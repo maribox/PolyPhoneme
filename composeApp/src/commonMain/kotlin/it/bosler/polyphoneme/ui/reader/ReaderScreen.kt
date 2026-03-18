@@ -59,6 +59,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.SubcomposeLayout
+import it.bosler.polyphoneme.model.IpaPosition
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -593,24 +594,29 @@ private fun PaginatedContent(
     SubcomposeLayout { constraints ->
         val contentWidth = constraints.maxWidth - horizontalPaddingPx * 2
         val contentHeight = constraints.maxHeight - verticalPaddingPx * 2
-        val paragraphConstraints = constraints.copy(
-            minWidth = contentWidth,
-            maxWidth = contentWidth,
-            minHeight = 0,
-        )
 
-        // Measure all paragraphs to get their heights
-        val heights = paragraphs.indices.map { i ->
-            val measurables = subcompose("measure_$i") {
-                ParagraphRow(
-                    paragraph = paragraphs[i],
-                    ipaPosition = settings.ipaPosition,
-                    fontSize = settings.fontSize,
-                    lineSpacing = settings.lineSpacing,
-                    onWordTap = {},
-                )
+        // Estimate paragraph heights without composing them (avoids OOM on large chapters)
+        val fontSizePx = (settings.fontSize * constraints.maxWidth / 360f).toInt().coerceAtLeast(1)
+        val isStacked = settings.ipaPosition == IpaPosition.ABOVE || settings.ipaPosition == IpaPosition.BELOW
+        val lineHeightPx = if (isStacked) {
+            (fontSizePx * 2.2f * settings.lineSpacing).toInt()  // word + IPA stacked
+        } else {
+            (fontSizePx * 1.6f * settings.lineSpacing).toInt()  // inline IPA
+        }
+        val avgCharWidth = fontSizePx * 0.52f  // approximate average character width
+        val verticalPadding = (8 * constraints.maxWidth / 360f).toInt()  // ~8dp
+
+        val heights = paragraphs.map { paragraph ->
+            val totalChars = paragraph.tokens.sumOf { token ->
+                val wordLen = token.leadingPunctuation.length + token.word.length + token.trailingPunctuation.length
+                if (isStacked) wordLen + 2  // spacing between word blocks
+                else {
+                    val ipaLen = token.ipa?.length ?: 0
+                    wordLen + ipaLen + 2
+                }
             }
-            measurables.first().measure(paragraphConstraints).height
+            val estimatedLines = ((totalChars * avgCharWidth) / contentWidth).toInt().coerceAtLeast(1)
+            estimatedLines * lineHeightPx + verticalPadding
         }
 
         // Compute page breaks

@@ -9,6 +9,7 @@ data class BookMeta(
     val author: String,
     val language: String? = null,
     val filePath: String,
+    val coverPath: String? = null,
     val chapterCount: Int,
     val lastReadChapter: Int = 0,
     val importedAt: Long,

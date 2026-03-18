@@ -16,10 +16,11 @@ import androidx.compose.ui.unit.sp
 data class ExtendedColors(
     val ipa: Color,
     val translation: Color,
+    val disambiguatedIpa: Color,
 )
 
 val LocalExtendedColors = staticCompositionLocalOf {
-    ExtendedColors(ipa = IpaColor, translation = TranslationColor)
+    ExtendedColors(ipa = IpaColor, translation = TranslationColor, disambiguatedIpa = DisambiguatedIpaColor)
 }
 
 private val LightColorScheme = lightColorScheme(
@@ -119,9 +120,9 @@ fun PolyPhonemeTheme(
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
     val extendedColors = if (darkTheme) {
-        ExtendedColors(ipa = IpaColorDark, translation = TranslationColorDark)
+        ExtendedColors(ipa = IpaColorDark, translation = TranslationColorDark, disambiguatedIpa = DisambiguatedIpaColorDark)
     } else {
-        ExtendedColors(ipa = IpaColor, translation = TranslationColor)
+        ExtendedColors(ipa = IpaColor, translation = TranslationColor, disambiguatedIpa = DisambiguatedIpaColor)
     }
 
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {

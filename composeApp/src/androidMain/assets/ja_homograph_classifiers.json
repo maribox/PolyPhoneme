@@ -1,0 +1,2417 @@
+{
+  "表": {
+    "readings": {
+      "ひょう": {
+        "frequency": 0.3493,
+        "keywords": [
+          "一覧",
+          "年",
+          "比較",
+          "下",
+          "以下",
+          "次",
+          "参照",
+          "データ",
+          "成績",
+          "統計"
+        ]
+      },
+      "おもて": {
+        "frequency": 0.3164,
+        "keywords": [
+          "通り",
+          "玄関",
+          "裏",
+          "側",
+          "面",
+          "門",
+          "庭",
+          "道"
+        ]
+      },
+      "あらわ": {
+        "frequency": 0.258,
+        "keywords": [
+          "す",
+          "れ",
+          "した",
+          "して",
+          "される",
+          "さ",
+          "現",
+          "感情",
+          "意志"
+        ]
+      },
+      "あら": {
+        "frequency": 0.0762,
+        "keywords": [
+          "わす",
+          "わし",
+          "わさ",
+          "わに"
+        ]
+      }
+    },
+    "default": "ひょう"
+  },
+  "角": {
+    "readings": {
+      "かく": {
+        "frequency": 0.6137,
+        "keywords": [
+          "度",
+          "直",
+          "三",
+          "四",
+          "多",
+          "視",
+          "広",
+          "鋭"
+        ]
+      },
+      "かど": {
+        "frequency": 0.3241,
+        "keywords": [
+          "曲がり",
+          "街",
+          "交差",
+          "建物",
+          "家",
+          "通り",
+          "丁目"
+        ]
+      },
+      "つの": {
+        "frequency": 0.0524,
+        "keywords": [
+          "鹿",
+          "牛",
+          "動物",
+          "生え",
+          "角笛"
+        ]
+      },
+      "すみ": {
+        "frequency": 0.0099,
+        "keywords": [
+          "部屋",
+          "隅"
+        ]
+      }
+    },
+    "default": "かく"
+  },
+  "大分": {
+    "readings": {
+      "おおいた": {
+        "frequency": 0.7897
+      },
+      "だいぶ": {
+        "frequency": 0.1874
+      },
+      "だいぶん": {
+        "frequency": 0.0228
+      }
+    },
+    "default": "おおいた"
+  },
+  "国立": {
+    "readings": {
+      "こくりつ": {
+        "frequency": 0.9874,
+        "keywords": [
+          "大学",
+          "博物館",
+          "公園",
+          "図書館",
+          "病院",
+          "研究"
+        ]
+      },
+      "くにたち": {
+        "frequency": 0.0126,
+        "keywords": [
+          "市",
+          "駅",
+          "音大"
+        ]
+      }
+    },
+    "default": "こくりつ"
+  },
+  "人気": {
+    "readings": {
+      "にんき": {
+        "frequency": 0.9745,
+        "keywords": [
+          "の",
+          "が",
+          "ある",
+          "ない",
+          "高い",
+          "番組",
+          "俳優",
+          "投票"
+        ]
+      },
+      "ひとけ": {
+        "frequency": 0.0197,
+        "keywords": [
+          "の",
+          "が",
+          "ない",
+          "なく"
+        ]
+      },
+      "じんき": {
+        "frequency": 0.0058
+      }
+    },
+    "default": "にんき",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:怖",
+        "class": "ひとけ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:なくて",
+        "class": "ひとけ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:夜道",
+        "class": "ひとけ"
+      }
+    ]
+  },
+  "市場": {
+    "readings": {
+      "しじょう": {
+        "frequency": 0.9909,
+        "keywords": [
+          "経済",
+          "株式",
+          "金融",
+          "労働",
+          "競争",
+          "規模",
+          "シェア",
+          "参入"
+        ]
+      },
+      "いちば": {
+        "frequency": 0.0091,
+        "keywords": [
+          "築地",
+          "魚",
+          "朝",
+          "商店",
+          "買い物",
+          "豊洲",
+          "中央"
+        ]
+      }
+    },
+    "default": "しじょう"
+  },
+  "気質": {
+    "readings": {
+      "きしつ": {
+        "frequency": 0.7357
+      },
+      "かたぎ": {
+        "frequency": 0.2643
+      }
+    },
+    "default": "きしつ"
+  },
+  "上方": {
+    "readings": {
+      "かみがた": {
+        "frequency": 0.6826
+      },
+      "じょうほう": {
+        "frequency": 0.3174
+      }
+    },
+    "default": "かみがた"
+  },
+  "上手": {
+    "readings": {
+      "じょうず": {
+        "frequency": 0.8983,
+        "keywords": [
+          "な",
+          "に",
+          "く",
+          "だ",
+          "です",
+          "下手",
+          "話",
+          "料理",
+          "歌"
+        ]
+      },
+      "うま": {
+        "frequency": 0.0786,
+        "keywords": [
+          "い",
+          "く",
+          "かっ",
+          "さ"
+        ]
+      },
+      "かみて": {
+        "frequency": 0.0167,
+        "keywords": [
+          "側",
+          "から",
+          "舞台",
+          "客席"
+        ]
+      },
+      "うわて": {
+        "frequency": 0.0063,
+        "keywords": [
+          "に出",
+          "を行く",
+          "取る"
+        ]
+      }
+    },
+    "default": "じょうず"
+  },
+  "下手": {
+    "readings": {
+      "へた": {
+        "frequency": 0.7395,
+        "keywords": [
+          "料理",
+          "が",
+          "な",
+          "だ",
+          "です",
+          "苦手",
+          "歌"
+        ]
+      },
+      "したて": {
+        "frequency": 0.1115,
+        "keywords": [
+          "に出る",
+          "出る",
+          "損",
+          "に出ると",
+          "から"
+        ]
+      },
+      "べた": {
+        "frequency": 0.1054
+      },
+      "しもて": {
+        "frequency": 0.0436
+      }
+    },
+    "default": "へた",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:出る",
+        "class": "したて"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:損",
+        "class": "したて"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:料理",
+        "class": "へた"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:だ",
+        "class": "へた"
+      }
+    ]
+  },
+  "仮名": {
+    "readings": {
+      "かな": {
+        "frequency": 0.8522
+      },
+      "がな": {
+        "frequency": 0.0781
+      },
+      "かめい": {
+        "frequency": 0.0697
+      }
+    },
+    "default": "かな"
+  },
+  "礼拝": {
+    "readings": {
+      "れいはい": {
+        "frequency": 0.9313
+      },
+      "らいはい": {
+        "frequency": 0.0687
+      }
+    },
+    "default": "れいはい"
+  },
+  "遺言": {
+    "readings": {
+      "ゆいごん": {
+        "frequency": 0.9621
+      },
+      "いげん": {
+        "frequency": 0.0205
+      },
+      "いごん": {
+        "frequency": 0.0174
+      }
+    },
+    "default": "ゆいごん"
+  },
+  "口腔": {
+    "readings": {
+      "こうこう": {
+        "frequency": 0.5373,
+        "keywords": [
+          "内",
+          "外科",
+          "衛生",
+          "ケア"
+        ]
+      },
+      "こうくう": {
+        "frequency": 0.4627,
+        "keywords": [
+          "内",
+          "外科",
+          "衛生",
+          "ケア"
+        ]
+      }
+    },
+    "default": "こうこう"
+  },
+  "骨": {
+    "readings": {
+      "ほね": {
+        "frequency": 0.6457,
+        "keywords": [
+          "折",
+          "太",
+          "細",
+          "魚",
+          "を",
+          "が",
+          "拾"
+        ]
+      },
+      "こつ": {
+        "frequency": 0.3543,
+        "keywords": [
+          "格",
+          "髄",
+          "粗",
+          "密度",
+          "遺",
+          "盤"
+        ]
+      }
+    },
+    "default": "ほね"
+  },
+  "一途": {
+    "readings": {
+      "いちず": {
+        "frequency": 0.8056
+      },
+      "いっと": {
+        "frequency": 0.1944
+      }
+    },
+    "default": "いちず"
+  },
+  "一言": {
+    "readings": {
+      "ひとこと": {
+        "frequency": 0.9148
+      },
+      "いちげん": {
+        "frequency": 0.0474
+      },
+      "いちごん": {
+        "frequency": 0.0378
+      }
+    },
+    "default": "ひとこと"
+  },
+  "最中": {
+    "readings": {
+      "さいちゅう": {
+        "frequency": 0.9236
+      },
+      "さなか": {
+        "frequency": 0.0764
+      }
+    },
+    "default": "さいちゅう"
+  },
+  "一目": {
+    "readings": {
+      "ひとめ": {
+        "frequency": 0.8837
+      },
+      "いちもく": {
+        "frequency": 0.1163
+      }
+    },
+    "default": "ひとめ"
+  },
+  "係": {
+    "readings": {
+      "かか": {
+        "frequency": 0.5807,
+        "keywords": [
+          "わる",
+          "わり",
+          "わっ",
+          "わら"
+        ]
+      },
+      "かかわ": {
+        "frequency": 0.4004,
+        "keywords": [
+          "る",
+          "り",
+          "ら",
+          "って"
+        ]
+      },
+      "がかり": {
+        "frequency": 0.0096,
+        "keywords": [
+          "受付",
+          "担当",
+          "窓口",
+          "案内",
+          "世話"
+        ]
+      },
+      "かかり": {
+        "frequency": 0.0093,
+        "keywords": [
+          "長",
+          "員",
+          "官"
+        ]
+      }
+    },
+    "default": "かか"
+  },
+  "足跡": {
+    "readings": {
+      "あしあと": {
+        "frequency": 0.5851
+      },
+      "そくせき": {
+        "frequency": 0.4149
+      }
+    },
+    "default": "あしあと"
+  },
+  "今日": {
+    "readings": {
+      "きょう": {
+        "frequency": 0.7224,
+        "keywords": [
+          "は",
+          "も",
+          "の",
+          "天気",
+          "朝",
+          "明日",
+          "昨日",
+          "から"
+        ]
+      },
+      "こんにち": {
+        "frequency": 0.2776,
+        "keywords": [
+          "における",
+          "において",
+          "的",
+          "社会",
+          "世界",
+          "技術",
+          "革新",
+          "では"
+        ]
+      }
+    },
+    "default": "きょう",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:における",
+        "class": "こんにち"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:おける",
+        "class": "こんにち"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:技術",
+        "class": "こんにち"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:革新",
+        "class": "こんにち"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:社会",
+        "class": "こんにち"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:天気",
+        "class": "きょう"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:散歩",
+        "class": "きょう"
+      }
+    ]
+  },
+  "明日": {
+    "readings": {
+      "あす": {
+        "frequency": 0.5955,
+        "keywords": [
+          "の",
+          "は",
+          "へ",
+          "から",
+          "まで",
+          "に向けて"
+        ]
+      },
+      "あした": {
+        "frequency": 0.4005,
+        "keywords": [
+          "の",
+          "は",
+          "また",
+          "朝",
+          "会おう",
+          "ね"
+        ]
+      },
+      "みょうにち": {
+        "frequency": 0.004,
+        "keywords": [
+          "以降",
+          "付",
+          "より",
+          "午前"
+        ]
+      }
+    },
+    "default": "あす"
+  },
+  "生物": {
+    "readings": {
+      "せいぶつ": {
+        "frequency": 0.9979,
+        "keywords": [
+          "学",
+          "多様性",
+          "兵器",
+          "工学",
+          "的",
+          "種"
+        ]
+      },
+      "いきもの": {
+        "frequency": 0.0021,
+        "keywords": [
+          "の",
+          "たち",
+          "がかり",
+          "小さな"
+        ]
+      }
+    },
+    "default": "せいぶつ"
+  },
+  "変化": {
+    "readings": {
+      "へんか": {
+        "frequency": 0.9962,
+        "keywords": [
+          "する",
+          "した",
+          "の",
+          "が",
+          "大きな",
+          "気候",
+          "社会",
+          "構造"
+        ]
+      },
+      "へんげ": {
+        "frequency": 0.0038,
+        "keywords": [
+          "百",
+          "化",
+          "物",
+          "妖"
+        ]
+      }
+    },
+    "default": "へんか"
+  },
+  "大事": {
+    "readings": {
+      "だいじ": {
+        "frequency": 0.9899
+      },
+      "おおごと": {
+        "frequency": 0.0101
+      }
+    },
+    "default": "だいじ"
+  },
+  "大家": {
+    "readings": {
+      "たいか": {
+        "frequency": 0.6489,
+        "keywords": [
+          "文学",
+          "知られ",
+          "芸術",
+          "分野",
+          "として"
+        ]
+      },
+      "おおや": {
+        "frequency": 0.2636,
+        "keywords": [
+          "さん",
+          "家賃",
+          "払った",
+          "部屋",
+          "不動産"
+        ]
+      },
+      "たいけ": {
+        "frequency": 0.0875
+      }
+    },
+    "default": "たいか",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "+1:さんに",
+        "class": "おおや"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:賃",
+        "class": "おおや"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:払",
+        "class": "おおや"
+      },
+      {
+        "score": 10.0,
+        "feature": "+1:さん",
+        "class": "おおや"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:払った",
+        "class": "おおや"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:さん",
+        "class": "おおや"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:家賃",
+        "class": "おおや"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:文学",
+        "class": "たいか"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:知られ",
+        "class": "たいか"
+      }
+    ]
+  },
+  "心中": {
+    "readings": {
+      "しんじゅう": {
+        "frequency": 0.8034
+      },
+      "しんちゅう": {
+        "frequency": 0.1303
+      },
+      "しんぢゅう": {
+        "frequency": 0.0662
+      }
+    },
+    "default": "しんじゅう"
+  },
+  "一行": {
+    "readings": {
+      "いっこう": {
+        "frequency": 0.9213
+      },
+      "いちぎょう": {
+        "frequency": 0.0787
+      }
+    },
+    "default": "いっこう"
+  },
+  "一時": {
+    "readings": {
+      "いちじ": {
+        "frequency": 0.8609
+      },
+      "いっとき": {
+        "frequency": 0.1238
+      },
+      "いちどき": {
+        "frequency": 0.0153
+      }
+    },
+    "default": "いちじ"
+  },
+  "一方": {
+    "readings": {
+      "いっぽう": {
+        "frequency": 0.9719
+      },
+      "ひとかた": {
+        "frequency": 0.0204
+      },
+      "いちほう": {
+        "frequency": 0.0077
+      }
+    },
+    "default": "いっぽう"
+  },
+  "一夜": {
+    "readings": {
+      "いちや": {
+        "frequency": 0.9333
+      },
+      "ひとよ": {
+        "frequency": 0.0667
+      }
+    },
+    "default": "いちや"
+  },
+  "下野": {
+    "readings": {
+      "しもつけ": {
+        "frequency": 0.767
+      },
+      "げや": {
+        "frequency": 0.1505
+      },
+      "しもの": {
+        "frequency": 0.0825
+      }
+    },
+    "default": "しもつけ"
+  },
+  "花弁": {
+    "readings": {
+      "かべん": {
+        "frequency": 0.786
+      },
+      "はなびら": {
+        "frequency": 0.214
+      }
+    },
+    "default": "かべん"
+  },
+  "玩具": {
+    "readings": {
+      "がんぐ": {
+        "frequency": 0.8505
+      },
+      "おもちゃ": {
+        "frequency": 0.1495
+      }
+    },
+    "default": "がんぐ"
+  },
+  "強力": {
+    "readings": {
+      "きょうりょく": {
+        "frequency": 0.9785
+      },
+      "ごうりき": {
+        "frequency": 0.0215
+      }
+    },
+    "default": "きょうりょく"
+  },
+  "金色": {
+    "readings": {
+      "きんいろ": {
+        "frequency": 0.6606
+      },
+      "こんじき": {
+        "frequency": 0.3394
+      }
+    },
+    "default": "きんいろ"
+  },
+  "経緯": {
+    "readings": {
+      "けいい": {
+        "frequency": 0.9927,
+        "keywords": [
+          "の",
+          "を",
+          "経過",
+          "事情",
+          "説明",
+          "歴史"
+        ]
+      },
+      "いきさつ": {
+        "frequency": 0.0073,
+        "keywords": [
+          "の",
+          "を",
+          "複雑"
+        ]
+      }
+    },
+    "default": "けいい"
+  },
+  "故郷": {
+    "readings": {
+      "こきょう": {
+        "frequency": 0.8594
+      },
+      "ふるさと": {
+        "frequency": 0.1132
+      },
+      "くに": {
+        "frequency": 0.0273
+      }
+    },
+    "default": "こきょう"
+  },
+  "紅葉": {
+    "readings": {
+      "こうよう": {
+        "frequency": 0.7163,
+        "keywords": [
+          "秋",
+          "山",
+          "彩る",
+          "見頃",
+          "季節"
+        ]
+      },
+      "もみじ": {
+        "frequency": 0.2837,
+        "keywords": [
+          "天ぷら",
+          "饅頭",
+          "葉",
+          "京都",
+          "食べ"
+        ]
+      }
+    },
+    "default": "こうよう",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:天",
+        "class": "もみじ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:ぷら",
+        "class": "もみじ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:天ぷら",
+        "class": "もみじ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:食べた",
+        "class": "もみじ"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:秋",
+        "class": "こうよう"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:山",
+        "class": "こうよう"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:彩る",
+        "class": "こうよう"
+      }
+    ]
+  },
+  "根本": {
+    "readings": {
+      "こんぽん": {
+        "frequency": 0.9164
+      },
+      "ねもと": {
+        "frequency": 0.0836
+      }
+    },
+    "default": "こんぽん"
+  },
+  "山陰": {
+    "readings": {
+      "さんいん": {
+        "frequency": 0.9762
+      },
+      "やまかげ": {
+        "frequency": 0.0238
+      }
+    },
+    "default": "さんいん"
+  },
+  "上下": {
+    "readings": {
+      "じょうげ": {
+        "frequency": 0.9411
+      },
+      "うえした": {
+        "frequency": 0.0589
+      }
+    },
+    "default": "じょうげ"
+  },
+  "身体": {
+    "readings": {
+      "しんたい": {
+        "frequency": 0.8575,
+        "keywords": [
+          "障害",
+          "検査",
+          "的",
+          "機能",
+          "能力",
+          "拘束",
+          "自由"
+        ]
+      },
+      "からだ": {
+        "frequency": 0.1425,
+        "keywords": [
+          "の",
+          "を",
+          "が",
+          "に",
+          "動か",
+          "大きな",
+          "全",
+          "温め"
+        ]
+      }
+    },
+    "default": "しんたい"
+  },
+  "水面": {
+    "readings": {
+      "すいめん": {
+        "frequency": 0.9384
+      },
+      "みなも": {
+        "frequency": 0.0616
+      }
+    },
+    "default": "すいめん"
+  },
+  "世論": {
+    "readings": {
+      "よろん": {
+        "frequency": 0.7019
+      },
+      "せろん": {
+        "frequency": 0.2981
+      }
+    },
+    "default": "よろん"
+  },
+  "清水": {
+    "readings": {
+      "しみず": {
+        "frequency": 0.9767
+      },
+      "きよみず": {
+        "frequency": 0.0233
+      }
+    },
+    "default": "しみず"
+  },
+  "大手": {
+    "readings": {
+      "おおて": {
+        "frequency": 0.9825,
+        "keywords": [
+          "企業",
+          "メーカー",
+          "銀行",
+          "会社",
+          "門"
+        ]
+      },
+      "おおで": {
+        "frequency": 0.0175,
+        "keywords": [
+          "を振って"
+        ]
+      }
+    },
+    "default": "おおて"
+  },
+  "大人": {
+    "readings": {
+      "おとな": {
+        "frequency": 0.9847,
+        "keywords": [
+          "子供",
+          "しい",
+          "っぽい",
+          "向け",
+          "になったら"
+        ]
+      },
+      "たいじん": {
+        "frequency": 0.0101,
+        "keywords": [
+          "物",
+          "の風格",
+          "人格者",
+          "風格"
+        ]
+      },
+      "うし": {
+        "frequency": 0.0053
+      }
+    },
+    "default": "おとな",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:風",
+        "class": "たいじん"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:人格",
+        "class": "たいじん"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:風格",
+        "class": "たいじん"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:人格者",
+        "class": "たいじん"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:になったら",
+        "class": "おとな"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:子供",
+        "class": "おとな"
+      }
+    ]
+  },
+  "大勢": {
+    "readings": {
+      "おおぜい": {
+        "frequency": 0.7642
+      },
+      "たいせい": {
+        "frequency": 0.2358
+      }
+    },
+    "default": "おおぜい"
+  },
+  "中間": {
+    "readings": {
+      "ちゅうかん": {
+        "frequency": 0.9919,
+        "keywords": [
+          "報告",
+          "試験",
+          "地点",
+          "層",
+          "管理"
+        ]
+      },
+      "ちゅうげん": {
+        "frequency": 0.0081,
+        "keywords": [
+          "お",
+          "贈り物",
+          "歳暮"
+        ]
+      }
+    },
+    "default": "ちゅうかん"
+  },
+  "日向": {
+    "readings": {
+      "ひゅうが": {
+        "frequency": 0.7156
+      },
+      "ひなた": {
+        "frequency": 0.2844
+      }
+    },
+    "default": "ひゅうが"
+  },
+  "夫婦": {
+    "readings": {
+      "ふうふ": {
+        "frequency": 0.9628,
+        "keywords": [
+          "の",
+          "が",
+          "間",
+          "生活",
+          "関係",
+          "共",
+          "仲"
+        ]
+      },
+      "めおと": {
+        "frequency": 0.0372,
+        "keywords": [
+          "茶碗",
+          "箸",
+          "善哉"
+        ]
+      }
+    },
+    "default": "ふうふ"
+  },
+  "牧場": {
+    "readings": {
+      "ぼくじょう": {
+        "frequency": 0.9233
+      },
+      "まきば": {
+        "frequency": 0.0767
+      }
+    },
+    "default": "ぼくじょう"
+  },
+  "末期": {
+    "readings": {
+      "まっき": {
+        "frequency": 0.9786
+      },
+      "まつご": {
+        "frequency": 0.0214
+      }
+    },
+    "default": "まっき"
+  },
+  "利益": {
+    "readings": {
+      "りえき": {
+        "frequency": 0.9847,
+        "keywords": [
+          "の",
+          "を",
+          "純",
+          "営業",
+          "率",
+          "追求",
+          "経常"
+        ]
+      },
+      "りやく": {
+        "frequency": 0.0153,
+        "keywords": [
+          "御",
+          "功徳",
+          "仏"
+        ]
+      }
+    },
+    "default": "りえき"
+  },
+  "一味": {
+    "readings": {
+      "いちみ": {
+        "frequency": 0.8805
+      },
+      "ひとあじ": {
+        "frequency": 0.1195
+      }
+    },
+    "default": "いちみ"
+  },
+  "魚": {
+    "readings": {
+      "さかな": {
+        "frequency": 0.7298,
+        "keywords": [
+          "の",
+          "を",
+          "が",
+          "釣り",
+          "焼き",
+          "料理",
+          "食べ",
+          "美味"
+        ]
+      },
+      "うお": {
+        "frequency": 0.2126,
+        "keywords": [
+          "座",
+          "市場",
+          "の目",
+          "河岸",
+          "つり"
+        ]
+      },
+      "ぎょ": {
+        "frequency": 0.0515,
+        "keywords": [
+          "介",
+          "類",
+          "雷"
+        ]
+      },
+      "ざかな": {
+        "frequency": 0.0062
+      }
+    },
+    "default": "さかな"
+  },
+  "施行": {
+    "readings": {
+      "しこう": {
+        "frequency": 0.9963,
+        "keywords": [
+          "する",
+          "され",
+          "日",
+          "法",
+          "規則",
+          "令"
+        ]
+      },
+      "せこう": {
+        "frequency": 0.0037,
+        "keywords": [
+          "工事",
+          "建設"
+        ]
+      }
+    },
+    "default": "しこう"
+  },
+  "施工": {
+    "readings": {
+      "せこう": {
+        "frequency": 0.9965,
+        "keywords": [
+          "する",
+          "管理",
+          "業者",
+          "工事",
+          "現場"
+        ]
+      },
+      "しこう": {
+        "frequency": 0.0019
+      },
+      "せこ": {
+        "frequency": 0.0017
+      }
+    },
+    "default": "せこう"
+  },
+  "転生": {
+    "readings": {
+      "てんせい": {
+        "frequency": 0.8389
+      },
+      "てんしょう": {
+        "frequency": 0.1611
+      }
+    },
+    "default": "てんせい"
+  },
+  "博士": {
+    "readings": {
+      "はくし": {
+        "frequency": 0.8736,
+        "keywords": [
+          "号",
+          "課程",
+          "論文",
+          "学位",
+          "取得",
+          "修了",
+          "後期"
+        ]
+      },
+      "はかせ": {
+        "frequency": 0.1264,
+        "keywords": [
+          "の",
+          "さん",
+          "先生",
+          "実験",
+          "面白い",
+          "見せて"
+        ]
+      }
+    },
+    "default": "はくし",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:実",
+        "class": "はかせ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:験",
+        "class": "はかせ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:面白い",
+        "class": "はかせ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:見せて",
+        "class": "はかせ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:くれた",
+        "class": "はかせ"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:課程",
+        "class": "はくし"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:学位",
+        "class": "はくし"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:修了",
+        "class": "はくし"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:実験",
+        "class": "はかせ"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:面白い",
+        "class": "はかせ"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:見せて",
+        "class": "はかせ"
+      }
+    ]
+  },
+  "眼鏡": {
+    "readings": {
+      "めがね": {
+        "frequency": 0.9524
+      },
+      "がんきょう": {
+        "frequency": 0.0476
+      }
+    },
+    "default": "めがね"
+  },
+  "文字": {
+    "readings": {
+      "もじ": {
+        "frequency": 0.938,
+        "keywords": [
+          "列",
+          "数",
+          "化け",
+          "入力",
+          "漢",
+          "通り",
+          "コード"
+        ]
+      },
+      "もんじ": {
+        "frequency": 0.062,
+        "keywords": [
+          "絵",
+          "曼荼羅"
+        ]
+      }
+    },
+    "default": "もじ"
+  },
+  "文書": {
+    "readings": {
+      "ぶんしょ": {
+        "frequency": 0.7179,
+        "keywords": [
+          "公",
+          "内部",
+          "提出",
+          "作成",
+          "偽造",
+          "管理",
+          "電子"
+        ]
+      },
+      "もんじょ": {
+        "frequency": 0.2796,
+        "keywords": [
+          "古",
+          "歴史",
+          "中世",
+          "伝来",
+          "所蔵",
+          "寺",
+          "院",
+          "家"
+        ]
+      },
+      "もんしょ": {
+        "frequency": 0.0024
+      }
+    },
+    "default": "ぶんしょ"
+  },
+  "現世": {
+    "readings": {
+      "げんせい": {
+        "frequency": 0.6057
+      },
+      "げんせ": {
+        "frequency": 0.3943
+      }
+    },
+    "default": "げんせい"
+  },
+  "日中": {
+    "readings": {
+      "にっちゅう": {
+        "frequency": 0.9907,
+        "keywords": [
+          "関係",
+          "戦争",
+          "友好",
+          "共同",
+          "韓",
+          "貿易"
+        ]
+      },
+      "にちじゅう": {
+        "frequency": 0.0093
+      }
+    },
+    "default": "にっちゅう"
+  },
+  "夜中": {
+    "readings": {
+      "よなか": {
+        "frequency": 0.8721
+      },
+      "やちゅう": {
+        "frequency": 0.1279
+      }
+    },
+    "default": "よなか"
+  },
+  "二人": {
+    "readings": {
+      "ふたり": {
+        "frequency": 0.9886,
+        "keywords": [
+          "の",
+          "は",
+          "で",
+          "が",
+          "きり",
+          "とも",
+          "暮らし"
+        ]
+      },
+      "ににん": {
+        "frequency": 0.0114,
+        "keywords": [
+          "乗り",
+          "三脚",
+          "羽織"
+        ]
+      }
+    },
+    "default": "ふたり"
+  },
+  "見物": {
+    "readings": {
+      "けんぶつ": {
+        "frequency": 0.9678
+      },
+      "みもの": {
+        "frequency": 0.0322
+      }
+    },
+    "default": "けんぶつ"
+  },
+  "清浄": {
+    "readings": {
+      "せいじょう": {
+        "frequency": 0.9456
+      },
+      "しょうじょう": {
+        "frequency": 0.0544
+      }
+    },
+    "default": "せいじょう"
+  },
+  "谷間": {
+    "readings": {
+      "たにま": {
+        "frequency": 0.942
+      },
+      "たにあい": {
+        "frequency": 0.058
+      }
+    },
+    "default": "たにま"
+  },
+  "追従": {
+    "readings": {
+      "ついじゅう": {
+        "frequency": 0.932
+      },
+      "ついしょう": {
+        "frequency": 0.068
+      }
+    },
+    "default": "ついじゅう"
+  },
+  "墓石": {
+    "readings": {
+      "はかいし": {
+        "frequency": 0.5569
+      },
+      "ぼせき": {
+        "frequency": 0.4431
+      }
+    },
+    "default": "はかいし"
+  },
+  "漢書": {
+    "readings": {
+      "かんじょ": {
+        "frequency": 0.6021
+      },
+      "かんしょ": {
+        "frequency": 0.2324
+      },
+      "からぶみ": {
+        "frequency": 0.1655
+      }
+    },
+    "default": "かんじょ"
+  },
+  "作法": {
+    "readings": {
+      "さほう": {
+        "frequency": 0.9014
+      },
+      "さくほう": {
+        "frequency": 0.0986
+      }
+    },
+    "default": "さほう"
+  },
+  "半月": {
+    "readings": {
+      "はんつき": {
+        "frequency": 0.8203
+      },
+      "はんげつ": {
+        "frequency": 0.1797
+      }
+    },
+    "default": "はんつき"
+  },
+  "黒子": {
+    "readings": {
+      "ほくろ": {
+        "frequency": 0.5222
+      },
+      "くろこ": {
+        "frequency": 0.4778
+      }
+    },
+    "default": "ほくろ"
+  },
+  "競売": {
+    "readings": {
+      "けいばい": {
+        "frequency": 0.7384
+      },
+      "きょうばい": {
+        "frequency": 0.2616
+      }
+    },
+    "default": "けいばい"
+  },
+  "開眼": {
+    "readings": {
+      "かいげん": {
+        "frequency": 0.7012
+      },
+      "かいがん": {
+        "frequency": 0.2988
+      }
+    },
+    "default": "かいげん"
+  },
+  "求道": {
+    "readings": {
+      "きゅうどう": {
+        "frequency": 0.8239
+      },
+      "ぐどう": {
+        "frequency": 0.1761
+      }
+    },
+    "default": "きゅうどう"
+  },
+  "施業": {
+    "readings": {
+      "せぎょう": {
+        "frequency": 0.6952
+      },
+      "しぎょう": {
+        "frequency": 0.3048
+      }
+    },
+    "default": "せぎょう"
+  },
+  "借家": {
+    "readings": {
+      "しゃっか": {
+        "frequency": 0.5617
+      },
+      "しゃくや": {
+        "frequency": 0.4383
+      }
+    },
+    "default": "しゃっか"
+  },
+  "法衣": {
+    "readings": {
+      "ころも": {
+        "frequency": 0.5693
+      },
+      "ほうえ": {
+        "frequency": 0.4307
+      }
+    },
+    "default": "ころも"
+  },
+  "昨日": {
+    "readings": {
+      "きのう": {
+        "frequency": 0.7892
+      },
+      "さくじつ": {
+        "frequency": 0.2108
+      }
+    },
+    "default": "きのう"
+  },
+  "風車": {
+    "readings": {
+      "ふうしゃ": {
+        "frequency": 0.6256
+      },
+      "かざぐるま": {
+        "frequency": 0.3744
+      }
+    },
+    "default": "ふうしゃ"
+  },
+  "寒気": {
+    "readings": {
+      "かんき": {
+        "frequency": 0.6595
+      },
+      "さむけ": {
+        "frequency": 0.3405
+      }
+    },
+    "default": "かんき"
+  },
+  "背筋": {
+    "readings": {
+      "せすじ": {
+        "frequency": 0.8045
+      },
+      "はいきん": {
+        "frequency": 0.1955
+      }
+    },
+    "default": "せすじ"
+  },
+  "逆手": {
+    "readings": {
+      "さかて": {
+        "frequency": 0.593
+      },
+      "ぎゃくて": {
+        "frequency": 0.407
+      }
+    },
+    "default": "さかて"
+  },
+  "生花": {
+    "readings": {
+      "いけばな": {
+        "frequency": 0.7567
+      },
+      "せいか": {
+        "frequency": 0.2433
+      }
+    },
+    "default": "いけばな"
+  },
+  "白髪": {
+    "readings": {
+      "しらが": {
+        "frequency": 0.7347
+      },
+      "はくはつ": {
+        "frequency": 0.2653
+      }
+    },
+    "default": "しらが"
+  },
+  "一月": {
+    "readings": {
+      "ひとつき": {
+        "frequency": 0.5163
+      },
+      "いちがつ": {
+        "frequency": 0.4837
+      }
+    },
+    "default": "ひとつき"
+  },
+  "一寸": {
+    "readings": {
+      "ちょっと": {
+        "frequency": 0.9303
+      },
+      "いっすん": {
+        "frequency": 0.0697
+      }
+    },
+    "default": "ちょっと"
+  },
+  "一声": {
+    "readings": {
+      "ひとこえ": {
+        "frequency": 0.6989
+      },
+      "いっせい": {
+        "frequency": 0.3011
+      }
+    },
+    "default": "ひとこえ"
+  },
+  "一日": {
+    "readings": {
+      "いちにち": {
+        "frequency": 0.6536,
+        "keywords": [
+          "中",
+          "じゅう",
+          "歩いて",
+          "疲れた",
+          "過ごした"
+        ]
+      },
+      "ついたち": {
+        "frequency": 0.3308,
+        "keywords": [
+          "毎月",
+          "家賃",
+          "払い",
+          "月",
+          "日に"
+        ]
+      },
+      "いちじつ": {
+        "frequency": 0.0157
+      }
+    },
+    "default": "いちにち",
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "+1:中",
+        "class": "いちにち"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:毎月",
+        "class": "ついたち"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:家賃",
+        "class": "ついたち"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:払い",
+        "class": "ついたち"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:歩いて",
+        "class": "いちにち"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:疲れた",
+        "class": "いちにち"
+      }
+    ]
+  },
+  "一分": {
+    "readings": {
+      "いちぶん": {
+        "frequency": 0.5474
+      },
+      "いちぶ": {
+        "frequency": 0.4526
+      }
+    },
+    "default": "いちぶん"
+  },
+  "一文": {
+    "readings": {
+      "いちもん": {
+        "frequency": 0.6418
+      },
+      "いちぶん": {
+        "frequency": 0.3582
+      }
+    },
+    "default": "いちもん"
+  },
+  "何時": {
+    "readings": {
+      "いつ": {
+        "frequency": 0.849
+      },
+      "なんじ": {
+        "frequency": 0.1082
+      },
+      "なんどき": {
+        "frequency": 0.0429
+      }
+    },
+    "default": "いつ"
+  },
+  "何分": {
+    "readings": {
+      "なにぶん": {
+        "frequency": 0.8814
+      },
+      "なんぷん": {
+        "frequency": 0.1186
+      }
+    },
+    "default": "なにぶん"
+  },
+  "気骨": {
+    "readings": {
+      "きこつ": {
+        "frequency": 0.6763
+      },
+      "きぼね": {
+        "frequency": 0.3237
+      }
+    },
+    "default": "きこつ"
+  },
+  "銀杏": {
+    "readings": {
+      "いちょう": {
+        "frequency": 0.7912
+      },
+      "ぎんなん": {
+        "frequency": 0.2088
+      }
+    },
+    "default": "いちょう"
+  },
+  "細々": {
+    "readings": {
+      "こまごま": {
+        "frequency": 0.5677
+      },
+      "ほそぼそ": {
+        "frequency": 0.4323
+      }
+    },
+    "default": "こまごま"
+  },
+  "細目": {
+    "readings": {
+      "さいもく": {
+        "frequency": 0.8866
+      },
+      "ほそめ": {
+        "frequency": 0.1134
+      }
+    },
+    "default": "さいもく"
+  },
+  "疾風": {
+    "readings": {
+      "しっぷう": {
+        "frequency": 0.7705
+      },
+      "はやて": {
+        "frequency": 0.1331
+      },
+      "かぜ": {
+        "frequency": 0.0963
+      }
+    },
+    "default": "しっぷう"
+  },
+  "菖蒲": {
+    "readings": {
+      "しょうぶ": {
+        "frequency": 0.7174
+      },
+      "あやめ": {
+        "frequency": 0.2826
+      }
+    },
+    "default": "しょうぶ"
+  },
+  "船底": {
+    "readings": {
+      "せんてい": {
+        "frequency": 0.7546
+      },
+      "ふなぞこ": {
+        "frequency": 0.2454
+      }
+    },
+    "default": "せんてい"
+  },
+  "相乗": {
+    "readings": {
+      "そうじょう": {
+        "frequency": 0.8916
+      },
+      "あいの": {
+        "frequency": 0.1084
+      }
+    },
+    "default": "そうじょう"
+  },
+  "造作": {
+    "readings": {
+      "ぞうさ": {
+        "frequency": 0.7431
+      },
+      "ぞうさく": {
+        "frequency": 0.2569
+      }
+    },
+    "default": "ぞうさ"
+  },
+  "頭数": {
+    "readings": {
+      "あたまかず": {
+        "frequency": 0.5854
+      },
+      "とうすう": {
+        "frequency": 0.4146
+      }
+    },
+    "default": "あたまかず"
+  },
+  "二重": {
+    "readings": {
+      "にじゅう": {
+        "frequency": 0.9881
+      },
+      "ふたえ": {
+        "frequency": 0.0119
+      }
+    },
+    "default": "にじゅう"
+  },
+  "日暮": {
+    "readings": {
+      "ひぐ": {
+        "frequency": 0.6936
+      },
+      "ひぐれ": {
+        "frequency": 0.167
+      },
+      "ひぐらし": {
+        "frequency": 0.1394
+      }
+    },
+    "default": "ひぐ"
+  },
+  "梅雨": {
+    "readings": {
+      "つゆ": {
+        "frequency": 0.6238
+      },
+      "ばいう": {
+        "frequency": 0.3762
+      }
+    },
+    "default": "つゆ"
+  },
+  "風穴": {
+    "readings": {
+      "かざあな": {
+        "frequency": 0.8152
+      },
+      "ふうけつ": {
+        "frequency": 0.1848
+      }
+    },
+    "default": "かざあな"
+  },
+  "分別": {
+    "readings": {
+      "ふんべつ": {
+        "frequency": 0.6684
+      },
+      "ぶんべつ": {
+        "frequency": 0.3316
+      }
+    },
+    "default": "ふんべつ"
+  },
+  "夜話": {
+    "readings": {
+      "やわ": {
+        "frequency": 0.9764
+      },
+      "よばなし": {
+        "frequency": 0.0236
+      }
+    },
+    "default": "やわ"
+  },
+  "野兎": {
+    "readings": {
+      "やと": {
+        "frequency": 0.8037
+      },
+      "のうさぎ": {
+        "frequency": 0.1963
+      }
+    },
+    "default": "やと"
+  },
+  "冷水": {
+    "readings": {
+      "れいすい": {
+        "frequency": 0.5526
+      },
+      "ひやみず": {
+        "frequency": 0.4474
+      }
+    },
+    "default": "れいすい"
+  },
+  "連中": {
+    "readings": {
+      "れんじゅう": {
+        "frequency": 0.5525
+      },
+      "れんちゅう": {
+        "frequency": 0.4475
+      }
+    },
+    "default": "れんじゅう"
+  },
+  "飛沫": {
+    "readings": {
+      "ひまつ": {
+        "frequency": 0.6991
+      },
+      "しぶき": {
+        "frequency": 0.3009
+      }
+    },
+    "default": "ひまつ"
+  },
+  "翡翠": {
+    "readings": {
+      "ひすい": {
+        "frequency": 0.6531
+      },
+      "かわせみ": {
+        "frequency": 0.3469
+      }
+    },
+    "default": "ひすい"
+  },
+  "一昨日": {
+    "readings": {
+      "おととい": {
+        "frequency": 0.7455
+      },
+      "いっさくじつ": {
+        "frequency": 0.2545
+      }
+    },
+    "default": "おととい"
+  },
+  "一昨年": {
+    "readings": {
+      "おととし": {
+        "frequency": 0.5496
+      },
+      "いっさくねん": {
+        "frequency": 0.4504
+      }
+    },
+    "default": "おととし"
+  },
+  "十八番": {
+    "readings": {
+      "じゅうはちばん": {
+        "frequency": 0.8379
+      },
+      "おはこ": {
+        "frequency": 0.1621
+      }
+    },
+    "default": "じゅうはちばん"
+  },
+  "明後日": {
+    "readings": {
+      "あさって": {
+        "frequency": 0.7561
+      },
+      "みょうごにち": {
+        "frequency": 0.2439
+      }
+    },
+    "default": "あさって"
+  },
+  "石綿": {
+    "readings": {
+      "いしわた": {
+        "frequency": 0.8254
+      },
+      "せきめん": {
+        "frequency": 0.1746
+      }
+    },
+    "default": "いしわた"
+  },
+  "公文": {
+    "readings": {
+      "こうぶん": {
+        "frequency": 0.8099
+      },
+      "くもん": {
+        "frequency": 0.1901
+      }
+    },
+    "default": "こうぶん"
+  },
+  "読本": {
+    "readings": {
+      "どくほん": {
+        "frequency": 0.8277,
+        "keywords": [
+          "入門",
+          "ガイド",
+          "初心者",
+          "完全"
+        ]
+      },
+      "とくほん": {
+        "frequency": 0.1641,
+        "keywords": [
+          "国語",
+          "教科書",
+          "尋常"
+        ]
+      },
+      "よみほん": {
+        "frequency": 0.0082,
+        "keywords": [
+          "江戸",
+          "曲亭",
+          "南総"
+        ]
+      }
+    },
+    "default": "どくほん"
+  },
+  "古本": {
+    "readings": {
+      "ふるほん": {
+        "frequency": 0.8346
+      },
+      "こほん": {
+        "frequency": 0.1654
+      }
+    },
+    "default": "ふるほん"
+  },
+  "町家": {
+    "readings": {
+      "まちや": {
+        "frequency": 0.752
+      },
+      "ちょうか": {
+        "frequency": 0.248
+      }
+    },
+    "default": "まちや"
+  },
+  "米": {
+    "readings": {
+      "べい": {
+        "frequency": 0.5771,
+        "keywords": [
+          "国",
+          "軍",
+          "ドル",
+          "大統領",
+          "政府",
+          "日",
+          "欧",
+          "中",
+          "英"
+        ]
+      },
+      "こめ": {
+        "frequency": 0.2993,
+        "keywords": [
+          "作",
+          "農",
+          "炊",
+          "白",
+          "玄",
+          "粒",
+          "研",
+          "収穫",
+          "稲",
+          "水田"
+        ]
+      },
+      "まい": {
+        "frequency": 0.0939,
+        "keywords": [
+          "平方",
+          "立方",
+          "ミリ",
+          "センチ",
+          "キロ"
+        ]
+      },
+      "よね": {
+        "frequency": 0.0206,
+        "keywords": [
+          "田",
+          "倉",
+          "沢",
+          "山",
+          "村"
+        ]
+      },
+      "ごめ": {
+        "frequency": 0.0054
+      },
+      "めーとる": {
+        "frequency": 0.0037,
+        "keywords": [
+          "平方",
+          "立方",
+          "キロ"
+        ]
+      }
+    },
+    "default": "べい"
+  }
+}

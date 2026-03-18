@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.bosler.polyphoneme.model.IpaPosition
+import it.bosler.polyphoneme.model.LanguageRegions
 import it.bosler.polyphoneme.model.ReadingMode
 import kotlin.math.roundToInt
 
@@ -75,6 +76,8 @@ private val LANGUAGES = listOf(
     "ko" to "Korean",
     "ar" to "Arabic",
 )
+
+// Region config comes from LanguageRegions.config — single source of truth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -144,6 +147,52 @@ fun SettingsScreen(
                     Icon(Icons.Default.Language, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                 },
             )
+
+            // Regional pronunciation variants (driven by LanguageRegions.config)
+            LanguageRegions.config.forEach { (langCode, regions) ->
+                val langName = LANGUAGES.find { it.first == langCode }?.second ?: langCode
+                var regionExpanded by remember { mutableStateOf(false) }
+                val currentRegion = settings.languageRegions[langCode]
+                    ?: LanguageRegions.getDefault(langCode)
+
+                ListItem(
+                    headlineContent = { Text("$langName pronunciation") },
+                    supportingContent = {
+                        ExposedDropdownMenuBox(
+                            expanded = regionExpanded,
+                            onExpandedChange = { regionExpanded = it },
+                            modifier = Modifier.padding(top = 4.dp),
+                        ) {
+                            OutlinedTextField(
+                                value = regions.find { it.code == currentRegion }?.displayName
+                                    ?: regions.first().displayName,
+                                onValueChange = {},
+                                readOnly = true,
+                                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(regionExpanded) },
+                                modifier = Modifier.menuAnchor().fillMaxWidth(),
+                                textStyle = MaterialTheme.typography.bodyMedium,
+                            )
+                            ExposedDropdownMenu(
+                                expanded = regionExpanded,
+                                onDismissRequest = { regionExpanded = false },
+                            ) {
+                                regions.forEach { region ->
+                                    DropdownMenuItem(
+                                        text = { Text(region.displayName) },
+                                        onClick = {
+                                            viewModel.updateLanguageRegion(langCode, region.code)
+                                            regionExpanded = false
+                                        },
+                                    )
+                                }
+                            }
+                        }
+                    },
+                    leadingContent = {
+                        Icon(Icons.Default.RecordVoiceOver, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                    },
+                )
+            }
 
             HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
 

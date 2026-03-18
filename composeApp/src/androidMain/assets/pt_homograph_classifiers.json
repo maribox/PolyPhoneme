@@ -1,0 +1,730 @@
+{
+  "sede": {
+    "classes": {
+      "noun_hq": {
+        "pronunciation": "ˈsedɨ",
+        "label": "headquarters",
+        "keywords": [
+          "empresa",
+          "escritório",
+          "organização",
+          "localizada",
+          "mudou"
+        ]
+      },
+      "noun_thirst": {
+        "pronunciation": "ˈsɛdɨ",
+        "label": "thirst",
+        "keywords": [
+          "água",
+          "beber",
+          "calor",
+          "matar",
+          "muita",
+          "sentir"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:empresa",
+        "class": "noun_hq"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:banco",
+        "class": "noun_hq"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:inaugurada",
+        "class": "noun_hq"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:muita",
+        "class": "noun_thirst"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:matar",
+        "class": "noun_thirst"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:água",
+        "class": "noun_thirst"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:corrida",
+        "class": "noun_thirst"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:beba",
+        "class": "noun_thirst"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:centro",
+        "class": "noun_hq"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:lisboa",
+        "class": "noun_hq"
+      }
+    ]
+  },
+  "colher": {
+    "classes": {
+      "noun": {
+        "pronunciation": "kuˈʎeɾ",
+        "label": "spoon",
+        "keywords": [
+          "sopa",
+          "chá",
+          "açúcar",
+          "mesa",
+          "café",
+          "prata"
+        ]
+      },
+      "verb": {
+        "pronunciation": "kuˈʎɛɾ",
+        "label": "to harvest",
+        "keywords": [
+          "frutos",
+          "safra",
+          "campo",
+          "plantação",
+          "resultados"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:morangos",
+        "class": "verb"
+      },
+      {
+        "score": 10.0,
+        "feature": "-1:fomos",
+        "class": "verb"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:flores",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:sopa",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:chá",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:açúcar",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:prata",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:frutos",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:safra",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:campo",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:plantação",
+        "class": "verb"
+      }
+    ]
+  },
+  "jogo": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ˈʒoɡu",
+        "label": "game",
+        "keywords": [
+          "futebol",
+          "equipe",
+          "time",
+          "partida",
+          "campeonato",
+          "final"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ˈʒɔɡu",
+        "label": "I play",
+        "keywords": [
+          "eu",
+          "sempre",
+          "gosto",
+          "costumo",
+          "quando"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:terças",
+        "class": "verb"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:todas",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:futebol",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:campeonato",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:final",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:partida",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:eu",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:costumo",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:sempre",
+        "class": "verb"
+      }
+    ]
+  },
+  "gosto": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ˈɡoʃtu",
+        "label": "taste",
+        "keywords": [
+          "bom",
+          "mau",
+          "pessoal",
+          "questão",
+          "refinado"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ˈɡɔʃtu",
+        "label": "I like",
+        "keywords": [
+          "eu",
+          "muito",
+          "não",
+          "mais",
+          "sempre"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:bom",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:ruim",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:amargo",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:refinado",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:pessoal",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:eu",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:muito",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:bastante",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:sempre",
+        "class": "verb"
+      }
+    ]
+  },
+  "acordo": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ɐˈkoɾdu",
+        "label": "agreement",
+        "keywords": [
+          "assinado",
+          "paz",
+          "negociação",
+          "termos",
+          "países"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ɐˈkɔɾdu",
+        "label": "I wake up",
+        "keywords": [
+          "eu",
+          "manhã",
+          "cedo",
+          "sempre",
+          "quando"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:assinado",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:paz",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:negociação",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:países",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:eu",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:manhã",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:cedo",
+        "class": "verb"
+      }
+    ]
+  },
+  "governo": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ɡuˈveɾnu",
+        "label": "government",
+        "keywords": [
+          "federal",
+          "estado",
+          "presidente",
+          "ministro",
+          "política"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ɡuˈvɛɾnu",
+        "label": "I govern",
+        "keywords": [
+          "eu",
+          "país",
+          "cidade",
+          "desde"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:federal",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:presidente",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:ministro",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:política",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:eu",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:desde",
+        "class": "verb"
+      }
+    ]
+  },
+  "forma": {
+    "classes": {
+      "noun_mold": {
+        "pronunciation": "ˈfoɾmɐ",
+        "label": "mold/way",
+        "keywords": [
+          "desta",
+          "dessa",
+          "outra",
+          "melhor",
+          "única",
+          "bolo"
+        ]
+      },
+      "noun_shape": {
+        "pronunciation": "ˈfɔɾmɐ",
+        "label": "shape/form",
+        "keywords": [
+          "física",
+          "corpo",
+          "geométrica",
+          "circular",
+          "redonda"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "-1:qualquer",
+        "class": "noun_shape"
+      },
+      {
+        "score": 10.0,
+        "feature": "-1:em",
+        "class": "noun_shape"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:exercício",
+        "class": "noun_shape"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:bolo",
+        "class": "noun_mold"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:massa",
+        "class": "noun_mold"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:desta",
+        "class": "noun_mold"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:dessa",
+        "class": "noun_mold"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:física",
+        "class": "noun_shape"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:corpo",
+        "class": "noun_shape"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:geométrica",
+        "class": "noun_shape"
+      }
+    ]
+  },
+  "olho": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ˈoʎu",
+        "label": "eye",
+        "keywords": [
+          "direito",
+          "esquerdo",
+          "abrir",
+          "fechar",
+          "cor",
+          "visão"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ˈɔʎu",
+        "label": "I look",
+        "keywords": [
+          "eu",
+          "sempre",
+          "quando",
+          "para"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:azul",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:verde",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:direito",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:esquerdo",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:visão",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:eu",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:pela",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:janela",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:quando",
+        "class": "verb"
+      }
+    ]
+  },
+  "seco": {
+    "classes": {
+      "adjective": {
+        "pronunciation": "ˈseku",
+        "label": "dry",
+        "keywords": [
+          "clima",
+          "tempo",
+          "solo",
+          "vinho",
+          "terreno",
+          "período"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ˈsɛku",
+        "label": "I dry",
+        "keywords": [
+          "eu",
+          "roupa",
+          "cabelo",
+          "mãos"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:clima",
+        "class": "adjective"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:tempo",
+        "class": "adjective"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:muito",
+        "class": "adjective"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:vinho",
+        "class": "adjective"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:solo",
+        "class": "adjective"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:eu",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:roupa",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:varal",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:cabelo",
+        "class": "verb"
+      }
+    ]
+  },
+  "pode": {
+    "classes": {
+      "present": {
+        "pronunciation": "ˈpodɨ",
+        "label": "can (present)",
+        "keywords": [
+          "ele",
+          "ela",
+          "você",
+          "quem",
+          "ninguém",
+          "também"
+        ]
+      },
+      "past": {
+        "pronunciation": "ˈpɔdɨ",
+        "label": "could (past)",
+        "keywords": [
+          "não",
+          "ontem",
+          "nunca",
+          "jamais"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:ontem",
+        "class": "past"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:pôde",
+        "class": "past"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:conseguiu",
+        "class": "past"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:você",
+        "class": "present"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:ajudar",
+        "class": "present"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:nunca",
+        "class": "past"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:jamais",
+        "class": "past"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:ele",
+        "class": "present"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:ela",
+        "class": "present"
+      }
+    ]
+  }
+}

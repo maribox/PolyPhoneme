@@ -1,0 +1,1657 @@
+{
+  "hacia": {
+    "classes": {
+      "preposition": {
+        "pronunciation": "ˈaθja",
+        "label": "toward",
+        "keywords": [
+          "ir",
+          "caminar",
+          "mirar",
+          "dirección",
+          "adelante",
+          "norte",
+          "sur"
+        ],
+        "example_count": 100
+      },
+      "verb": {
+        "pronunciation": "aˈθia",
+        "label": "he/she did (hacer)",
+        "keywords": [
+          "siempre",
+          "nunca",
+          "bien",
+          "mal",
+          "todo",
+          "trabajo"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:norte", "class": "preposition" },
+      { "score": 9.0, "feature": "w:sur", "class": "preposition" },
+      { "score": 9.0, "feature": "w:dirección", "class": "preposition" },
+      { "score": 8.0, "feature": "-1:lo", "class": "verb" },
+      { "score": 8.0, "feature": "-1:siempre", "class": "verb" }
+    ]
+  },
+  "papa": {
+    "classes": {
+      "noun_pope": {
+        "pronunciation": "ˈpapa",
+        "label": "Pope/father",
+        "keywords": [
+          "iglesia",
+          "vaticano",
+          "católico",
+          "padre",
+          "familia"
+        ],
+        "example_count": 80
+      },
+      "noun_potato": {
+        "pronunciation": "paˈpa",
+        "label": "potato",
+        "keywords": [
+          "frita",
+          "puré",
+          "cocina",
+          "patata",
+          "tubérculo"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "-1:el", "class": "noun_pope" },
+      { "score": 9.0, "feature": "w:iglesia", "class": "noun_pope" },
+      { "score": 9.0, "feature": "w:vaticano", "class": "noun_pope" },
+      { "score": 9.0, "feature": "w:frita", "class": "noun_potato" },
+      { "score": 9.0, "feature": "w:puré", "class": "noun_potato" },
+      { "score": 8.0, "feature": "w:comprar", "class": "noun_potato" },
+      { "score": 8.0, "feature": "w:cena", "class": "noun_potato" },
+      { "score": 8.0, "feature": "w:cocina", "class": "noun_potato" }
+    ]
+  },
+  "vino": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ˈbino",
+        "label": "wine",
+        "keywords": [
+          "tinto",
+          "blanco",
+          "copa",
+          "botella",
+          "uva",
+          "beber"
+        ],
+        "example_count": 90
+      },
+      "verb": {
+        "pronunciation": "ˈbino",
+        "label": "he/she came",
+        "keywords": [
+          "ayer",
+          "aquí",
+          "casa",
+          "visitar",
+          "llegar"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "w:visitarnos", "class": "verb" },
+      { "score": 10.0, "feature": "w:oficina", "class": "verb" },
+      { "score": 10.0, "feature": "w:hoy", "class": "verb" },
+      { "score": 9.0, "feature": "w:tinto", "class": "noun" },
+      { "score": 9.0, "feature": "w:copa", "class": "noun" },
+      { "score": 9.0, "feature": "w:botella", "class": "noun" },
+      { "score": 9.0, "feature": "w:ayer", "class": "verb" },
+      { "score": 9.0, "feature": "-1:amigo", "class": "verb" },
+      { "score": 8.0, "feature": "w:temprano", "class": "verb" },
+      { "score": 8.0, "feature": "w:casa", "class": "verb" }
+    ]
+  },
+  "como": {
+    "classes": {
+      "conjunction": {
+        "pronunciation": "ˈkomo",
+        "label": "like/as",
+        "keywords": [
+          "si",
+          "tal",
+          "así",
+          "ejemplo",
+          "igual"
+        ],
+        "example_count": 100
+      },
+      "verb": {
+        "pronunciation": "ˈkomo",
+        "label": "I eat",
+        "keywords": [
+          "yo",
+          "todos",
+          "días",
+          "almuerzo",
+          "cena",
+          "desayuno"
+        ],
+        "example_count": 20
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "w:restaurante", "class": "verb" },
+      { "score": 10.0, "feature": "w:frutas", "class": "verb" },
+      { "score": 10.0, "feature": "-1:yo", "class": "verb" },
+      { "score": 9.0, "feature": "w:desayuno", "class": "verb" },
+      { "score": 9.0, "feature": "w:almuerzo", "class": "verb" },
+      { "score": 8.0, "feature": "+1:si", "class": "conjunction" },
+      { "score": 8.0, "feature": "+1:un", "class": "conjunction" },
+      { "score": 8.0, "feature": "+1:una", "class": "conjunction" }
+    ]
+  },
+  "secreto": {
+    "classes": {
+      "noun": {
+        "pronunciation": "seˈkɾeto",
+        "label": "secret (noun)",
+        "keywords": [
+          "guardar",
+          "contar",
+          "descubrir",
+          "oculto",
+          "misterio"
+        ],
+        "example_count": 70
+      },
+      "adjective": {
+        "pronunciation": "seˈkɾeto",
+        "label": "secret (adj)",
+        "keywords": [
+          "agente",
+          "servicio",
+          "misión",
+          "operación",
+          "sociedad"
+        ],
+        "example_count": 50
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "w:cumplió", "class": "adjective" },
+      { "score": 9.0, "feature": "-1:agente", "class": "adjective" },
+      { "score": 9.0, "feature": "w:misión", "class": "adjective" },
+      { "score": 9.0, "feature": "w:servicio", "class": "adjective" },
+      { "score": 9.0, "feature": "w:operación", "class": "adjective" },
+      { "score": 8.0, "feature": "w:conté", "class": "noun" },
+      { "score": 8.0, "feature": "w:guardar", "class": "noun" }
+    ]
+  },
+  "bajo": {
+    "classes": {
+      "adjective": {
+        "pronunciation": "ˈbaxo",
+        "label": "low/short",
+        "keywords": [
+          "alto",
+          "volumen",
+          "tono",
+          "perfil",
+          "precio",
+          "nivel",
+          "peso"
+        ],
+        "example_count": 60
+      },
+      "preposition": {
+        "pronunciation": "ˈbaxo",
+        "label": "under/beneath",
+        "keywords": [
+          "techo",
+          "agua",
+          "presión",
+          "control",
+          "lluvia",
+          "sol",
+          "tierra"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "+1:el", "class": "preposition" },
+      { "score": 9.0, "feature": "+1:la", "class": "preposition" },
+      { "score": 9.0, "feature": "w:techo", "class": "preposition" },
+      { "score": 9.0, "feature": "w:presión", "class": "preposition" },
+      { "score": 8.0, "feature": "w:perfil", "class": "adjective" },
+      { "score": 8.0, "feature": "w:volumen", "class": "adjective" },
+      { "score": 8.0, "feature": "w:precio", "class": "adjective" },
+      { "score": 8.0, "feature": "-1:más", "class": "adjective" }
+    ]
+  },
+  "sobre": {
+    "classes": {
+      "preposition": {
+        "pronunciation": "ˈsobɾe",
+        "label": "on/about",
+        "keywords": [
+          "mesa",
+          "tema",
+          "todo",
+          "hablar",
+          "discutir",
+          "pensar"
+        ],
+        "example_count": 90
+      },
+      "noun": {
+        "pronunciation": "ˈsobɾe",
+        "label": "envelope",
+        "keywords": [
+          "carta",
+          "sello",
+          "correo",
+          "abrir",
+          "cerrar",
+          "enviar"
+        ],
+        "example_count": 20
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "-1:el", "class": "noun" },
+      { "score": 9.0, "feature": "-1:un", "class": "noun" },
+      { "score": 9.0, "feature": "w:sello", "class": "noun" },
+      { "score": 9.0, "feature": "w:correo", "class": "noun" },
+      { "score": 8.0, "feature": "+1:la", "class": "preposition" },
+      { "score": 8.0, "feature": "+1:el", "class": "preposition" },
+      { "score": 8.0, "feature": "w:tema", "class": "preposition" }
+    ]
+  },
+  "llama": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ˈʎama",
+        "label": "flame/llama",
+        "keywords": [
+          "fuego",
+          "vela",
+          "arder",
+          "quemar",
+          "animal",
+          "alpaca"
+        ],
+        "example_count": 30
+      },
+      "verb": {
+        "pronunciation": "ˈʎama",
+        "label": "calls/is called",
+        "keywords": [
+          "teléfono",
+          "nombre",
+          "atención",
+          "puerta",
+          "gritar"
+        ],
+        "example_count": 70
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "-1:se", "class": "verb" },
+      { "score": 10.0, "feature": "-1:me", "class": "verb" },
+      { "score": 10.0, "feature": "-1:te", "class": "verb" },
+      { "score": 9.0, "feature": "w:teléfono", "class": "verb" },
+      { "score": 9.0, "feature": "w:fuego", "class": "noun" },
+      { "score": 9.0, "feature": "w:vela", "class": "noun" },
+      { "score": 8.0, "feature": "-1:la", "class": "noun" },
+      { "score": 8.0, "feature": "-1:una", "class": "noun" }
+    ]
+  },
+  "planta": {
+    "classes": {
+      "noun_plant": {
+        "pronunciation": "ˈplanta",
+        "label": "plant (botanical)",
+        "keywords": [
+          "jardín",
+          "flor",
+          "regar",
+          "verde",
+          "semilla",
+          "raíz"
+        ],
+        "example_count": 50
+      },
+      "noun_floor": {
+        "pronunciation": "ˈplanta",
+        "label": "floor/level",
+        "keywords": [
+          "edificio",
+          "piso",
+          "primera",
+          "segunda",
+          "baja",
+          "ascensor"
+        ],
+        "example_count": 30
+      },
+      "verb": {
+        "pronunciation": "ˈplanta",
+        "label": "plants/stands up",
+        "keywords": [
+          "árbol",
+          "sembrar",
+          "cara",
+          "frente"
+        ],
+        "example_count": 20
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "w:edificio", "class": "noun_floor" },
+      { "score": 10.0, "feature": "-1:primera", "class": "noun_floor" },
+      { "score": 10.0, "feature": "-1:segunda", "class": "noun_floor" },
+      { "score": 9.0, "feature": "w:ascensor", "class": "noun_floor" },
+      { "score": 9.0, "feature": "w:piso", "class": "noun_floor" },
+      { "score": 9.0, "feature": "w:jardín", "class": "noun_plant" },
+      { "score": 9.0, "feature": "w:regar", "class": "noun_plant" },
+      { "score": 9.0, "feature": "w:flor", "class": "noun_plant" },
+      { "score": 8.0, "feature": "w:semilla", "class": "noun_plant" },
+      { "score": 8.0, "feature": "-1:le", "class": "verb" }
+    ]
+  },
+  "gato": {
+    "classes": {
+      "noun_animal": {
+        "pronunciation": "ˈɡato",
+        "label": "cat",
+        "keywords": [
+          "perro",
+          "mascota",
+          "ratón",
+          "maullar",
+          "gatito",
+          "felino"
+        ],
+        "example_count": 80
+      },
+      "noun_jack": {
+        "pronunciation": "ˈɡato",
+        "label": "car jack",
+        "keywords": [
+          "coche",
+          "rueda",
+          "neumático",
+          "levantar",
+          "mecánico",
+          "taller"
+        ],
+        "example_count": 15
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:coche", "class": "noun_jack" },
+      { "score": 9.0, "feature": "w:rueda", "class": "noun_jack" },
+      { "score": 9.0, "feature": "w:neumático", "class": "noun_jack" },
+      { "score": 9.0, "feature": "w:levantar", "class": "noun_jack" },
+      { "score": 8.0, "feature": "w:perro", "class": "noun_animal" },
+      { "score": 8.0, "feature": "w:mascota", "class": "noun_animal" },
+      { "score": 8.0, "feature": "w:ratón", "class": "noun_animal" }
+    ]
+  },
+  "banco": {
+    "classes": {
+      "noun_bank": {
+        "pronunciation": "ˈbanko",
+        "label": "bank (financial)",
+        "keywords": [
+          "dinero",
+          "cuenta",
+          "préstamo",
+          "ahorro",
+          "crédito",
+          "cajero"
+        ],
+        "example_count": 60
+      },
+      "noun_bench": {
+        "pronunciation": "ˈbanko",
+        "label": "bench",
+        "keywords": [
+          "parque",
+          "sentar",
+          "plaza",
+          "madera",
+          "jardín"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:dinero", "class": "noun_bank" },
+      { "score": 9.0, "feature": "w:cuenta", "class": "noun_bank" },
+      { "score": 9.0, "feature": "w:cajero", "class": "noun_bank" },
+      { "score": 9.0, "feature": "w:préstamo", "class": "noun_bank" },
+      { "score": 9.0, "feature": "w:parque", "class": "noun_bench" },
+      { "score": 9.0, "feature": "w:sentar", "class": "noun_bench" },
+      { "score": 8.0, "feature": "w:plaza", "class": "noun_bench" },
+      { "score": 8.0, "feature": "+1:del", "class": "noun_bench" }
+    ]
+  },
+  "muñeca": {
+    "classes": {
+      "noun_doll": {
+        "pronunciation": "muˈɲeka",
+        "label": "doll",
+        "keywords": [
+          "jugar",
+          "niña",
+          "juguete",
+          "trapo",
+          "vestido",
+          "porcelana"
+        ],
+        "example_count": 50
+      },
+      "noun_wrist": {
+        "pronunciation": "muˈɲeka",
+        "label": "wrist",
+        "keywords": [
+          "reloj",
+          "pulsera",
+          "mano",
+          "dolor",
+          "fractura",
+          "hueso"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:reloj", "class": "noun_wrist" },
+      { "score": 9.0, "feature": "w:pulsera", "class": "noun_wrist" },
+      { "score": 9.0, "feature": "w:fractura", "class": "noun_wrist" },
+      { "score": 9.0, "feature": "w:dolor", "class": "noun_wrist" },
+      { "score": 9.0, "feature": "w:jugar", "class": "noun_doll" },
+      { "score": 9.0, "feature": "w:juguete", "class": "noun_doll" },
+      { "score": 8.0, "feature": "w:niña", "class": "noun_doll" },
+      { "score": 8.0, "feature": "w:porcelana", "class": "noun_doll" }
+    ]
+  },
+  "cabo": {
+    "classes": {
+      "noun_cape": {
+        "pronunciation": "ˈkabo",
+        "label": "cape/headland",
+        "keywords": [
+          "mar",
+          "costa",
+          "navegar",
+          "océano",
+          "punta"
+        ],
+        "example_count": 30
+      },
+      "noun_corporal": {
+        "pronunciation": "ˈkabo",
+        "label": "corporal (military)",
+        "keywords": [
+          "soldado",
+          "militar",
+          "ejército",
+          "sargento",
+          "rango"
+        ],
+        "example_count": 20
+      },
+      "noun_end": {
+        "pronunciation": "ˈkabo",
+        "label": "end/stub",
+        "keywords": [
+          "llevar",
+          "fin",
+          "completar",
+          "realizar"
+        ],
+        "example_count": 50
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "+1:a", "class": "noun_end" },
+      { "score": 9.0, "feature": "w:mar", "class": "noun_cape" },
+      { "score": 9.0, "feature": "w:costa", "class": "noun_cape" },
+      { "score": 9.0, "feature": "w:navegar", "class": "noun_cape" },
+      { "score": 9.0, "feature": "w:soldado", "class": "noun_corporal" },
+      { "score": 9.0, "feature": "w:ejército", "class": "noun_corporal" },
+      { "score": 8.0, "feature": "-1:al", "class": "noun_end" },
+      { "score": 8.0, "feature": "w:llevar", "class": "noun_end" }
+    ]
+  },
+  "corte": {
+    "classes": {
+      "noun_cut": {
+        "pronunciation": "ˈkoɾte",
+        "label": "cut",
+        "keywords": [
+          "pelo",
+          "tijeras",
+          "cuchillo",
+          "herida",
+          "cabello"
+        ],
+        "example_count": 50
+      },
+      "noun_court": {
+        "pronunciation": "ˈkoɾte",
+        "label": "court",
+        "keywords": [
+          "rey",
+          "real",
+          "justicia",
+          "suprema",
+          "palacio"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:pelo", "class": "noun_cut" },
+      { "score": 9.0, "feature": "w:tijeras", "class": "noun_cut" },
+      { "score": 9.0, "feature": "w:cabello", "class": "noun_cut" },
+      { "score": 9.0, "feature": "w:rey", "class": "noun_court" },
+      { "score": 9.0, "feature": "w:real", "class": "noun_court" },
+      { "score": 9.0, "feature": "w:suprema", "class": "noun_court" },
+      { "score": 8.0, "feature": "w:justicia", "class": "noun_court" },
+      { "score": 8.0, "feature": "w:herida", "class": "noun_cut" }
+    ]
+  },
+  "orden": {
+    "classes": {
+      "noun_command": {
+        "pronunciation": "ˈoɾden",
+        "label": "order/command",
+        "keywords": [
+          "dar",
+          "obedecer",
+          "judicial",
+          "ejecutar",
+          "cumplir"
+        ],
+        "example_count": 50
+      },
+      "noun_arrangement": {
+        "pronunciation": "ˈoɾden",
+        "label": "order/arrangement",
+        "keywords": [
+          "alfabético",
+          "cronológico",
+          "poner",
+          "mantener",
+          "desorden"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:judicial", "class": "noun_command" },
+      { "score": 9.0, "feature": "w:obedecer", "class": "noun_command" },
+      { "score": 9.0, "feature": "w:cumplir", "class": "noun_command" },
+      { "score": 9.0, "feature": "w:alfabético", "class": "noun_arrangement" },
+      { "score": 9.0, "feature": "w:cronológico", "class": "noun_arrangement" },
+      { "score": 8.0, "feature": "w:desorden", "class": "noun_arrangement" },
+      { "score": 8.0, "feature": "w:mantener", "class": "noun_arrangement" }
+    ]
+  },
+  "capital": {
+    "classes": {
+      "noun_city": {
+        "pronunciation": "kapiˈtal",
+        "label": "capital city",
+        "keywords": [
+          "ciudad",
+          "país",
+          "estado",
+          "gobierno",
+          "provincia"
+        ],
+        "example_count": 50
+      },
+      "noun_money": {
+        "pronunciation": "kapiˈtal",
+        "label": "capital (financial)",
+        "keywords": [
+          "inversión",
+          "dinero",
+          "empresa",
+          "fondo",
+          "riesgo",
+          "ganancia"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:ciudad", "class": "noun_city" },
+      { "score": 9.0, "feature": "w:país", "class": "noun_city" },
+      { "score": 9.0, "feature": "w:provincia", "class": "noun_city" },
+      { "score": 9.0, "feature": "w:inversión", "class": "noun_money" },
+      { "score": 9.0, "feature": "w:empresa", "class": "noun_money" },
+      { "score": 8.0, "feature": "w:fondo", "class": "noun_money" },
+      { "score": 8.0, "feature": "w:gobierno", "class": "noun_city" }
+    ]
+  },
+  "derecho": {
+    "classes": {
+      "noun_law": {
+        "pronunciation": "deˈɾetʃo",
+        "label": "right/law",
+        "keywords": [
+          "humano",
+          "civil",
+          "constitucional",
+          "abogado",
+          "justicia",
+          "ley"
+        ],
+        "example_count": 50
+      },
+      "adjective": {
+        "pronunciation": "deˈɾetʃo",
+        "label": "right/straight",
+        "keywords": [
+          "lado",
+          "mano",
+          "ojo",
+          "pie",
+          "caminar",
+          "recto"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:humano", "class": "noun_law" },
+      { "score": 9.0, "feature": "w:abogado", "class": "noun_law" },
+      { "score": 9.0, "feature": "w:constitucional", "class": "noun_law" },
+      { "score": 9.0, "feature": "w:ley", "class": "noun_law" },
+      { "score": 9.0, "feature": "-1:lado", "class": "adjective" },
+      { "score": 9.0, "feature": "-1:ojo", "class": "adjective" },
+      { "score": 8.0, "feature": "w:recto", "class": "adjective" },
+      { "score": 8.0, "feature": "-1:pie", "class": "adjective" }
+    ]
+  },
+  "entrada": {
+    "classes": {
+      "noun_entrance": {
+        "pronunciation": "enˈtɾada",
+        "label": "entrance",
+        "keywords": [
+          "puerta",
+          "edificio",
+          "principal",
+          "salida",
+          "acceso"
+        ],
+        "example_count": 50
+      },
+      "noun_ticket": {
+        "pronunciation": "enˈtɾada",
+        "label": "ticket",
+        "keywords": [
+          "cine",
+          "concierto",
+          "teatro",
+          "comprar",
+          "taquilla",
+          "espectáculo"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:cine", "class": "noun_ticket" },
+      { "score": 9.0, "feature": "w:concierto", "class": "noun_ticket" },
+      { "score": 9.0, "feature": "w:teatro", "class": "noun_ticket" },
+      { "score": 9.0, "feature": "w:taquilla", "class": "noun_ticket" },
+      { "score": 9.0, "feature": "w:puerta", "class": "noun_entrance" },
+      { "score": 9.0, "feature": "w:salida", "class": "noun_entrance" },
+      { "score": 8.0, "feature": "w:principal", "class": "noun_entrance" },
+      { "score": 8.0, "feature": "w:comprar", "class": "noun_ticket" }
+    ]
+  },
+  "cola": {
+    "classes": {
+      "noun_tail": {
+        "pronunciation": "ˈkola",
+        "label": "tail",
+        "keywords": [
+          "perro",
+          "gato",
+          "animal",
+          "mover",
+          "largo"
+        ],
+        "example_count": 40
+      },
+      "noun_queue": {
+        "pronunciation": "ˈkola",
+        "label": "queue/line",
+        "keywords": [
+          "esperar",
+          "fila",
+          "turno",
+          "gente",
+          "supermercado"
+        ],
+        "example_count": 40
+      },
+      "noun_glue": {
+        "pronunciation": "ˈkola",
+        "label": "glue",
+        "keywords": [
+          "pegar",
+          "pegamento",
+          "madera",
+          "papel"
+        ],
+        "example_count": 15
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:esperar", "class": "noun_queue" },
+      { "score": 9.0, "feature": "w:fila", "class": "noun_queue" },
+      { "score": 9.0, "feature": "w:turno", "class": "noun_queue" },
+      { "score": 9.0, "feature": "w:perro", "class": "noun_tail" },
+      { "score": 9.0, "feature": "w:animal", "class": "noun_tail" },
+      { "score": 9.0, "feature": "w:mover", "class": "noun_tail" },
+      { "score": 8.0, "feature": "w:pegar", "class": "noun_glue" },
+      { "score": 8.0, "feature": "w:pegamento", "class": "noun_glue" }
+    ]
+  },
+  "carta": {
+    "classes": {
+      "noun_letter": {
+        "pronunciation": "ˈkaɾta",
+        "label": "letter",
+        "keywords": [
+          "escribir",
+          "correo",
+          "enviar",
+          "sobre",
+          "buzón"
+        ],
+        "example_count": 50
+      },
+      "noun_menu": {
+        "pronunciation": "ˈkaɾta",
+        "label": "menu",
+        "keywords": [
+          "restaurante",
+          "plato",
+          "pedir",
+          "comida",
+          "camarero"
+        ],
+        "example_count": 30
+      },
+      "noun_card": {
+        "pronunciation": "ˈkaɾta",
+        "label": "card (playing)",
+        "keywords": [
+          "jugar",
+          "baraja",
+          "póker",
+          "naipe",
+          "partida"
+        ],
+        "example_count": 20
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:restaurante", "class": "noun_menu" },
+      { "score": 9.0, "feature": "w:plato", "class": "noun_menu" },
+      { "score": 9.0, "feature": "w:camarero", "class": "noun_menu" },
+      { "score": 9.0, "feature": "w:escribir", "class": "noun_letter" },
+      { "score": 9.0, "feature": "w:correo", "class": "noun_letter" },
+      { "score": 9.0, "feature": "w:buzón", "class": "noun_letter" },
+      { "score": 8.0, "feature": "w:baraja", "class": "noun_card" },
+      { "score": 8.0, "feature": "w:naipe", "class": "noun_card" },
+      { "score": 8.0, "feature": "w:póker", "class": "noun_card" }
+    ]
+  },
+  "sierra": {
+    "classes": {
+      "noun_saw": {
+        "pronunciation": "ˈsjeɾa",
+        "label": "saw (tool)",
+        "keywords": [
+          "cortar",
+          "madera",
+          "herramienta",
+          "carpintero",
+          "eléctrica"
+        ],
+        "example_count": 25
+      },
+      "noun_mountain": {
+        "pronunciation": "ˈsjeɾa",
+        "label": "mountain range",
+        "keywords": [
+          "montaña",
+          "nieve",
+          "nevada",
+          "altura",
+          "paisaje",
+          "senderismo"
+        ],
+        "example_count": 60
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:montaña", "class": "noun_mountain" },
+      { "score": 9.0, "feature": "w:nieve", "class": "noun_mountain" },
+      { "score": 9.0, "feature": "w:nevada", "class": "noun_mountain" },
+      { "score": 9.0, "feature": "w:madera", "class": "noun_saw" },
+      { "score": 9.0, "feature": "w:carpintero", "class": "noun_saw" },
+      { "score": 8.0, "feature": "w:cortar", "class": "noun_saw" },
+      { "score": 8.0, "feature": "w:herramienta", "class": "noun_saw" },
+      { "score": 8.0, "feature": "w:senderismo", "class": "noun_mountain" }
+    ]
+  },
+  "hoja": {
+    "classes": {
+      "noun_leaf": {
+        "pronunciation": "ˈoxa",
+        "label": "leaf",
+        "keywords": [
+          "árbol",
+          "verde",
+          "otoño",
+          "caer",
+          "rama",
+          "planta"
+        ],
+        "example_count": 50
+      },
+      "noun_sheet": {
+        "pronunciation": "ˈoxa",
+        "label": "sheet/page/blade",
+        "keywords": [
+          "papel",
+          "cálculo",
+          "cuchillo",
+          "afeitar",
+          "libro"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:árbol", "class": "noun_leaf" },
+      { "score": 9.0, "feature": "w:otoño", "class": "noun_leaf" },
+      { "score": 9.0, "feature": "w:rama", "class": "noun_leaf" },
+      { "score": 9.0, "feature": "w:papel", "class": "noun_sheet" },
+      { "score": 9.0, "feature": "w:cálculo", "class": "noun_sheet" },
+      { "score": 9.0, "feature": "w:cuchillo", "class": "noun_sheet" },
+      { "score": 8.0, "feature": "w:afeitar", "class": "noun_sheet" },
+      { "score": 8.0, "feature": "w:verde", "class": "noun_leaf" }
+    ]
+  },
+  "pico": {
+    "classes": {
+      "noun_beak": {
+        "pronunciation": "ˈpiko",
+        "label": "beak",
+        "keywords": [
+          "pájaro",
+          "ave",
+          "loro",
+          "águila",
+          "comer"
+        ],
+        "example_count": 30
+      },
+      "noun_peak": {
+        "pronunciation": "ˈpiko",
+        "label": "peak/summit",
+        "keywords": [
+          "montaña",
+          "cumbre",
+          "metros",
+          "escalar",
+          "alto"
+        ],
+        "example_count": 40
+      },
+      "noun_pickaxe": {
+        "pronunciation": "ˈpiko",
+        "label": "pick/pickaxe",
+        "keywords": [
+          "cavar",
+          "mina",
+          "piedra",
+          "herramienta"
+        ],
+        "example_count": 15
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:pájaro", "class": "noun_beak" },
+      { "score": 9.0, "feature": "w:ave", "class": "noun_beak" },
+      { "score": 9.0, "feature": "w:loro", "class": "noun_beak" },
+      { "score": 9.0, "feature": "w:montaña", "class": "noun_peak" },
+      { "score": 9.0, "feature": "w:cumbre", "class": "noun_peak" },
+      { "score": 9.0, "feature": "w:escalar", "class": "noun_peak" },
+      { "score": 8.0, "feature": "w:mina", "class": "noun_pickaxe" },
+      { "score": 8.0, "feature": "w:cavar", "class": "noun_pickaxe" }
+    ]
+  },
+  "bote": {
+    "classes": {
+      "noun_boat": {
+        "pronunciation": "ˈbote",
+        "label": "small boat",
+        "keywords": [
+          "mar",
+          "remo",
+          "agua",
+          "pescar",
+          "río",
+          "navegar"
+        ],
+        "example_count": 40
+      },
+      "noun_jar": {
+        "pronunciation": "ˈbote",
+        "label": "jar/can",
+        "keywords": [
+          "basura",
+          "conserva",
+          "cocina",
+          "tapa",
+          "cristal"
+        ],
+        "example_count": 40
+      },
+      "noun_bounce": {
+        "pronunciation": "ˈbote",
+        "label": "bounce",
+        "keywords": [
+          "pelota",
+          "balón",
+          "saltar",
+          "rebotar"
+        ],
+        "example_count": 15
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:mar", "class": "noun_boat" },
+      { "score": 9.0, "feature": "w:remo", "class": "noun_boat" },
+      { "score": 9.0, "feature": "w:pescar", "class": "noun_boat" },
+      { "score": 9.0, "feature": "w:basura", "class": "noun_jar" },
+      { "score": 9.0, "feature": "w:conserva", "class": "noun_jar" },
+      { "score": 8.0, "feature": "w:pelota", "class": "noun_bounce" },
+      { "score": 8.0, "feature": "w:rebotar", "class": "noun_bounce" },
+      { "score": 8.0, "feature": "w:tapa", "class": "noun_jar" }
+    ]
+  },
+  "falda": {
+    "classes": {
+      "noun_skirt": {
+        "pronunciation": "ˈfalda",
+        "label": "skirt",
+        "keywords": [
+          "vestido",
+          "ropa",
+          "llevar",
+          "blusa",
+          "tela",
+          "corta"
+        ],
+        "example_count": 60
+      },
+      "noun_slope": {
+        "pronunciation": "ˈfalda",
+        "label": "hillside/slope",
+        "keywords": [
+          "montaña",
+          "volcán",
+          "ladera",
+          "cerro",
+          "subir"
+        ],
+        "example_count": 25
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:montaña", "class": "noun_slope" },
+      { "score": 9.0, "feature": "w:volcán", "class": "noun_slope" },
+      { "score": 9.0, "feature": "w:ladera", "class": "noun_slope" },
+      { "score": 9.0, "feature": "w:vestido", "class": "noun_skirt" },
+      { "score": 9.0, "feature": "w:ropa", "class": "noun_skirt" },
+      { "score": 8.0, "feature": "w:blusa", "class": "noun_skirt" },
+      { "score": 8.0, "feature": "w:tela", "class": "noun_skirt" }
+    ]
+  },
+  "puerto": {
+    "classes": {
+      "noun_port": {
+        "pronunciation": "ˈpweɾto",
+        "label": "port/harbor",
+        "keywords": [
+          "barco",
+          "mar",
+          "pesquero",
+          "muelle",
+          "embarcar",
+          "navegar"
+        ],
+        "example_count": 60
+      },
+      "noun_pass": {
+        "pronunciation": "ˈpweɾto",
+        "label": "mountain pass",
+        "keywords": [
+          "montaña",
+          "carretera",
+          "nieve",
+          "altura",
+          "cruzar",
+          "cerrado"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:barco", "class": "noun_port" },
+      { "score": 9.0, "feature": "w:muelle", "class": "noun_port" },
+      { "score": 9.0, "feature": "w:embarcar", "class": "noun_port" },
+      { "score": 9.0, "feature": "w:carretera", "class": "noun_pass" },
+      { "score": 9.0, "feature": "w:cerrado", "class": "noun_pass" },
+      { "score": 8.0, "feature": "w:pesquero", "class": "noun_port" },
+      { "score": 8.0, "feature": "w:nieve", "class": "noun_pass" }
+    ]
+  },
+  "cuarto": {
+    "classes": {
+      "noun_room": {
+        "pronunciation": "ˈkwaɾto",
+        "label": "room",
+        "keywords": [
+          "dormir",
+          "baño",
+          "cama",
+          "puerta",
+          "oscuro",
+          "pequeño"
+        ],
+        "example_count": 50
+      },
+      "ordinal": {
+        "pronunciation": "ˈkwaɾto",
+        "label": "fourth",
+        "keywords": [
+          "piso",
+          "lugar",
+          "primero",
+          "tercero",
+          "quinto",
+          "capítulo"
+        ],
+        "example_count": 30
+      },
+      "noun_quarter": {
+        "pronunciation": "ˈkwaɾto",
+        "label": "quarter",
+        "keywords": [
+          "hora",
+          "luna",
+          "medio",
+          "kilo"
+        ],
+        "example_count": 20
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:dormir", "class": "noun_room" },
+      { "score": 9.0, "feature": "w:baño", "class": "noun_room" },
+      { "score": 9.0, "feature": "w:cama", "class": "noun_room" },
+      { "score": 9.0, "feature": "-1:el", "class": "noun_room" },
+      { "score": 9.0, "feature": "-1:primer", "class": "ordinal" },
+      { "score": 9.0, "feature": "+1:lugar", "class": "ordinal" },
+      { "score": 9.0, "feature": "+1:piso", "class": "ordinal" },
+      { "score": 8.0, "feature": "w:hora", "class": "noun_quarter" },
+      { "score": 8.0, "feature": "+1:de", "class": "noun_quarter" }
+    ]
+  },
+  "cura": {
+    "classes": {
+      "noun_priest": {
+        "pronunciation": "ˈkuɾa",
+        "label": "priest",
+        "keywords": [
+          "iglesia",
+          "parroquia",
+          "misa",
+          "religión",
+          "párroco"
+        ],
+        "example_count": 40
+      },
+      "noun_cure": {
+        "pronunciation": "ˈkuɾa",
+        "label": "cure",
+        "keywords": [
+          "enfermedad",
+          "medicina",
+          "remedio",
+          "tratamiento",
+          "sanar"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:iglesia", "class": "noun_priest" },
+      { "score": 9.0, "feature": "w:misa", "class": "noun_priest" },
+      { "score": 9.0, "feature": "w:parroquia", "class": "noun_priest" },
+      { "score": 9.0, "feature": "-1:el", "class": "noun_priest" },
+      { "score": 9.0, "feature": "w:enfermedad", "class": "noun_cure" },
+      { "score": 9.0, "feature": "w:medicina", "class": "noun_cure" },
+      { "score": 9.0, "feature": "-1:la", "class": "noun_cure" },
+      { "score": 8.0, "feature": "w:remedio", "class": "noun_cure" }
+    ]
+  },
+  "frente": {
+    "classes": {
+      "noun_front": {
+        "pronunciation": "ˈfɾente",
+        "label": "front",
+        "keywords": [
+          "batalla",
+          "guerra",
+          "frío",
+          "avanzar",
+          "enemigo"
+        ],
+        "example_count": 40
+      },
+      "noun_forehead": {
+        "pronunciation": "ˈfɾente",
+        "label": "forehead",
+        "keywords": [
+          "sudor",
+          "arruga",
+          "besar",
+          "fiebre",
+          "tocar"
+        ],
+        "example_count": 30
+      },
+      "preposition": {
+        "pronunciation": "ˈfɾente",
+        "label": "in front of",
+        "keywords": [
+          "casa",
+          "edificio",
+          "espejo"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "+1:a", "class": "preposition" },
+      { "score": 9.0, "feature": "w:batalla", "class": "noun_front" },
+      { "score": 9.0, "feature": "w:guerra", "class": "noun_front" },
+      { "score": 9.0, "feature": "w:enemigo", "class": "noun_front" },
+      { "score": 9.0, "feature": "w:sudor", "class": "noun_forehead" },
+      { "score": 9.0, "feature": "w:fiebre", "class": "noun_forehead" },
+      { "score": 8.0, "feature": "w:arruga", "class": "noun_forehead" },
+      { "score": 8.0, "feature": "-1:la", "class": "noun_forehead" },
+      { "score": 8.0, "feature": "-1:al", "class": "noun_front" }
+    ]
+  },
+  "cometa": {
+    "classes": {
+      "noun_comet": {
+        "pronunciation": "koˈmeta",
+        "label": "comet",
+        "keywords": [
+          "cielo",
+          "estrella",
+          "cola",
+          "espacio",
+          "Halley",
+          "observar"
+        ],
+        "example_count": 40
+      },
+      "noun_kite": {
+        "pronunciation": "koˈmeta",
+        "label": "kite",
+        "keywords": [
+          "volar",
+          "viento",
+          "niño",
+          "hilo",
+          "jugar",
+          "parque"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "-1:el", "class": "noun_comet" },
+      { "score": 9.0, "feature": "-1:la", "class": "noun_kite" },
+      { "score": 9.0, "feature": "-1:una", "class": "noun_kite" },
+      { "score": 9.0, "feature": "w:cielo", "class": "noun_comet" },
+      { "score": 9.0, "feature": "w:espacio", "class": "noun_comet" },
+      { "score": 9.0, "feature": "w:volar", "class": "noun_kite" },
+      { "score": 9.0, "feature": "w:viento", "class": "noun_kite" },
+      { "score": 8.0, "feature": "w:hilo", "class": "noun_kite" }
+    ]
+  },
+  "mano": {
+    "classes": {
+      "noun_hand": {
+        "pronunciation": "ˈmano",
+        "label": "hand",
+        "keywords": [
+          "dedo",
+          "derecha",
+          "izquierda",
+          "tocar",
+          "agarrar"
+        ],
+        "example_count": 80
+      },
+      "noun_coat": {
+        "pronunciation": "ˈmano",
+        "label": "coat (of paint)",
+        "keywords": [
+          "pintura",
+          "pintar",
+          "pared",
+          "color",
+          "brocha"
+        ],
+        "example_count": 15
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:pintura", "class": "noun_coat" },
+      { "score": 9.0, "feature": "w:pintar", "class": "noun_coat" },
+      { "score": 9.0, "feature": "w:pared", "class": "noun_coat" },
+      { "score": 9.0, "feature": "w:brocha", "class": "noun_coat" },
+      { "score": 8.0, "feature": "w:dedo", "class": "noun_hand" },
+      { "score": 8.0, "feature": "w:derecha", "class": "noun_hand" },
+      { "score": 8.0, "feature": "w:izquierda", "class": "noun_hand" }
+    ]
+  },
+  "copa": {
+    "classes": {
+      "noun_glass": {
+        "pronunciation": "ˈkopa",
+        "label": "glass/goblet",
+        "keywords": [
+          "vino",
+          "brindar",
+          "beber",
+          "champán",
+          "cristal"
+        ],
+        "example_count": 50
+      },
+      "noun_treetop": {
+        "pronunciation": "ˈkopa",
+        "label": "treetop/crown",
+        "keywords": [
+          "árbol",
+          "ramas",
+          "sombra",
+          "hojas",
+          "bosque"
+        ],
+        "example_count": 20
+      },
+      "noun_trophy": {
+        "pronunciation": "ˈkopa",
+        "label": "cup/trophy",
+        "keywords": [
+          "campeonato",
+          "ganar",
+          "final",
+          "equipo",
+          "fútbol",
+          "torneo"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:vino", "class": "noun_glass" },
+      { "score": 9.0, "feature": "w:champán", "class": "noun_glass" },
+      { "score": 9.0, "feature": "w:brindar", "class": "noun_glass" },
+      { "score": 9.0, "feature": "w:campeonato", "class": "noun_trophy" },
+      { "score": 9.0, "feature": "w:fútbol", "class": "noun_trophy" },
+      { "score": 9.0, "feature": "w:torneo", "class": "noun_trophy" },
+      { "score": 8.0, "feature": "w:árbol", "class": "noun_treetop" },
+      { "score": 8.0, "feature": "w:ramas", "class": "noun_treetop" },
+      { "score": 8.0, "feature": "w:sombra", "class": "noun_treetop" }
+    ]
+  },
+  "solo": {
+    "classes": {
+      "adjective": {
+        "pronunciation": "ˈsolo",
+        "label": "alone",
+        "keywords": [
+          "casa",
+          "sentir",
+          "estar",
+          "quedarse",
+          "soledad"
+        ],
+        "example_count": 50
+      },
+      "adverb": {
+        "pronunciation": "ˈsolo",
+        "label": "only/just",
+        "keywords": [
+          "quiero",
+          "necesito",
+          "falta",
+          "momento",
+          "uno"
+        ],
+        "example_count": 50
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "-1:está", "class": "adjective" },
+      { "score": 9.0, "feature": "-1:estoy", "class": "adjective" },
+      { "score": 9.0, "feature": "w:soledad", "class": "adjective" },
+      { "score": 9.0, "feature": "+1:quiero", "class": "adverb" },
+      { "score": 9.0, "feature": "+1:necesito", "class": "adverb" },
+      { "score": 9.0, "feature": "+1:falta", "class": "adverb" },
+      { "score": 8.0, "feature": "+1:un", "class": "adverb" },
+      { "score": 8.0, "feature": "+1:una", "class": "adverb" }
+    ]
+  },
+  "aun": {
+    "classes": {
+      "adverb_even": {
+        "pronunciation": "aun",
+        "label": "even",
+        "keywords": [
+          "así",
+          "cuando",
+          "más",
+          "peor",
+          "mejor"
+        ],
+        "example_count": 40
+      },
+      "adverb_still": {
+        "pronunciation": "aˈun",
+        "label": "still/yet",
+        "keywords": [
+          "todavía",
+          "no",
+          "queda",
+          "falta",
+          "sigue"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "+1:así", "class": "adverb_even" },
+      { "score": 10.0, "feature": "+1:cuando", "class": "adverb_even" },
+      { "score": 9.0, "feature": "+1:más", "class": "adverb_even" },
+      { "score": 9.0, "feature": "+1:no", "class": "adverb_still" },
+      { "score": 9.0, "feature": "w:todavía", "class": "adverb_still" },
+      { "score": 8.0, "feature": "w:queda", "class": "adverb_still" },
+      { "score": 8.0, "feature": "w:falta", "class": "adverb_still" }
+    ]
+  },
+  "destino": {
+    "classes": {
+      "noun_destination": {
+        "pronunciation": "desˈtino",
+        "label": "destination",
+        "keywords": [
+          "viaje",
+          "llegar",
+          "vuelo",
+          "turismo",
+          "avión"
+        ],
+        "example_count": 40
+      },
+      "noun_fate": {
+        "pronunciation": "desˈtino",
+        "label": "fate/destiny",
+        "keywords": [
+          "inevitable",
+          "cruel",
+          "cumplir",
+          "vida",
+          "suerte"
+        ],
+        "example_count": 50
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:viaje", "class": "noun_destination" },
+      { "score": 9.0, "feature": "w:vuelo", "class": "noun_destination" },
+      { "score": 9.0, "feature": "w:avión", "class": "noun_destination" },
+      { "score": 9.0, "feature": "w:turismo", "class": "noun_destination" },
+      { "score": 9.0, "feature": "w:inevitable", "class": "noun_fate" },
+      { "score": 9.0, "feature": "w:cruel", "class": "noun_fate" },
+      { "score": 8.0, "feature": "w:suerte", "class": "noun_fate" },
+      { "score": 8.0, "feature": "w:vida", "class": "noun_fate" }
+    ]
+  },
+  "radio": {
+    "classes": {
+      "noun_radio": {
+        "pronunciation": "ˈraðjo",
+        "label": "radio",
+        "keywords": [
+          "escuchar",
+          "emisora",
+          "programa",
+          "música",
+          "noticias",
+          "antena"
+        ],
+        "example_count": 50
+      },
+      "noun_radius": {
+        "pronunciation": "ˈraðjo",
+        "label": "radius",
+        "keywords": [
+          "círculo",
+          "kilómetros",
+          "metros",
+          "diámetro",
+          "acción"
+        ],
+        "example_count": 30
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:escuchar", "class": "noun_radio" },
+      { "score": 9.0, "feature": "w:emisora", "class": "noun_radio" },
+      { "score": 9.0, "feature": "w:programa", "class": "noun_radio" },
+      { "score": 9.0, "feature": "w:círculo", "class": "noun_radius" },
+      { "score": 9.0, "feature": "w:diámetro", "class": "noun_radius" },
+      { "score": 8.0, "feature": "w:kilómetros", "class": "noun_radius" },
+      { "score": 8.0, "feature": "w:metros", "class": "noun_radius" }
+    ]
+  },
+  "peso": {
+    "classes": {
+      "noun_weight": {
+        "pronunciation": "ˈpeso",
+        "label": "weight",
+        "keywords": [
+          "kilos",
+          "balanza",
+          "perder",
+          "ganar",
+          "gramos",
+          "pesado"
+        ],
+        "example_count": 50
+      },
+      "noun_currency": {
+        "pronunciation": "ˈpeso",
+        "label": "peso (currency)",
+        "keywords": [
+          "moneda",
+          "dólar",
+          "cambio",
+          "pagar",
+          "precio",
+          "mexicano"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:kilos", "class": "noun_weight" },
+      { "score": 9.0, "feature": "w:balanza", "class": "noun_weight" },
+      { "score": 9.0, "feature": "w:gramos", "class": "noun_weight" },
+      { "score": 9.0, "feature": "w:moneda", "class": "noun_currency" },
+      { "score": 9.0, "feature": "w:dólar", "class": "noun_currency" },
+      { "score": 9.0, "feature": "w:mexicano", "class": "noun_currency" },
+      { "score": 8.0, "feature": "w:cambio", "class": "noun_currency" },
+      { "score": 8.0, "feature": "w:perder", "class": "noun_weight" }
+    ]
+  },
+  "partido": {
+    "classes": {
+      "noun_match": {
+        "pronunciation": "paɾˈtiðo",
+        "label": "match/game",
+        "keywords": [
+          "fútbol",
+          "jugar",
+          "ganar",
+          "equipo",
+          "gol",
+          "resultado"
+        ],
+        "example_count": 40
+      },
+      "noun_party": {
+        "pronunciation": "paɾˈtiðo",
+        "label": "political party",
+        "keywords": [
+          "político",
+          "elección",
+          "votar",
+          "gobierno",
+          "candidato",
+          "líder"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:fútbol", "class": "noun_match" },
+      { "score": 9.0, "feature": "w:gol", "class": "noun_match" },
+      { "score": 9.0, "feature": "w:equipo", "class": "noun_match" },
+      { "score": 9.0, "feature": "w:político", "class": "noun_party" },
+      { "score": 9.0, "feature": "w:elección", "class": "noun_party" },
+      { "score": 9.0, "feature": "w:votar", "class": "noun_party" },
+      { "score": 8.0, "feature": "w:candidato", "class": "noun_party" },
+      { "score": 8.0, "feature": "w:resultado", "class": "noun_match" }
+    ]
+  },
+  "lengua": {
+    "classes": {
+      "noun_tongue": {
+        "pronunciation": "ˈlenɡwa",
+        "label": "tongue",
+        "keywords": [
+          "boca",
+          "sabor",
+          "probar",
+          "lamer",
+          "morder"
+        ],
+        "example_count": 40
+      },
+      "noun_language": {
+        "pronunciation": "ˈlenɡwa",
+        "label": "language",
+        "keywords": [
+          "hablar",
+          "español",
+          "materna",
+          "extranjera",
+          "aprender",
+          "idioma"
+        ],
+        "example_count": 50
+      }
+    },
+    "decision_rules": [
+      { "score": 9.0, "feature": "w:boca", "class": "noun_tongue" },
+      { "score": 9.0, "feature": "w:sabor", "class": "noun_tongue" },
+      { "score": 9.0, "feature": "w:lamer", "class": "noun_tongue" },
+      { "score": 9.0, "feature": "w:idioma", "class": "noun_language" },
+      { "score": 9.0, "feature": "+1:materna", "class": "noun_language" },
+      { "score": 9.0, "feature": "+1:extranjera", "class": "noun_language" },
+      { "score": 8.0, "feature": "w:aprender", "class": "noun_language" },
+      { "score": 8.0, "feature": "w:español", "class": "noun_language" }
+    ]
+  },
+  "genio": {
+    "classes": {
+      "noun_genius": {
+        "pronunciation": "ˈxenjo",
+        "label": "genius",
+        "keywords": [
+          "inteligente",
+          "brillante",
+          "inventor",
+          "talento",
+          "creativo"
+        ],
+        "example_count": 40
+      },
+      "noun_temper": {
+        "pronunciation": "ˈxenjo",
+        "label": "temper/character",
+        "keywords": [
+          "mal",
+          "buen",
+          "humor",
+          "enfadar",
+          "carácter"
+        ],
+        "example_count": 40
+      }
+    },
+    "decision_rules": [
+      { "score": 10.0, "feature": "-1:mal", "class": "noun_temper" },
+      { "score": 10.0, "feature": "-1:buen", "class": "noun_temper" },
+      { "score": 9.0, "feature": "w:humor", "class": "noun_temper" },
+      { "score": 9.0, "feature": "w:enfadar", "class": "noun_temper" },
+      { "score": 9.0, "feature": "w:brillante", "class": "noun_genius" },
+      { "score": 9.0, "feature": "w:talento", "class": "noun_genius" },
+      { "score": 8.0, "feature": "w:inventor", "class": "noun_genius" },
+      { "score": 8.0, "feature": "w:creativo", "class": "noun_genius" }
+    ]
+  }
+}

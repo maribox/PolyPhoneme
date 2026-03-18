@@ -51,6 +51,9 @@ kotlin {
             implementation(libs.epub4j.core)
             implementation(libs.jsoup)
             implementation(libs.androidx.datastore.preferences)
+            implementation(libs.mlkit.genai.prompt)
+            implementation(libs.litertlm.android)
+            implementation(libs.onnxruntime.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -91,12 +94,23 @@ android {
         applicationId = "it.bosler.polyphoneme"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = (findProperty("APP_VERSION_CODE") as? String)?.toIntOrNull() ?: 1
+        versionName = (findProperty("APP_VERSION_NAME") as? String) ?: "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         val buildDate = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US).format(Date())
         buildConfigField("String", "BUILD_DATE", "\"$buildDate\"")
+    }
+    signingConfigs {
+        create("release") {
+            val ksFile = file(System.getenv("KEYSTORE_FILE") ?: "release.keystore")
+            if (ksFile.exists()) {
+                storeFile = ksFile
+                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = System.getenv("KEY_ALIAS") ?: ""
+                keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+            }
+        }
     }
     packaging {
         resources {
@@ -105,7 +119,13 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            val releaseSigning = signingConfigs.findByName("release")
+            if (releaseSigning?.storeFile?.exists() == true) {
+                signingConfig = releaseSigning
+            }
         }
     }
     compileOptions {

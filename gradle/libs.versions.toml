@@ -20,6 +20,9 @@ androidx-navigation = "2.9.2"
 androidx-datastore = "1.1.7"
 epub4j = "4.2.1"
 jsoup = "1.22.1"
+mlkit-genai = "1.0.0-beta1"
+litertlm = "0.9.0-alpha01"
+onnxruntime = "1.24.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -45,6 +48,9 @@ androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navi
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 epub4j-core = { module = "io.documentnode:epub4j-core", version.ref = "epub4j" }
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+mlkit-genai-prompt = { module = "com.google.mlkit:genai-prompt", version.ref = "mlkit-genai" }
+litertlm-android = { module = "com.google.ai.edge.litertlm:litertlm-android", version.ref = "litertlm" }
+onnxruntime-android = { module = "com.microsoft.onnxruntime:onnxruntime-android", version.ref = "onnxruntime" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

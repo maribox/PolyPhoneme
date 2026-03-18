@@ -1,0 +1,681 @@
+{
+  "umfahren": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈʊmˌfaːʁən",
+        "label": "to knock over",
+        "keywords": [
+          "fuhr",
+          "um",
+          "dabei",
+          "fast",
+          "beinahe",
+          "auto",
+          "wagen",
+          "versehentlich",
+          "zaun"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "ʊmˈfaːʁən",
+        "label": "to drive around",
+        "keywords": [
+          "stadt",
+          "hindernis",
+          "kreisverkehr",
+          "stau",
+          "weiträumig",
+          "baustelle"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:beinahe",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:zaun",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:weiträumig",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:baustelle",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:stau",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:auto",
+        "class": "separable"
+      }
+    ]
+  },
+  "übersetzen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈyːbɐˌzɛtsn̩",
+        "label": "to ferry across",
+        "keywords": [
+          "fähre",
+          "fluss",
+          "ufer",
+          "boot",
+          "setzte",
+          "über"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "yːbɐˈzɛtsn̩",
+        "label": "to translate",
+        "keywords": [
+          "sprache",
+          "text",
+          "buch",
+          "deutsch",
+          "englisch",
+          "übersetzung",
+          "wort",
+          "brief"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:fähre",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:fluss",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:englische",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:brief",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:boot",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:text",
+        "class": "inseparable"
+      }
+    ]
+  },
+  "durchbrechen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈdʊʁçˌbʁɛçn̩",
+        "label": "to break in two",
+        "keywords": [
+          "stock",
+          "holz",
+          "stab",
+          "brach",
+          "durch",
+          "mitte",
+          "entzwei",
+          "leicht"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "dʊʁçˈbʁɛçn̩",
+        "label": "to break through",
+        "keywords": [
+          "mauer",
+          "grenze",
+          "barriere",
+          "wand",
+          "front",
+          "durchbruch",
+          "armee",
+          "linie",
+          "feindliche"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:stock",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:leicht",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:armee",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:feindliche",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:linie",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:holz",
+        "class": "separable"
+      }
+    ]
+  },
+  "unterstellen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈʊntɐˌʃtɛlən",
+        "label": "to shelter/store",
+        "keywords": [
+          "regen",
+          "auto",
+          "garage",
+          "stellte",
+          "unter",
+          "trocken"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "ʊntɐˈʃtɛlən",
+        "label": "to insinuate",
+        "keywords": [
+          "absicht",
+          "motiv",
+          "böse",
+          "vorwurf",
+          "lüge",
+          "behaupten"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:bösen",
+        "class": "inseparable"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:absichten",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:regen",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:garage",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:trocken",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:stellte",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:absicht",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:vorwurf",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:böse",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:lüge",
+        "class": "inseparable"
+      }
+    ]
+  },
+  "wiederholen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈviːdɐˌhoːlən",
+        "label": "to fetch back",
+        "keywords": [
+          "holte",
+          "wieder",
+          "zurück",
+          "abholte"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "viːdɐˈhoːlən",
+        "label": "to repeat",
+        "keywords": [
+          "nochmal",
+          "prüfung",
+          "klasse",
+          "übung",
+          "satz",
+          "bitte",
+          "wiederholung"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:holte",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:zurück",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:abholte",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:nochmal",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:prüfung",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:übung",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:bitte",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:wiederholung",
+        "class": "inseparable"
+      }
+    ]
+  },
+  "umstellen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈʊmˌʃtɛlən",
+        "label": "to rearrange",
+        "keywords": [
+          "möbel",
+          "stellte",
+          "um",
+          "ordnung",
+          "uhr",
+          "zeit",
+          "ernährung"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "ʊmˈʃtɛlən",
+        "label": "to surround",
+        "keywords": [
+          "polizei",
+          "gebäude",
+          "haus",
+          "truppen",
+          "belagern",
+          "umstellt"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:möbel",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:uhr",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:ernährung",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:zeit",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:polizei",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:gebäude",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:truppen",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:umstellt",
+        "class": "inseparable"
+      }
+    ]
+  },
+  "überziehen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈyːbɐˌtsiːən",
+        "label": "to put on (coat)",
+        "keywords": [
+          "jacke",
+          "mantel",
+          "pullover",
+          "zog",
+          "über",
+          "kleidung"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "yːbɐˈtsiːən",
+        "label": "to overdraw",
+        "keywords": [
+          "konto",
+          "kredit",
+          "bank",
+          "schulden",
+          "limit",
+          "dispo"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:jacke",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:mantel",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:pullover",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:kleidung",
+        "class": "separable"
+      },
+      {
+        "score": 7.0,
+        "feature": "-1:zog",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:konto",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:bank",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:kredit",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:dispo",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:schulden",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:limit",
+        "class": "inseparable"
+      }
+    ]
+  },
+  "modern": {
+    "classes": {
+      "adjective": {
+        "pronunciation": "moˈdɛʁn",
+        "label": "modern",
+        "keywords": [
+          "kunst",
+          "architektur",
+          "design",
+          "stil",
+          "zeit",
+          "gesellschaft",
+          "welt"
+        ]
+      },
+      "verb": {
+        "pronunciation": "ˈmoːdɐn",
+        "label": "to rot",
+        "keywords": [
+          "holz",
+          "laub",
+          "verfall",
+          "feucht",
+          "wald",
+          "boden",
+          "kompost"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "-1:sehr",
+        "class": "adjective"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:moderne",
+        "class": "adjective"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:einrichtung",
+        "class": "adjective"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:kunst",
+        "class": "adjective"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:architektur",
+        "class": "adjective"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:design",
+        "class": "adjective"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:zu",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:fangen",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:balken",
+        "class": "verb"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:holz",
+        "class": "verb"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:feucht",
+        "class": "verb"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:verfall",
+        "class": "verb"
+      }
+    ]
+  },
+  "august": {
+    "classes": {
+      "month": {
+        "pronunciation": "aʊ̯ˈɡʊst",
+        "label": "August (month)",
+        "keywords": [
+          "monat",
+          "sommer",
+          "september",
+          "juli",
+          "jahr",
+          "anfang",
+          "ende"
+        ]
+      },
+      "name": {
+        "pronunciation": "ˈaʊ̯ɡʊst",
+        "label": "August (name)",
+        "keywords": [
+          "herr",
+          "kaiser",
+          "könig",
+          "prinz",
+          "graf",
+          "friedrich",
+          "wilhelm"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "-1:im",
+        "class": "month"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:monat",
+        "class": "month"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:urlaub",
+        "class": "month"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:sommer",
+        "class": "month"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:september",
+        "class": "month"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:juli",
+        "class": "month"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:könig",
+        "class": "name"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:sachsen",
+        "class": "name"
+      },
+      {
+        "score": 8.0,
+        "feature": "+1:der",
+        "class": "name"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:starke",
+        "class": "name"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:kaiser",
+        "class": "name"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:prinz",
+        "class": "name"
+      }
+    ]
+  }
+}

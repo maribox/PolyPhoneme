@@ -1,0 +1,402 @@
+{
+  "voorkomen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈvoːrˌkoːmən",
+        "label": "to occur/appear",
+        "keywords": [
+          "vaak",
+          "regelmatig",
+          "komt",
+          "voor",
+          "soort",
+          "ziekte"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "voːrˈkoːmən",
+        "label": "to prevent",
+        "keywords": [
+          "problemen",
+          "schade",
+          "ongeluk",
+          "risico",
+          "vermijden"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:bloedvergieten",
+        "class": "inseparable"
+      },
+      {
+        "score": 10.0,
+        "feature": "-1:werd",
+        "class": "inseparable"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:genezen",
+        "class": "inseparable"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:willen",
+        "class": "inseparable"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:catastrofe",
+        "class": "inseparable"
+      },
+      {
+        "score": 10.0,
+        "feature": "w:beter",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:probleem",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:problemen",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:ziekte",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:vaccinatie",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:moment",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:overal",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:ongelukken",
+        "class": "separable"
+      }
+    ]
+  },
+  "ondergaan": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈɔndərˌɣaːn",
+        "label": "to set (sun)",
+        "keywords": [
+          "zon",
+          "avond",
+          "horizon",
+          "west",
+          "ondergaat"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "ɔndərˈɣaːn",
+        "label": "to undergo",
+        "keywords": [
+          "operatie",
+          "behandeling",
+          "verandering",
+          "onderzoek"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:operatie",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:behandeling",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:zon",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:uur",
+        "class": "separable"
+      }
+    ]
+  },
+  "overleggen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈoːvərˌlɛɣən",
+        "label": "to present/submit",
+        "keywords": [
+          "bewijs",
+          "document",
+          "paspoort",
+          "factuur",
+          "legitimatie"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "oːvərˈlɛɣən",
+        "label": "to discuss/consult",
+        "keywords": [
+          "samen",
+          "collega",
+          "vergadering",
+          "overleg",
+          "team"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:paspoort",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:document",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:balie",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:bewijs",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:factuur",
+        "class": "separable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:legitimatie",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:hen",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:met",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:directeur",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:samen",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:probleem",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:vergadering",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:collega",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:overleg",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:team",
+        "class": "inseparable"
+      }
+    ]
+  },
+  "doorlopen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈdoːrˌloːpən",
+        "label": "to walk on",
+        "keywords": [
+          "gewoon",
+          "verder",
+          "stop",
+          "niet",
+          "even"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "doːrˈloːpən",
+        "label": "to traverse/go through",
+        "keywords": [
+          "proces",
+          "fase",
+          "opleiding",
+          "traject",
+          "stappen"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:laat",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:gewoon",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:einde",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:komen",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:niet",
+        "class": "separable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:zomaar",
+        "class": "separable"
+      }
+    ]
+  },
+  "overkomen": {
+    "classes": {
+      "separable": {
+        "pronunciation": "ˈoːvərˌkoːmən",
+        "label": "to come over",
+        "keywords": [
+          "vanavond",
+          "morgen",
+          "bezoek",
+          "langs",
+          "eten"
+        ]
+      },
+      "inseparable": {
+        "pronunciation": "oːvərˈkoːmən",
+        "label": "to happen to",
+        "keywords": [
+          "ongeluk",
+          "iets",
+          "ergs",
+          "nooit",
+          "overkwam"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:vanavond",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:eten",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:bezoek",
+        "class": "separable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:langs",
+        "class": "separable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:morgen",
+        "class": "separable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:hetzelfde",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:iedereen",
+        "class": "inseparable"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:zoiets",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:hypocriet",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:rijk",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:kan",
+        "class": "inseparable"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:ongeluk",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:nooit",
+        "class": "inseparable"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:overkwam",
+        "class": "inseparable"
+      }
+    ]
+  }
+}

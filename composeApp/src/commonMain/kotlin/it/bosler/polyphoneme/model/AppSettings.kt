@@ -12,4 +12,5 @@ data class AppSettings(
     val lineSpacing: Float = 1.5f,
     val readingMode: ReadingMode = ReadingMode.PAGE,
     val hasSeenPageModeTutorial: Boolean = false,
+    val languageRegions: Map<String, String> = emptyMap(),
 )

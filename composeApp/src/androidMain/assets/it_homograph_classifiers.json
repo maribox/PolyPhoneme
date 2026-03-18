@@ -1,0 +1,737 @@
+{
+  "ancora": {
+    "classes": {
+      "noun": {
+        "pronunciation": "ˈaŋkora",
+        "label": "anchor",
+        "example_count": 10,
+        "keywords": [
+          "nave",
+          "barca",
+          "porto",
+          "mare",
+          "gettare",
+          "catena",
+          "pesante"
+        ]
+      },
+      "adverb": {
+        "pronunciation": "aŋˈkora",
+        "label": "still/again",
+        "example_count": 90,
+        "keywords": [
+          "non",
+          "una",
+          "volta",
+          "più",
+          "sempre",
+          "oggi"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "-1:l'",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:nave",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:porto",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:pesante",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:gettato",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:barca",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "-1:non",
+        "class": "adverb"
+      },
+      {
+        "score": 8.0,
+        "feature": "+1:finito",
+        "class": "adverb"
+      },
+      {
+        "score": 8.0,
+        "feature": "+1:comprare",
+        "class": "adverb"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:devo",
+        "class": "adverb"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:compiti",
+        "class": "adverb"
+      }
+    ]
+  },
+  "principi": {
+    "classes": {
+      "noun_princes": {
+        "pronunciation": "ˈprintʃipi",
+        "label": "princes",
+        "keywords": [
+          "re",
+          "regina",
+          "palazzo",
+          "corona",
+          "nobili",
+          "reali",
+          "castello",
+          "vivevano"
+        ]
+      },
+      "noun_principles": {
+        "pronunciation": "prinˈtʃipi",
+        "label": "principles",
+        "keywords": [
+          "base",
+          "fondamentali",
+          "morali",
+          "regole",
+          "valori",
+          "etici",
+          "democrazia",
+          "importanti"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "w:termodinamica",
+        "class": "noun_principles"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:castello",
+        "class": "noun_princes"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:vivevano",
+        "class": "noun_princes"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:collina",
+        "class": "noun_princes"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:fondamentali",
+        "class": "noun_principles"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:democrazia",
+        "class": "noun_principles"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:importanti",
+        "class": "noun_principles"
+      }
+    ]
+  },
+  "leggere": {
+    "classes": {
+      "verb": {
+        "pronunciation": "ˈlɛddʒere",
+        "label": "to read",
+        "keywords": [
+          "libro",
+          "pagina",
+          "testo",
+          "parole",
+          "giornale",
+          "storia",
+          "romanzi"
+        ]
+      },
+      "adjective": {
+        "pronunciation": "ledˈdʒɛre",
+        "label": "light (f.pl.)",
+        "keywords": [
+          "borse",
+          "valigie",
+          "piume",
+          "nuvole",
+          "stoffe",
+          "armi",
+          "scarpe",
+          "comode"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:romanzi",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:piace",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:sera",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:scarpe",
+        "class": "adjective"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:comode",
+        "class": "adjective"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:molto",
+        "class": "adjective"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:storici",
+        "class": "verb"
+      }
+    ]
+  },
+  "subito": {
+    "classes": {
+      "adverb": {
+        "pronunciation": "ˈsubito",
+        "label": "immediately",
+        "keywords": [
+          "dopo",
+          "prima",
+          "arrivato",
+          "capito",
+          "fatto",
+          "corso",
+          "vieni",
+          "qui",
+          "favore"
+        ]
+      },
+      "verb": {
+        "pronunciation": "suˈbito",
+        "label": "endured",
+        "keywords": [
+          "danno",
+          "perdita",
+          "attacco",
+          "sconfitta",
+          "violenza",
+          "torto",
+          "intervento",
+          "chirurgico"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 10.0,
+        "feature": "-1:vieni",
+        "class": "adverb"
+      },
+      {
+        "score": 9.0,
+        "feature": "+1:qui",
+        "class": "adverb"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:ha",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:intervento",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:chirurgico",
+        "class": "verb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:favore",
+        "class": "adverb"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:settimana",
+        "class": "verb"
+      },
+      {
+        "score": 7.0,
+        "feature": "w:scorsa",
+        "class": "verb"
+      }
+    ]
+  },
+  "capitano": {
+    "classes": {
+      "verb": {
+        "pronunciation": "ˈkapitano",
+        "label": "they happen",
+        "keywords": [
+          "cose",
+          "spesso",
+          "volte",
+          "situazioni",
+          "sempre"
+        ]
+      },
+      "noun": {
+        "pronunciation": "kapiˈtano",
+        "label": "captain",
+        "keywords": [
+          "nave",
+          "squadra",
+          "esercito",
+          "grado",
+          "comandante",
+          "bordo"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:cose",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:aspetti",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:quando",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:meno",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:il",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:guidò",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:squadra",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:vittoria",
+        "class": "noun"
+      }
+    ]
+  },
+  "pesca": {
+    "classes": {
+      "noun_peach": {
+        "pronunciation": "ˈpɛska",
+        "label": "peach",
+        "keywords": [
+          "frutta",
+          "dolce",
+          "matura",
+          "albero",
+          "succo",
+          "gelato",
+          "succosa",
+          "mangiato"
+        ]
+      },
+      "noun_fishing": {
+        "pronunciation": "ˈpeska",
+        "label": "fishing",
+        "keywords": [
+          "mare",
+          "fiume",
+          "barca",
+          "rete",
+          "pescare",
+          "pesce",
+          "lago",
+          "vietata",
+          "abbondante"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:dolce",
+        "class": "noun_peach"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:succosa",
+        "class": "noun_peach"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:matura",
+        "class": "noun_peach"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:mangiato",
+        "class": "noun_peach"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:giardino",
+        "class": "noun_peach"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:lago",
+        "class": "noun_fishing"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:fiume",
+        "class": "noun_fishing"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:vietata",
+        "class": "noun_fishing"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:abbondante",
+        "class": "noun_fishing"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:tratto",
+        "class": "noun_fishing"
+      }
+    ]
+  },
+  "botte": {
+    "classes": {
+      "noun_beatings": {
+        "pronunciation": "ˈbɔtte",
+        "label": "beatings",
+        "keywords": [
+          "prendere",
+          "dare",
+          "colpi",
+          "pugni",
+          "picchiare",
+          "preso",
+          "rissa"
+        ]
+      },
+      "noun_barrel": {
+        "pronunciation": "ˈbotte",
+        "label": "barrel",
+        "keywords": [
+          "vino",
+          "legno",
+          "cantina",
+          "invecchiamento",
+          "rovere"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:preso",
+        "class": "noun_beatings"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:rissa",
+        "class": "noun_beatings"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:vino",
+        "class": "noun_barrel"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:rovere",
+        "class": "noun_barrel"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:invecchia",
+        "class": "noun_barrel"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:durante",
+        "class": "noun_beatings"
+      }
+    ]
+  },
+  "perdono": {
+    "classes": {
+      "verb": {
+        "pronunciation": "ˈpɛrdono",
+        "label": "they lose",
+        "keywords": [
+          "non",
+          "mai",
+          "facilmente",
+          "perdonare",
+          "spesso",
+          "chiavi"
+        ]
+      },
+      "noun": {
+        "pronunciation": "perˈdono",
+        "label": "pardon",
+        "keywords": [
+          "chiedere",
+          "grazia",
+          "clemenza",
+          "concessione"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "-1:spesso",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:chiavi",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:casa",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "-1:chiedo",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:chiedo",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:fatto",
+        "class": "noun"
+      }
+    ]
+  },
+  "legge": {
+    "classes": {
+      "verb": {
+        "pronunciation": "ˈlɛddʒe",
+        "label": "reads",
+        "keywords": [
+          "libro",
+          "giornale",
+          "testo",
+          "parole",
+          "voce",
+          "sera",
+          "mattina"
+        ]
+      },
+      "noun": {
+        "pronunciation": "ˈleddʒe",
+        "label": "law",
+        "keywords": [
+          "stato",
+          "parlamento",
+          "diritto",
+          "norma",
+          "approvata",
+          "decreto",
+          "italiana",
+          "nuova",
+          "vigore"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:libro",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:giornale",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:sera",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:mattina",
+        "class": "verb"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:italiana",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:nuova",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:vigore",
+        "class": "noun"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:diritti",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "-1:la",
+        "class": "noun"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:figli",
+        "class": "verb"
+      }
+    ]
+  },
+  "venti": {
+    "classes": {
+      "noun_winds": {
+        "pronunciation": "ˈvɛnti",
+        "label": "winds",
+        "keywords": [
+          "forte",
+          "tempesta",
+          "soffiare",
+          "mare",
+          "tramontana",
+          "forti",
+          "nord",
+          "alberi"
+        ]
+      },
+      "numeral": {
+        "pronunciation": "ˈventi",
+        "label": "twenty",
+        "keywords": [
+          "anni",
+          "giorni",
+          "persone",
+          "minuti",
+          "chilometri",
+          "euro",
+          "studenti",
+          "compiuto"
+        ]
+      }
+    },
+    "decision_rules": [
+      {
+        "score": 9.0,
+        "feature": "w:forti",
+        "class": "noun_winds"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:alberi",
+        "class": "noun_winds"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:nord",
+        "class": "noun_winds"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:freddo",
+        "class": "noun_winds"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:studenti",
+        "class": "numeral"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:anni",
+        "class": "numeral"
+      },
+      {
+        "score": 9.0,
+        "feature": "w:compiuto",
+        "class": "numeral"
+      },
+      {
+        "score": 8.0,
+        "feature": "w:classe",
+        "class": "numeral"
+      },
+      {
+        "score": 8.0,
+        "feature": "-1:i",
+        "class": "noun_winds"
+      }
+    ]
+  }
+}

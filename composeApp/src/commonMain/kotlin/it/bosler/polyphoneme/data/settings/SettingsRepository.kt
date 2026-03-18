@@ -14,4 +14,5 @@ interface SettingsRepository {
     suspend fun updateLineSpacing(spacing: Float)
     suspend fun updateReadingMode(mode: ReadingMode)
     suspend fun updateHasSeenPageModeTutorial(seen: Boolean)
+    suspend fun updateLanguageRegion(lang: String, region: String)
 }

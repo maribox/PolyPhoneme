@@ -27,6 +27,7 @@ class AndroidSettingsRepository(private val context: Context) : SettingsReposito
         val LINE_SPACING = floatPreferencesKey("line_spacing")
         val READING_MODE = stringPreferencesKey("reading_mode")
         val HAS_SEEN_PAGE_TUTORIAL = booleanPreferencesKey("has_seen_page_tutorial")
+        val LANGUAGE_REGIONS = stringPreferencesKey("language_regions")
     }
 
     override fun settingsFlow(): Flow<AppSettings> = context.dataStore.data.map { prefs ->
@@ -42,6 +43,12 @@ class AndroidSettingsRepository(private val context: Context) : SettingsReposito
                 try { ReadingMode.valueOf(it) } catch (_: Exception) { ReadingMode.PAGE }
             } ?: ReadingMode.PAGE,
             hasSeenPageModeTutorial = prefs[Keys.HAS_SEEN_PAGE_TUTORIAL] ?: false,
+            languageRegions = prefs[Keys.LANGUAGE_REGIONS]?.let { raw ->
+                raw.split(";").filter { it.contains("=") }.associate {
+                    val (k, v) = it.split("=", limit = 2)
+                    k to v
+                }
+            } ?: emptyMap(),
         )
     }
 
@@ -71,5 +78,18 @@ class AndroidSettingsRepository(private val context: Context) : SettingsReposito
 
     override suspend fun updateHasSeenPageModeTutorial(seen: Boolean) {
         context.dataStore.edit { it[Keys.HAS_SEEN_PAGE_TUTORIAL] = seen }
+    }
+
+    override suspend fun updateLanguageRegion(lang: String, region: String) {
+        context.dataStore.edit { prefs ->
+            val current = prefs[Keys.LANGUAGE_REGIONS]?.let { raw ->
+                raw.split(";").filter { it.contains("=") }.associate {
+                    val (k, v) = it.split("=", limit = 2)
+                    k to v
+                }
+            }?.toMutableMap() ?: mutableMapOf()
+            current[lang] = region
+            prefs[Keys.LANGUAGE_REGIONS] = current.entries.joinToString(";") { "${it.key}=${it.value}" }
+        }
     }
 }

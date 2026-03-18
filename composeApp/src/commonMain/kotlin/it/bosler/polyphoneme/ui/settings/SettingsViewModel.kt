@@ -41,4 +41,8 @@ class SettingsViewModel : ViewModel() {
     fun updateReadingMode(mode: ReadingMode) {
         viewModelScope.launch { repo.updateReadingMode(mode) }
     }
+
+    fun updateLanguageRegion(lang: String, region: String) {
+        viewModelScope.launch { repo.updateLanguageRegion(lang, region) }
+    }
 }

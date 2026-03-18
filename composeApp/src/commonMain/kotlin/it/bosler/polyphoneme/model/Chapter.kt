@@ -16,4 +16,6 @@ data class Token(
     val trailingPunctuation: String = "",
     val ipa: String? = null,
     val translation: String? = null,
+    val isDisambiguated: Boolean = false,
+    val alternativePronunciations: List<String> = emptyList(),
 )

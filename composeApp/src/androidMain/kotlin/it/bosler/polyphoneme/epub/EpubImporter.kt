@@ -11,6 +11,9 @@ class EpubImporter(private val context: Context) {
     private val booksDir: File
         get() = File(context.filesDir, "books").also { it.mkdirs() }
 
+    private val coversDir: File
+        get() = File(context.filesDir, "covers").also { it.mkdirs() }
+
     fun importBook(uriString: String): BookMeta {
         val uri = Uri.parse(uriString)
         val bookId = UUID.randomUUID().toString()
@@ -23,8 +26,9 @@ class EpubImporter(private val context: Context) {
             }
         } ?: throw IllegalStateException("Cannot open URI: $uriString")
 
-        // Parse metadata
-        val (_, parsed) = destFile.inputStream().use { EpubParser.parseMetadata(it) }
+        // Parse metadata and extract cover
+        val (book, parsed) = destFile.inputStream().use { EpubParser.parseMetadata(it) }
+        val coverPath = extractCover(book, bookId)
 
         return BookMeta(
             id = bookId,
@@ -32,9 +36,28 @@ class EpubImporter(private val context: Context) {
             author = parsed.author,
             language = parsed.language,
             filePath = destFile.absolutePath,
+            coverPath = coverPath,
             chapterCount = parsed.chapterCount,
             importedAt = System.currentTimeMillis(),
         )
+    }
+
+    private fun extractCover(book: io.documentnode.epub4j.domain.Book, bookId: String): String? {
+        val coverImage = book.coverImage ?: return null
+        return try {
+            val ext = when {
+                coverImage.mediaType?.name?.contains("png") == true -> "png"
+                coverImage.mediaType?.name?.contains("gif") == true -> "gif"
+                else -> "jpg"
+            }
+            val coverFile = File(coversDir, "$bookId.$ext")
+            coverFile.outputStream().use { out ->
+                out.write(coverImage.data)
+            }
+            coverFile.absolutePath
+        } catch (_: Exception) {
+            null
+        }
     }
 
     fun deleteBookFile(filePath: String) {

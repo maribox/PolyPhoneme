@@ -30,7 +30,41 @@ class AndroidBookRepository(
         return bookMeta
     }
 
-    override suspend fun getLibrary(): List<BookMeta> = loadLibrary()
+    override suspend fun getLibrary(): List<BookMeta> {
+        val library = loadLibrary()
+        // Back-fill covers for books imported before cover extraction was added
+        var changed = false
+        val updated = library.map { book ->
+            if (book.coverPath == null) {
+                val coverPath = extractCoverForExisting(book)
+                if (coverPath != null) {
+                    changed = true
+                    book.copy(coverPath = coverPath)
+                } else book
+            } else book
+        }
+        if (changed) saveLibrary(updated)
+        return updated
+    }
+
+    private fun extractCoverForExisting(book: BookMeta): String? {
+        return try {
+            val epubFile = File(book.filePath)
+            if (!epubFile.exists()) return null
+            val epubBook = epubFile.inputStream().use { EpubReader().readEpub(it) }
+            val coverImage = epubBook.coverImage ?: return null
+            val coversDir = File(context.filesDir, "covers").also { it.mkdirs() }
+            val ext = when {
+                coverImage.mediaType?.name?.contains("png") == true -> "png"
+                else -> "jpg"
+            }
+            val coverFile = File(coversDir, "${book.id}.$ext")
+            coverFile.outputStream().use { out -> out.write(coverImage.data) }
+            coverFile.absolutePath
+        } catch (_: Exception) {
+            null
+        }
+    }
 
     override suspend fun getBookMeta(bookId: String): BookMeta? =
         loadLibrary().find { it.id == bookId }
@@ -39,6 +73,7 @@ class AndroidBookRepository(
         val library = loadLibrary().toMutableList()
         val book = library.find { it.id == id } ?: return
         importer.deleteBookFile(book.filePath)
+        book.coverPath?.let { File(it).delete() }
         library.removeAll { it.id == id }
         saveLibrary(library)
     }
@@ -57,21 +92,10 @@ class AndroidBookRepository(
             detected
         }
 
-        // Apply IPA transcription if service is available
+        // Apply IPA transcription with context-aware disambiguation
         val service = ipaService ?: return chapter
-        val allWords = chapter.paragraphs.flatMap { p -> p.tokens.map { it.word } }.distinct()
-        val ipaMap = service.transcribe(allWords, language)
-
-        return chapter.copy(
-            paragraphs = chapter.paragraphs.map { paragraph ->
-                paragraph.copy(
-                    tokens = paragraph.tokens.map { token ->
-                        val ipa = ipaMap[token.word.lowercase()]
-                        if (ipa != null) token.copy(ipa = ipa) else token
-                    }
-                )
-            }
-        )
+        val transcribedParagraphs = service.transcribeInContext(chapter.paragraphs, language)
+        return chapter.copy(paragraphs = transcribedParagraphs)
     }
 
     override suspend fun getChapterCount(bookId: String): Int {
