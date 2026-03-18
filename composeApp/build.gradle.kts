@@ -81,6 +81,8 @@ kotlin {
 
 configurations.all {
     exclude(group = "xmlpull", module = "xmlpull")
+    exclude(group = "xpp3", module = "xpp3")
+    exclude(group = "net.sf.kxml", module = "kxml2")
 }
 
 android {
@@ -115,6 +117,7 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "org/xmlpull/**"
         }
     }
     buildTypes {
