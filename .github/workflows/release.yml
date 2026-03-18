@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
 
 jobs:
   release:
@@ -22,17 +22,45 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Extract version from tag
+      - name: Determine next version from conventional commits
         id: version
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          VERSION="${TAG#v}"
-          # Generate version code from tag: v1.2.3 → 10203
-          IFS='.' read -r major minor patch <<< "$VERSION"
-          CODE=$(( major * 10000 + minor * 100 + ${patch:-0} ))
-          echo "name=$VERSION" >> "$GITHUB_OUTPUT"
+          # Get latest tag or default to v0.0.0
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+
+          # Parse current version
+          VERSION="${LATEST_TAG#v}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          MAJOR=${MAJOR:-0}; MINOR=${MINOR:-0}; PATCH=${PATCH:-0}
+
+          # Analyze commits since last tag for conventional commit prefixes
+          COMMITS=$(git log "${LATEST_TAG}..HEAD" --pretty=format:"%s" 2>/dev/null || git log --pretty=format:"%s")
+
+          BUMP="patch"
+          while IFS= read -r msg; do
+            if echo "$msg" | grep -qiE "^(feat|feature)(\(.+\))?!:|^BREAKING CHANGE"; then
+              BUMP="major"; break
+            elif echo "$msg" | grep -qiE "^(feat|feature)(\(.+\))?:"; then
+              BUMP="minor"
+            fi
+          done <<< "$COMMITS"
+
+          # Apply bump
+          case $BUMP in
+            major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
+            minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
+            patch) PATCH=$((PATCH + 1)) ;;
+          esac
+
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          CODE=$(git rev-list --count HEAD)
+          TAG="v${NEW_VERSION}"
+
+          echo "name=$NEW_VERSION" >> "$GITHUB_OUTPUT"
           echo "code=$CODE" >> "$GITHUB_OUTPUT"
-          echo "Building version $VERSION (code $CODE)"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Bump: $BUMP → $NEW_VERSION (code $CODE)"
 
       - name: Decode keystore
         if: env.KEYSTORE_BASE64 != ''
@@ -51,12 +79,11 @@ jobs:
             -PAPP_VERSION_NAME=${{ steps.version.outputs.name }} \
             -PAPP_VERSION_CODE=${{ steps.version.outputs.code }}
 
-      - name: Find and rename APK
+      - name: Prepare APK
         id: apk
         run: |
           APK=$(find composeApp/build/outputs/apk/release -name '*.apk' | head -1)
           if [ -z "$APK" ]; then
-            echo "No release APK found, falling back to debug"
             ./gradlew :composeApp:assembleDebug \
               -PAPP_VERSION_NAME=${{ steps.version.outputs.name }} \
               -PAPP_VERSION_CODE=${{ steps.version.outputs.code }}
@@ -66,9 +93,15 @@ jobs:
           cp "$APK" "$DEST"
           echo "path=$DEST" >> "$GITHUB_OUTPUT"
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          files: ${{ steps.apk.outputs.path }}
-          name: PolyPhoneme ${{ steps.version.outputs.name }}
+      - name: Create tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          git tag "$TAG"
+          git push origin "$TAG"
+          gh release create "$TAG" \
+            "${{ steps.apk.outputs.path }}" \
+            --title "PolyPhoneme ${{ steps.version.outputs.name }}" \
+            --generate-notes \
+            --latest
