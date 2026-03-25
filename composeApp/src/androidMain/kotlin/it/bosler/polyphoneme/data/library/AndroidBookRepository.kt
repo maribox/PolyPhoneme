@@ -119,6 +119,9 @@ class AndroidBookRepository(
         return EpubParser.extractTableOfContents(epubBook)
     }
 
+    override suspend fun updateBookLanguage(bookId: String, language: String) =
+        updateLanguage(bookId, language)
+
     private fun updateLanguage(bookId: String, language: String) {
         val library = loadLibrary().toMutableList()
         val index = library.indexOfFirst { it.id == bookId }

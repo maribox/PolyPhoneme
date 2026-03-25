@@ -35,6 +35,7 @@ import it.bosler.polyphoneme.model.IpaPosition
 import it.bosler.polyphoneme.model.Paragraph
 import it.bosler.polyphoneme.model.Token
 import it.bosler.polyphoneme.ui.theme.LocalExtendedColors
+import it.bosler.polyphoneme.ui.theme.LocalReaderStyle
 import it.bosler.polyphoneme.ui.theme.rememberIpaFontFamily
 
 @Composable
@@ -75,12 +76,14 @@ private fun InlineParagraph(
     onWordTap: (Token) -> Unit,
     modifier: Modifier,
 ) {
-    val textColor = MaterialTheme.colorScheme.onSurface
-    val ipaColor = LocalExtendedColors.current.ipa
+    val readerStyle = LocalReaderStyle.current
+    val textColor = readerStyle.textColor ?: MaterialTheme.colorScheme.onSurface
+    val ipaColor = readerStyle.ipaColor ?: LocalExtendedColors.current.ipa
     val ipaSize = (fontSize * 0.6f).sp
     val ipaFont = rememberIpaFontFamily()
+    val bodyFont = readerStyle.fontFamily
 
-    val annotatedString: AnnotatedString = remember(paragraph, ipaPosition, fontSize, textColor, ipaColor) {
+    val annotatedString: AnnotatedString = remember(paragraph, ipaPosition, fontSize, textColor, ipaColor, bodyFont) {
         buildAnnotatedString {
             for ((index, token) in paragraph.tokens.withIndex()) {
                 when (ipaPosition) {
@@ -88,7 +91,7 @@ private fun InlineParagraph(
                         append(token.leadingPunctuation)
                         val wordStart = length
                         if (token.ipa != null) {
-                            withStyle(SpanStyle(color = ipaColor)) {
+                            withStyle(SpanStyle(color = ipaColor, fontFamily = ipaFont)) {
                                 append(token.ipa)
                             }
                         } else {
@@ -100,7 +103,7 @@ private fun InlineParagraph(
                     }
                     IpaPosition.BEFORE -> {
                         if (token.ipa != null) {
-                            withStyle(SpanStyle(fontSize = ipaSize, color = ipaColor)) {
+                            withStyle(SpanStyle(fontSize = ipaSize, color = ipaColor, fontFamily = ipaFont)) {
                                 append("/${token.ipa}/ ")
                             }
                         }
@@ -119,7 +122,7 @@ private fun InlineParagraph(
                         addStringAnnotation("token", index.toString(), wordStart, wordEnd)
                         append(token.trailingPunctuation)
                         if (token.ipa != null) {
-                            withStyle(SpanStyle(fontSize = ipaSize, color = ipaColor)) {
+                            withStyle(SpanStyle(fontSize = ipaSize, color = ipaColor, fontFamily = ipaFont)) {
                                 append(" /${token.ipa}/")
                             }
                         }
@@ -138,7 +141,7 @@ private fun InlineParagraph(
             fontSize = fontSize.sp,
             lineHeight = (fontSize * lineSpacing).sp,
             color = textColor,
-            fontFamily = ipaFont,
+            fontFamily = bodyFont,
         ),
         onTextLayout = { layoutResult = it },
         modifier = modifier
@@ -171,11 +174,13 @@ private fun StackedParagraph(
     onWordTap: (Token) -> Unit,
     modifier: Modifier,
 ) {
-    val textColor = MaterialTheme.colorScheme.onSurface
-    val ipaColor = LocalExtendedColors.current.ipa
+    val readerStyle = LocalReaderStyle.current
+    val textColor = readerStyle.textColor ?: MaterialTheme.colorScheme.onSurface
+    val ipaColor = readerStyle.ipaColor ?: LocalExtendedColors.current.ipa
     val ipaFontSize = (fontSize * 0.6f).sp
     val ipaLineHeight = with(LocalDensity.current) { (ipaFontSize * 1.3f).toDp() }
     val ipaFont = rememberIpaFontFamily()
+    val bodyFont = readerStyle.fontFamily
 
     FlowRow(
         modifier = modifier
@@ -187,10 +192,12 @@ private fun StackedParagraph(
                 token = token,
                 ipaPosition = ipaPosition,
                 fontSize = fontSize,
+                lineSpacing = lineSpacing,
                 ipaFontSize = ipaFontSize,
                 ipaLineHeight = ipaLineHeight,
                 ipaColor = ipaColor,
                 ipaFont = ipaFont,
+                bodyFont = bodyFont,
                 textColor = textColor,
                 onClick = { onWordTap(token) },
             )
@@ -203,10 +210,12 @@ private fun WordBlock(
     token: Token,
     ipaPosition: IpaPosition,
     fontSize: Int,
+    lineSpacing: Float,
     ipaFontSize: androidx.compose.ui.unit.TextUnit,
     ipaLineHeight: androidx.compose.ui.unit.Dp,
     ipaColor: Color,
     ipaFont: FontFamily,
+    bodyFont: FontFamily,
     textColor: Color,
     onClick: () -> Unit,
 ) {
@@ -240,8 +249,9 @@ private fun WordBlock(
             text = display,
             style = TextStyle(
                 fontSize = fontSize.sp,
+                lineHeight = (fontSize * lineSpacing).sp,
                 color = textColor,
-                fontFamily = ipaFont,
+                fontFamily = bodyFont,
             ),
         )
 

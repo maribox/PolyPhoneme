@@ -1,7 +1,10 @@
 package it.bosler.polyphoneme.data.settings
 
 import it.bosler.polyphoneme.model.AppSettings
+import it.bosler.polyphoneme.model.AppTheme
 import it.bosler.polyphoneme.model.IpaPosition
+import it.bosler.polyphoneme.model.ReaderBackground
+import it.bosler.polyphoneme.model.ReaderFont
 import it.bosler.polyphoneme.model.ReadingMode
 import kotlinx.coroutines.flow.Flow
 
@@ -15,4 +18,7 @@ interface SettingsRepository {
     suspend fun updateReadingMode(mode: ReadingMode)
     suspend fun updateHasSeenPageModeTutorial(seen: Boolean)
     suspend fun updateLanguageRegion(lang: String, region: String)
+    suspend fun updateAppTheme(theme: AppTheme)
+    suspend fun updateReaderBackground(bg: ReaderBackground)
+    suspend fun updateReaderFont(font: ReaderFont)
 }

@@ -1,9 +1,12 @@
 package it.bosler.polyphoneme.ui.settings
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -51,14 +54,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import it.bosler.polyphoneme.ui.theme.Amber_light_primary
+import it.bosler.polyphoneme.ui.theme.Crimson_light_primary
+import it.bosler.polyphoneme.ui.theme.Indigo_light_primary
+import it.bosler.polyphoneme.ui.theme.ReaderAmoledBg
+import it.bosler.polyphoneme.ui.theme.ReaderDarkBg
+import it.bosler.polyphoneme.ui.theme.ReaderSepiaBg
+import it.bosler.polyphoneme.ui.theme.Sage_light_primary
+import it.bosler.polyphoneme.ui.theme.Slate_light_primary
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import it.bosler.polyphoneme.model.AppTheme
 import it.bosler.polyphoneme.model.IpaPosition
 import it.bosler.polyphoneme.model.LanguageRegions
+import it.bosler.polyphoneme.model.ReaderBackground
+import it.bosler.polyphoneme.model.ReaderFont
 import it.bosler.polyphoneme.model.ReadingMode
 import kotlin.math.roundToInt
 
@@ -225,6 +240,26 @@ fun SettingsScreen(
                 steps = 19,
                 valueLabel = "%.1f".format(settings.lineSpacing),
                 onValueChange = { viewModel.updateLineSpacing(it) },
+            )
+
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+
+            // Appearance Section
+            SectionHeader("Appearance")
+
+            AppThemePicker(
+                selected = settings.appTheme,
+                onSelect = { viewModel.updateAppTheme(it) },
+            )
+
+            ReaderBackgroundPicker(
+                selected = settings.readerBackground,
+                onSelect = { viewModel.updateReaderBackground(it) },
+            )
+
+            ReaderFontPicker(
+                selected = settings.readerFont,
+                onSelect = { viewModel.updateReaderFont(it) },
             )
 
             HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -518,6 +553,165 @@ private fun SectionHeader(title: String) {
         style = MaterialTheme.typography.labelLarge,
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(start = 16.dp, top = 24.dp, bottom = 8.dp),
+    )
+}
+
+// ── Appearance Pickers ───────────────────────────────────────────────────────
+
+private val APP_THEME_OPTIONS = listOf(
+    AppTheme.INDIGO  to ("Indigo"  to Indigo_light_primary),
+    AppTheme.SAGE    to ("Sage"    to Sage_light_primary),
+    AppTheme.AMBER   to ("Amber"   to Amber_light_primary),
+    AppTheme.CRIMSON to ("Crimson" to Crimson_light_primary),
+    AppTheme.SLATE   to ("Slate"   to Slate_light_primary),
+)
+
+private val READER_BG_OPTIONS = listOf(
+    ReaderBackground.DEFAULT to ("Default" to Color.Unspecified),
+    ReaderBackground.SEPIA   to ("Sepia"   to ReaderSepiaBg),
+    ReaderBackground.DARK    to ("Dark"    to ReaderDarkBg),
+    ReaderBackground.AMOLED  to ("AMOLED"  to ReaderAmoledBg),
+)
+
+private val READER_FONT_OPTIONS = listOf(
+    ReaderFont.DEFAULT to "Sans",
+    ReaderFont.SERIF   to "Serif",
+)
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun AppThemePicker(selected: AppTheme, onSelect: (AppTheme) -> Unit) {
+    ListItem(
+        headlineContent = { Text("Color theme") },
+        supportingContent = {
+            FlowRow(
+                modifier = Modifier.padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                APP_THEME_OPTIONS.forEach { (theme, labelAndColor) ->
+                    val (label, color) = labelAndColor
+                    val isSel = selected == theme
+                    Surface(
+                        onClick = { onSelect(theme) },
+                        shape = RoundedCornerShape(20.dp),
+                        color = if (isSel) color.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceContainerLow,
+                        border = BorderStroke(if (isSel) 2.dp else 1.dp, if (isSel) color else MaterialTheme.colorScheme.outlineVariant),
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 7.dp),
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(10.dp)
+                                    .background(color, shape = RoundedCornerShape(5.dp)),
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                label,
+                                style = MaterialTheme.typography.labelMedium,
+                                color = if (isSel) color else MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontWeight = if (isSel) FontWeight.Bold else FontWeight.Normal,
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        leadingContent = {
+            Icon(Icons.Default.Info, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        },
+    )
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ReaderBackgroundPicker(selected: ReaderBackground, onSelect: (ReaderBackground) -> Unit) {
+    ListItem(
+        headlineContent = { Text("Reader background") },
+        supportingContent = {
+            FlowRow(
+                modifier = Modifier.padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                READER_BG_OPTIONS.forEach { (bg, labelAndColor) ->
+                    val (label, color) = labelAndColor
+                    val isSel = selected == bg
+                    val displayColor = if (color == Color.Unspecified) MaterialTheme.colorScheme.surface else color
+                    val borderColor = if (isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant
+                    Surface(
+                        onClick = { onSelect(bg) },
+                        shape = RoundedCornerShape(12.dp),
+                        color = displayColor,
+                        border = BorderStroke(if (isSel) 2.dp else 1.dp, borderColor),
+                    ) {
+                        Text(
+                            label,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = if (color == Color.Unspecified) MaterialTheme.colorScheme.onSurface else Color(0xFF3D2B1A),
+                            fontWeight = if (isSel) FontWeight.Bold else FontWeight.Normal,
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 8.dp),
+                        )
+                    }
+                }
+            }
+        },
+        leadingContent = {
+            Icon(Icons.Default.FormatSize, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        },
+    )
+}
+
+@Composable
+private fun ReaderFontPicker(selected: ReaderFont, onSelect: (ReaderFont) -> Unit) {
+    ListItem(
+        headlineContent = { Text("Reader font") },
+        supportingContent = {
+            Row(
+                modifier = Modifier.padding(top = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                READER_FONT_OPTIONS.forEach { (font, label) ->
+                    val isSel = selected == font
+                    val fontFamily = when (font) {
+                        ReaderFont.SERIF -> androidx.compose.ui.text.font.FontFamily.Serif
+                        else -> androidx.compose.ui.text.font.FontFamily.Default
+                    }
+                    Surface(
+                        onClick = { onSelect(font) },
+                        shape = RoundedCornerShape(12.dp),
+                        color = if (isSel) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                        else MaterialTheme.colorScheme.surfaceContainerLow,
+                        border = BorderStroke(
+                            if (isSel) 2.dp else 1.dp,
+                            if (isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant,
+                        ),
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp),
+                        ) {
+                            Text(
+                                "Aa",
+                                style = MaterialTheme.typography.titleMedium.copy(fontFamily = fontFamily),
+                                color = if (isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                            )
+                            Text(
+                                label,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = if (isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                fontWeight = if (isSel) FontWeight.Bold else FontWeight.Normal,
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        leadingContent = {
+            Icon(Icons.Default.FormatSize, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        },
     )
 }
 

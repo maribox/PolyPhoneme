@@ -30,14 +30,32 @@ class EpubImporter(private val context: Context) {
         val (book, parsed) = destFile.inputStream().use { EpubParser.parseMetadata(it) }
         val coverPath = extractCover(book, bookId)
 
+        // Detect language from actual text content — more reliable than EPUB metadata
+        val detectedLanguage = run {
+            val sampleText = buildString {
+                for (ref in book.spine.spineReferences.take(15)) {
+                    val html = try { String(ref.resource.data) } catch (_: Exception) { continue }
+                    val text = org.jsoup.Jsoup.parse(html).body()?.text() ?: continue
+                    append(text)
+                    append(" ")
+                    if (length > 3000) break
+                }
+            }
+            EpubParser.detectLanguage(sampleText) ?: parsed.language
+        }
+
+        // Find first chapter with real content to skip front matter
+        val firstContentChapter = EpubParser.findFirstContentChapter(book)
+
         return BookMeta(
             id = bookId,
             title = parsed.title,
             author = parsed.author,
-            language = parsed.language,
+            language = detectedLanguage,
             filePath = destFile.absolutePath,
             coverPath = coverPath,
             chapterCount = parsed.chapterCount,
+            lastReadChapter = firstContentChapter,
             importedAt = System.currentTimeMillis(),
         )
     }

@@ -4,7 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import it.bosler.polyphoneme.di.AppDependencies
 import it.bosler.polyphoneme.model.AppSettings
+import it.bosler.polyphoneme.model.AppTheme
 import it.bosler.polyphoneme.model.IpaPosition
+import it.bosler.polyphoneme.model.ReaderBackground
+import it.bosler.polyphoneme.model.ReaderFont
 import it.bosler.polyphoneme.model.ReadingMode
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -44,5 +47,17 @@ class SettingsViewModel : ViewModel() {
 
     fun updateLanguageRegion(lang: String, region: String) {
         viewModelScope.launch { repo.updateLanguageRegion(lang, region) }
+    }
+
+    fun updateAppTheme(theme: AppTheme) {
+        viewModelScope.launch { repo.updateAppTheme(theme) }
+    }
+
+    fun updateReaderBackground(bg: ReaderBackground) {
+        viewModelScope.launch { repo.updateReaderBackground(bg) }
+    }
+
+    fun updateReaderFont(font: ReaderFont) {
+        viewModelScope.launch { repo.updateReaderFont(font) }
     }
 }

@@ -10,7 +10,10 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import it.bosler.polyphoneme.model.AppSettings
+import it.bosler.polyphoneme.model.AppTheme
 import it.bosler.polyphoneme.model.IpaPosition
+import it.bosler.polyphoneme.model.ReaderBackground
+import it.bosler.polyphoneme.model.ReaderFont
 import it.bosler.polyphoneme.model.ReadingMode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -28,6 +31,9 @@ class AndroidSettingsRepository(private val context: Context) : SettingsReposito
         val READING_MODE = stringPreferencesKey("reading_mode")
         val HAS_SEEN_PAGE_TUTORIAL = booleanPreferencesKey("has_seen_page_tutorial")
         val LANGUAGE_REGIONS = stringPreferencesKey("language_regions")
+        val APP_THEME = stringPreferencesKey("app_theme")
+        val READER_BACKGROUND = stringPreferencesKey("reader_background")
+        val READER_FONT = stringPreferencesKey("reader_font")
     }
 
     override fun settingsFlow(): Flow<AppSettings> = context.dataStore.data.map { prefs ->
@@ -49,6 +55,15 @@ class AndroidSettingsRepository(private val context: Context) : SettingsReposito
                     k to v
                 }
             } ?: emptyMap(),
+            appTheme = prefs[Keys.APP_THEME]?.let {
+                try { AppTheme.valueOf(it) } catch (_: Exception) { AppTheme.INDIGO }
+            } ?: AppTheme.INDIGO,
+            readerBackground = prefs[Keys.READER_BACKGROUND]?.let {
+                try { ReaderBackground.valueOf(it) } catch (_: Exception) { ReaderBackground.DEFAULT }
+            } ?: ReaderBackground.DEFAULT,
+            readerFont = prefs[Keys.READER_FONT]?.let {
+                try { ReaderFont.valueOf(it) } catch (_: Exception) { ReaderFont.DEFAULT }
+            } ?: ReaderFont.DEFAULT,
         )
     }
 
@@ -78,6 +93,18 @@ class AndroidSettingsRepository(private val context: Context) : SettingsReposito
 
     override suspend fun updateHasSeenPageModeTutorial(seen: Boolean) {
         context.dataStore.edit { it[Keys.HAS_SEEN_PAGE_TUTORIAL] = seen }
+    }
+
+    override suspend fun updateAppTheme(theme: AppTheme) {
+        context.dataStore.edit { it[Keys.APP_THEME] = theme.name }
+    }
+
+    override suspend fun updateReaderBackground(bg: ReaderBackground) {
+        context.dataStore.edit { it[Keys.READER_BACKGROUND] = bg.name }
+    }
+
+    override suspend fun updateReaderFont(font: ReaderFont) {
+        context.dataStore.edit { it[Keys.READER_FONT] = font.name }
     }
 
     override suspend fun updateLanguageRegion(lang: String, region: String) {

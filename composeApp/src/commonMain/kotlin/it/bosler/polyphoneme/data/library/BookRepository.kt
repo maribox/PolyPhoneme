@@ -13,5 +13,6 @@ interface BookRepository {
     suspend fun loadChapter(bookId: String, chapterIndex: Int): Chapter
     suspend fun getChapterCount(bookId: String): Int
     suspend fun updateLastRead(bookId: String, chapterIndex: Int)
+    suspend fun updateBookLanguage(bookId: String, language: String)
     suspend fun getTableOfContents(bookId: String): List<TocEntry>
 }

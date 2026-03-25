@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +22,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.FormatSize
@@ -37,8 +38,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -72,6 +71,7 @@ import it.bosler.polyphoneme.model.AppSettings
 import it.bosler.polyphoneme.model.Chapter
 import it.bosler.polyphoneme.model.ReadingMode
 import it.bosler.polyphoneme.model.Token
+import it.bosler.polyphoneme.ui.theme.LocalReaderStyle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -96,55 +96,12 @@ fun ReaderScreen(
         viewModel.loadBook(bookId, initialChapterIndex)
     }
 
+    val readerStyle = LocalReaderStyle.current
+    val readerBg = readerStyle.background ?: MaterialTheme.colorScheme.surface
+
     Scaffold(
-        topBar = {
+        bottomBar = {
             Column {
-                TopAppBar(
-                    title = {
-                        Column {
-                            Text(
-                                text = chapter?.title ?: "Loading...",
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis,
-                                style = MaterialTheme.typography.titleSmall,
-                            )
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(
-                                    text = "${chapterIndex + 1} of $chapterCount",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                                Text(
-                                    text = "  \u00b7  ",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.outline,
-                                )
-                                Text(
-                                    text = bookLanguage.uppercase(),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = MaterialTheme.colorScheme.primary,
-                                )
-                            }
-                        }
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = onBack) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                        }
-                    },
-                    actions = {
-                        IconButton(onClick = { showFontControls = !showFontControls }) {
-                            Icon(Icons.Default.FormatSize, contentDescription = "Font size")
-                        }
-                        IconButton(onClick = { showToc = true }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Table of Contents")
-                        }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surface,
-                    ),
-                )
                 AnimatedVisibility(visible = showFontControls) {
                     Surface(
                         color = MaterialTheme.colorScheme.surfaceContainerLow,
@@ -169,10 +126,73 @@ fun ReaderScreen(
                         }
                     }
                 }
+                Surface(
+                    color = MaterialTheme.colorScheme.surfaceContainerLow,
+                    tonalElevation = 2.dp,
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 4.dp, vertical = 2.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        IconButton(
+                            onClick = { viewModel.prevChapter() },
+                            enabled = chapterIndex > 0,
+                        ) {
+                            Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Previous chapter")
+                        }
+
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.weight(1f),
+                        ) {
+                            Text(
+                                text = chapter?.title ?: "",
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    text = "${chapterIndex + 1} / $chapterCount",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                )
+                                Text(
+                                    text = "  ·  ",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.outline,
+                                )
+                                Text(
+                                    text = bookLanguage.split("-", "_").first().uppercase(),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = MaterialTheme.colorScheme.primary,
+                                )
+                            }
+                        }
+
+                        IconButton(onClick = { showFontControls = !showFontControls }) {
+                            Icon(Icons.Default.FormatSize, contentDescription = "Font size")
+                        }
+                        IconButton(onClick = { showToc = true }) {
+                            Icon(Icons.Default.Menu, contentDescription = "Table of Contents")
+                        }
+                        IconButton(
+                            onClick = { viewModel.nextChapter() },
+                            enabled = chapterIndex < chapterCount - 1,
+                        ) {
+                            Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Next chapter")
+                        }
+                    }
+                }
             }
         },
     ) { padding ->
-        Box(modifier = Modifier.fillMaxSize().padding(padding)) {
+        Box(modifier = Modifier.fillMaxSize().background(readerBg).padding(padding)) {
             val currentChapter = chapter
             if (currentChapter != null && !isLoading) {
                 when (settings.readingMode) {
@@ -183,7 +203,6 @@ fun ReaderScreen(
                         chapterCount = chapterCount,
                         onWordTap = { viewModel.selectWord(it) },
                         onNextChapter = { viewModel.nextChapter() },
-                        onPrevChapter = { viewModel.prevChapter() },
                     )
                     ReadingMode.PAGE -> PageModeContent(
                         chapter = currentChapter,
@@ -281,7 +300,6 @@ private fun ScrollModeContent(
     chapterCount: Int,
     onWordTap: (Token) -> Unit,
     onNextChapter: () -> Unit,
-    onPrevChapter: () -> Unit,
 ) {
     val listState = rememberLazyListState()
     var overscrollAmount by remember { mutableFloatStateOf(0f) }
@@ -352,83 +370,58 @@ private fun ScrollModeContent(
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        LinearProgressIndicator(
-            progress = { scrollProgress },
-            modifier = Modifier.fillMaxWidth().height(2.dp),
-            color = MaterialTheme.colorScheme.primary,
-            trackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-        )
-
-        Box(modifier = Modifier.weight(1f).nestedScroll(nestedScrollConnection)) {
-            LazyColumn(
-                state = listState,
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(horizontal = 20.dp, vertical = 16.dp),
-            ) {
-                items(
-                    count = chapter.paragraphs.size,
-                    key = { it },
-                ) { index ->
-                    ParagraphRow(
-                        paragraph = chapter.paragraphs[index],
-                        ipaPosition = settings.ipaPosition,
-                        fontSize = settings.fontSize,
-                        lineSpacing = settings.lineSpacing,
-                        onWordTap = onWordTap,
-                    )
-                }
-                item { Spacer(modifier = Modifier.height(48.dp)) }
+    Box(modifier = Modifier.fillMaxSize().nestedScroll(nestedScrollConnection)) {
+        LazyColumn(
+            state = listState,
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 16.dp),
+        ) {
+            items(
+                count = chapter.paragraphs.size,
+                key = { it },
+            ) { index ->
+                ParagraphRow(
+                    paragraph = chapter.paragraphs[index],
+                    ipaPosition = settings.ipaPosition,
+                    fontSize = settings.fontSize,
+                    lineSpacing = settings.lineSpacing,
+                    onWordTap = onWordTap,
+                )
             }
-
-            // Overscroll next-chapter indicator
-            if (overscrollAmount > 0 && hasNext) {
-                val progress = (overscrollAmount / overscrollThreshold).coerceIn(0f, 1f)
-                val pastThreshold = progress >= 1f
-
-                Box(
-                    modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter).padding(bottom = 24.dp),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        CircularProgressIndicator(
-                            progress = { progress },
-                            modifier = Modifier.size(40.dp),
-                            color = if (pastThreshold) MaterialTheme.colorScheme.primary
-                            else MaterialTheme.colorScheme.onSurfaceVariant,
-                            strokeWidth = 3.dp,
-                        )
-                        Spacer(Modifier.height(8.dp))
-                        Text(
-                            text = if (pastThreshold) "Release for next chapter" else "Keep scrolling...",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                }
-            }
+            item { Spacer(modifier = Modifier.height(48.dp)) }
         }
 
-        // Bottom bar
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceContainerLow,
-            tonalElevation = 2.dp,
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
+        // Progress bar at top
+        LinearProgressIndicator(
+            progress = { scrollProgress },
+            modifier = Modifier.fillMaxWidth().height(2.dp).align(Alignment.TopCenter),
+            color = MaterialTheme.colorScheme.primary,
+            trackColor = Color.Transparent,
+        )
+
+        // Overscroll next-chapter indicator
+        if (overscrollAmount > 0 && hasNext) {
+            val progress = (overscrollAmount / overscrollThreshold).coerceIn(0f, 1f)
+            val pastThreshold = progress >= 1f
+
+            Box(
+                modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter).padding(bottom = 24.dp),
+                contentAlignment = Alignment.Center,
             ) {
-                IconButton(onClick = onPrevChapter, enabled = chapterIndex > 0) {
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Previous")
-                }
-                Text(
-                    text = "${(scrollProgress * 100).toInt()}%",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                IconButton(onClick = onNextChapter, enabled = hasNext) {
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Next")
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    CircularProgressIndicator(
+                        progress = { progress },
+                        modifier = Modifier.size(40.dp),
+                        color = if (pastThreshold) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.onSurfaceVariant,
+                        strokeWidth = 3.dp,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        text = if (pastThreshold) "Release for next chapter" else "Keep scrolling...",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
                 }
             }
         }
@@ -461,63 +454,67 @@ private fun PageModeContent(
     val totalPages = pageBreaks.size.coerceAtLeast(1)
     val paragraphs = chapter.paragraphs
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()) {
         // Progress
         LinearProgressIndicator(
             progress = {
                 if (totalPages <= 1) 0f
                 else currentPage.toFloat() / (totalPages - 1).coerceAtLeast(1)
             },
-            modifier = Modifier.fillMaxWidth().height(2.dp),
+            modifier = Modifier.fillMaxWidth().height(2.dp).align(Alignment.TopCenter),
             color = MaterialTheme.colorScheme.primary,
-            trackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
+            trackColor = Color.Transparent,
         )
 
-        // Content area — uses SubcomposeLayout to measure paragraphs and paginate
-        Box(modifier = Modifier.weight(1f)) {
-            PaginatedContent(
-                paragraphs = paragraphs,
-                settings = settings,
-                currentPage = currentPage,
-                onWordTap = onWordTap,
-                onPageBreaksComputed = { pageBreaks = it },
-            )
-        }
+        // Content
+        PaginatedContent(
+            paragraphs = paragraphs,
+            settings = settings,
+            currentPage = currentPage,
+            onWordTap = onWordTap,
+            onPageBreaksComputed = { pageBreaks = it },
+        )
 
-        // Bottom bar with page navigation
-        Surface(
-            color = MaterialTheme.colorScheme.surfaceContainerLow,
-            tonalElevation = 2.dp,
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                IconButton(
-                    onClick = {
-                        if (currentPage > 0) currentPage--
-                        else if (chapterIndex > 0) onPrevChapter()
-                    },
-                    enabled = currentPage > 0 || chapterIndex > 0,
+        // Left edge tap → prev page / prev chapter
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(48.dp)
+                .align(Alignment.CenterStart)
+                .clickable(
+                    interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },
+                    indication = null,
                 ) {
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Previous page")
-                }
-                Text(
-                    text = "${currentPage + 1} / $totalPages",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                IconButton(
-                    onClick = {
-                        if (currentPage < totalPages - 1) currentPage++
-                        else if (chapterIndex < chapterCount - 1) onNextChapter()
-                    },
-                    enabled = currentPage < totalPages - 1 || chapterIndex < chapterCount - 1,
+                    if (currentPage > 0) currentPage--
+                    else if (chapterIndex > 0) onPrevChapter()
+                },
+        )
+
+        // Right edge tap → next page / next chapter
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(48.dp)
+                .align(Alignment.CenterEnd)
+                .clickable(
+                    interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() },
+                    indication = null,
                 ) {
-                    Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = "Next page")
-                }
-            }
+                    if (currentPage < totalPages - 1) currentPage++
+                    else if (chapterIndex < chapterCount - 1) onNextChapter()
+                },
+        )
+
+        // Page indicator
+        if (totalPages > 1) {
+            Text(
+                text = "${currentPage + 1} / $totalPages",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 8.dp),
+            )
         }
     }
 

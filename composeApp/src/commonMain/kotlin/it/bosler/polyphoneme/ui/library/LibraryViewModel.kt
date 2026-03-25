@@ -61,6 +61,13 @@ class LibraryViewModel : ViewModel() {
         }
     }
 
+    fun updateBookLanguage(bookId: String, language: String) {
+        viewModelScope.launch {
+            repo.updateBookLanguage(bookId, language)
+            _books.value = repo.getLibrary()
+        }
+    }
+
     fun clearError() {
         _error.value = null
     }

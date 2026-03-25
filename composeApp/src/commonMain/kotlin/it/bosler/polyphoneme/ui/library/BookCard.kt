@@ -2,6 +2,7 @@ package it.bosler.polyphoneme.ui.library
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,17 +16,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -33,15 +39,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.bosler.polyphoneme.model.BookMeta
 
+private val SUPPORTED_LANGUAGES = listOf("en", "de", "fr", "es", "it", "pt", "nl", "ru", "ja", "zh")
+private val LANGUAGE_NAMES = mapOf(
+    "en" to "English", "de" to "German", "fr" to "French", "es" to "Spanish",
+    "it" to "Italian", "pt" to "Portuguese", "nl" to "Dutch", "ru" to "Russian",
+    "ja" to "Japanese", "zh" to "Chinese",
+)
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BookCard(
     book: BookMeta,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
+    onLanguageChange: ((String) -> Unit)? = null,
     coverImage: @Composable ((Modifier) -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
+    var showLanguagePicker by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
@@ -58,12 +74,12 @@ fun BookCard(
             if (coverImage != null) {
                 coverImage(Modifier.fillMaxSize())
             } else {
-                // Generated cover with title text
                 GeneratedCover(book)
             }
 
             // Language badge overlay
             book.language?.let { lang ->
+                val displayCode = lang.split("-", "_").first().uppercase()
                 Box(
                     modifier = Modifier.fillMaxSize().padding(6.dp),
                     contentAlignment = Alignment.TopEnd,
@@ -71,9 +87,12 @@ fun BookCard(
                     Surface(
                         shape = RoundedCornerShape(4.dp),
                         color = MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.75f),
+                        modifier = Modifier.clickable(enabled = onLanguageChange != null) {
+                            showLanguagePicker = true
+                        },
                     ) {
                         Text(
-                            text = lang.uppercase(),
+                            text = displayCode,
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.inverseOnSurface,
                             modifier = Modifier.padding(horizontal = 5.dp, vertical = 2.dp),
@@ -84,13 +103,13 @@ fun BookCard(
             }
 
             // Progress bar at bottom of cover
-            if (book.chapterCount > 1) {
+            if (book.chapterCount > 1 && book.lastReadChapter > 0) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.BottomCenter,
                 ) {
                     LinearProgressIndicator(
-                        progress = { (book.lastReadChapter + 1).toFloat() / book.chapterCount },
+                        progress = { book.lastReadChapter.toFloat() / book.chapterCount },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(3.dp),
@@ -121,6 +140,47 @@ fun BookCard(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontSize = 11.sp,
+        )
+    }
+
+    if (showLanguagePicker && onLanguageChange != null) {
+        AlertDialog(
+            onDismissRequest = { showLanguagePicker = false },
+            title = { Text("Book Language") },
+            text = {
+                Column {
+                    SUPPORTED_LANGUAGES.forEach { code ->
+                        val isCurrent = code == book.language?.split("-", "_")?.first()
+                        TextButton(
+                            onClick = {
+                                onLanguageChange(code)
+                                showLanguagePicker = false
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                            ) {
+                                Text(
+                                    LANGUAGE_NAMES[code] ?: code,
+                                    color = if (isCurrent) MaterialTheme.colorScheme.primary
+                                    else MaterialTheme.colorScheme.onSurface,
+                                    fontWeight = if (isCurrent) FontWeight.Bold else FontWeight.Normal,
+                                )
+                                Text(
+                                    code.uppercase(),
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontSize = 11.sp,
+                                )
+                            }
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showLanguagePicker = false }) { Text("Cancel") }
+            },
         )
     }
 }

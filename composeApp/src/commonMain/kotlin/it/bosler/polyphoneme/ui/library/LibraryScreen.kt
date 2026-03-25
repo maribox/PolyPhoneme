@@ -164,6 +164,7 @@ fun LibraryScreen(
                         book = book,
                         onClick = { onBookClick(book.id, book.lastReadChapter) },
                         onLongClick = { bookToDelete = book.id },
+                        onLanguageChange = { lang -> viewModel.updateBookLanguage(book.id, lang) },
                         coverImage = book.coverPath?.let { path ->
                             { modifier -> CoverImage(path, modifier) }
                         },
