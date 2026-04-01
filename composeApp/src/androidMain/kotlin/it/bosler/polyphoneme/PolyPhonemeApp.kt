@@ -4,6 +4,7 @@ import android.app.Application
 import it.bosler.polyphoneme.data.ipa.AndroidAudioPlayer
 import it.bosler.polyphoneme.data.ipa.DictionaryIpaService
 import it.bosler.polyphoneme.data.library.AndroidBookRepository
+import it.bosler.polyphoneme.data.translation.AndroidTranslationService
 import it.bosler.polyphoneme.data.settings.AndroidSettingsRepository
 import it.bosler.polyphoneme.di.AppDependencies
 import kotlinx.coroutines.CoroutineScope
@@ -20,9 +21,11 @@ class PolyPhonemeApp : Application() {
     override fun onCreate() {
         super.onCreate()
         val ipaService = DictionaryIpaService(this)
+        val translationService = AndroidTranslationService(this)
         val settingsRepo = AndroidSettingsRepository(this)
         AppDependencies.ipaService = ipaService
-        AppDependencies.bookRepository = AndroidBookRepository(this, ipaService)
+        AppDependencies.bookRepository = AndroidBookRepository(this, ipaService, translationService)
+        AppDependencies.translationService = translationService
         AppDependencies.settingsRepository = settingsRepo
         val audioPlayer = AndroidAudioPlayer(this)
         AppDependencies.audioPlayer = audioPlayer

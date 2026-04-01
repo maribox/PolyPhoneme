@@ -16,6 +16,8 @@ data class Token(
     val trailingPunctuation: String = "",
     val ipa: String? = null,
     val translation: String? = null,
+    /** 0.0 = very rare word, 1.0 = very common (function word). Used by frequency slider. */
+    val commonness: Float = 0.5f,
     val isDisambiguated: Boolean = false,
     val alternativePronunciations: List<String> = emptyList(),
 )

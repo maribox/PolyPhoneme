@@ -1,12 +1,16 @@
 package it.bosler.polyphoneme.ui.reader
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,17 +33,35 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import it.bosler.polyphoneme.data.ipa.PhonemeDatabase
+import it.bosler.polyphoneme.data.ipa.PhonemeTerms
+import it.bosler.polyphoneme.data.ipa.TermCategory
 import it.bosler.polyphoneme.model.Token
+import it.bosler.polyphoneme.ui.settings.IPA_VOWEL_SYMBOLS
+import it.bosler.polyphoneme.ui.settings.IpaVowelChart
 import it.bosler.polyphoneme.ui.theme.LocalExtendedColors
 import it.bosler.polyphoneme.ui.theme.rememberIpaFontFamily
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -54,17 +76,24 @@ fun WordDetailSheet(
     val extColors = LocalExtendedColors.current
     val ipaFont = rememberIpaFontFamily()
     val phonemes = token.ipa?.let { PhonemeDatabase.tokenize(it) } ?: emptyList()
+    var expandedVowel by remember { mutableStateOf<String?>(null) }
     val langName = languageDisplayName(bookLanguage)
     val wiktionaryLang = bookLanguage.lowercase().split("-", "_").first()
+    val scrollState = rememberScrollState()
+    val scope = rememberCoroutineScope()
+
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+        sheetState = sheetState,
     ) {
+        // Back always dismisses the sheet (not partially collapse)
+        BackHandler { onDismiss() }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .padding(horizontal = 24.dp)
                 .padding(bottom = 48.dp),
         ) {
@@ -80,6 +109,15 @@ fun WordDetailSheet(
                     text = "/${token.ipa}/",
                     style = MaterialTheme.typography.titleLarge.copy(fontFamily = ipaFont),
                     color = extColors.ipa,
+                )
+            }
+
+            if (token.translation != null) {
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = token.translation,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = extColors.translation,
                 )
             }
 
@@ -128,25 +166,55 @@ fun WordDetailSheet(
 
                 for (symbol in phonemes) {
                     val info = PhonemeDatabase.lookup(symbol)
-                    if (info != null) {
+                    val isVowel = symbol in IPA_VOWEL_SYMBOLS
+                    val isExpanded = expandedVowel == symbol
+
+                    Column {
                         PhonemeRow(
                             symbol = symbol,
-                            name = info.name,
-                            examples = info.examples,
+                            name = info?.name ?: "",
+                            examples = info?.examples ?: emptyMap(),
                             bookLanguage = bookLanguage,
                             nativeLanguage = nativeLanguage,
                             onSpeak = onSpeak,
+                            isVowel = isVowel,
+                            isChartExpanded = isExpanded,
+                            onToggleChart = {
+                                expandedVowel = if (isExpanded) null else symbol
+                                if (!isExpanded) {
+                                    scope.launch {
+                                        // Small delay for AnimatedVisibility to start expanding
+                                        kotlinx.coroutines.delay(100)
+                                        scrollState.animateScrollTo(scrollState.maxValue)
+                                    }
+                                }
+                            },
                         )
-                    } else {
-                        // Unknown symbol — just show it
-                        PhonemeRow(
-                            symbol = symbol,
-                            name = "",
-                            examples = emptyMap(),
-                            bookLanguage = bookLanguage,
-                            nativeLanguage = nativeLanguage,
-                            onSpeak = onSpeak,
-                        )
+
+                        AnimatedVisibility(visible = isExpanded) {
+                            var chartSelectedVowel by remember { mutableStateOf(symbol) }
+                            Column(modifier = Modifier.padding(top = 4.dp, bottom = 8.dp)) {
+                                IpaVowelChart(
+                                    highlightedVowels = setOf(symbol),
+                                    onVowelSelected = { if (it != null) chartSelectedVowel = it },
+                                )
+                                // Show PhonemeRow for tapped chart vowel (fixed height to prevent layout shifts)
+                                Box(modifier = Modifier.defaultMinSize(minHeight = 72.dp)) {
+                                    val vowelInfo = PhonemeDatabase.lookup(chartSelectedVowel)
+                                    PhonemeRow(
+                                        symbol = chartSelectedVowel,
+                                        name = vowelInfo?.name ?: "",
+                                        examples = vowelInfo?.examples ?: emptyMap(),
+                                        bookLanguage = bookLanguage,
+                                        nativeLanguage = nativeLanguage,
+                                        onSpeak = onSpeak,
+                                    )
+                                }
+                                Spacer(Modifier.height(4.dp))
+                                HorizontalDivider()
+                                Spacer(Modifier.height(4.dp))
+                            }
+                        }
                     }
                 }
             }
@@ -163,6 +231,9 @@ private fun PhonemeRow(
     bookLanguage: String,
     nativeLanguage: String,
     onSpeak: (text: String, language: String) -> Unit,
+    isVowel: Boolean = false,
+    isChartExpanded: Boolean = false,
+    onToggleChart: (() -> Unit)? = null,
 ) {
     val extColors = LocalExtendedColors.current
     val ipaFont = rememberIpaFontFamily()
@@ -230,10 +301,7 @@ private fun PhonemeRow(
             // Description + examples
             Column(modifier = Modifier.weight(1f)) {
                 if (name.isNotEmpty()) {
-                    Text(
-                        text = name,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
+                    ClickablePhonemeDescription(name = name)
                 }
                 if (relevantExamples.isNotEmpty()) {
                     Spacer(Modifier.height(2.dp))
@@ -262,6 +330,121 @@ private fun PhonemeRow(
                         }
                     }
                 }
+            }
+
+            if (isVowel && onToggleChart != null) {
+                VowelChartIcon(
+                    vowelSymbol = symbol,
+                    active = isChartExpanded,
+                    onClick = onToggleChart,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun VowelChartIcon(
+    vowelSymbol: String,
+    active: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val color = if (active) MaterialTheme.colorScheme.primary
+                else MaterialTheme.colorScheme.outline
+    val ipaFont = rememberIpaFontFamily()
+    val textMeasurer = rememberTextMeasurer()
+    val style = TextStyle(
+        fontSize = 12.sp,
+        fontFamily = ipaFont,
+        fontWeight = FontWeight.Bold,
+        color = color,
+        textAlign = TextAlign.Center,
+    )
+    val measuredText = remember(vowelSymbol, style) { textMeasurer.measure(vowelSymbol, style) }
+
+    Canvas(
+        modifier = modifier
+            .size(28.dp)
+            .clickable(onClick = onClick),
+    ) {
+        val w = size.width
+        val h = size.height
+        val pad = w * 0.08f
+
+        // IPA trapezoid: full width top, left edge narrows inward at bottom
+        val path = Path().apply {
+            moveTo(pad, pad)                          // top-left
+            lineTo(w - pad, pad)                      // top-right
+            lineTo(w - pad, h - pad)                  // bottom-right
+            lineTo(w * 0.35f, h - pad)                // bottom-left (indented)
+            close()
+        }
+        drawPath(path, color = color, style = Stroke(width = 1.6f))
+
+        // Center vowel in the trapezoid centroid (slightly right of box center)
+        val cx = (pad + (w - pad) + (w - pad) + w * 0.35f) / 4f
+        val cy = h / 2f
+        drawText(
+            textLayoutResult = measuredText,
+            topLeft = Offset(
+                cx - measuredText.size.width / 2f,
+                cy - measuredText.size.height / 2f,
+            ),
+        )
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ClickablePhonemeDescription(name: String) {
+    val terms = remember(name) { PhonemeTerms.parseDescription(name) }
+    var expandedTerm by remember { mutableStateOf<String?>(null) }
+
+    if (terms.isEmpty()) {
+        Text(text = name, style = MaterialTheme.typography.bodyMedium)
+        return
+    }
+
+    Column {
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+        ) {
+            for (term in terms) {
+                val isExpanded = expandedTerm == term.term
+                val bgColor = if (isExpanded) MaterialTheme.colorScheme.primaryContainer
+                    else MaterialTheme.colorScheme.surfaceContainerHigh
+                val textColor = if (isExpanded) MaterialTheme.colorScheme.onPrimaryContainer
+                    else MaterialTheme.colorScheme.onSurfaceVariant
+
+                Surface(
+                    modifier = Modifier.clickable {
+                        expandedTerm = if (isExpanded) null else term.term
+                    },
+                    shape = RoundedCornerShape(6.dp),
+                    color = bgColor,
+                ) {
+                    Text(
+                        text = term.term,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = textColor,
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                    )
+                }
+            }
+        }
+
+        // Show explanation for expanded term
+        AnimatedVisibility(visible = expandedTerm != null) {
+            val info = expandedTerm?.let { PhonemeTerms.lookup(it) }
+            if (info != null) {
+                Text(
+                    text = info.explanation,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
             }
         }
     }

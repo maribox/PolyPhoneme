@@ -229,12 +229,123 @@ private fun slateDark() = darkColorScheme(
     surfaceContainerHigh = Slate_dark_surfaceContainerHigh, surfaceContainerHighest = Slate_dark_surfaceContainerHighest,
 )
 
+private fun oceanLight() = lightColorScheme(
+    primary = Ocean_light_primary, onPrimary = Ocean_light_onPrimary,
+    primaryContainer = Ocean_light_primaryContainer, onPrimaryContainer = Ocean_light_onPrimaryContainer,
+    secondary = Ocean_light_secondary, onSecondary = Ocean_light_onSecondary,
+    secondaryContainer = Ocean_light_secondaryContainer, onSecondaryContainer = Ocean_light_onSecondaryContainer,
+    tertiary = Ocean_light_tertiary, onTertiary = Ocean_light_onTertiary,
+    tertiaryContainer = Ocean_light_tertiaryContainer, onTertiaryContainer = Ocean_light_onTertiaryContainer,
+    background = Ocean_light_background, onBackground = Ocean_light_onBackground,
+    surface = Ocean_light_surface, onSurface = Ocean_light_onSurface,
+    surfaceVariant = Ocean_light_surfaceVariant, onSurfaceVariant = Ocean_light_onSurfaceVariant,
+    outline = Ocean_light_outline, outlineVariant = Ocean_light_outlineVariant,
+    inverseSurface = Ocean_light_inverseSurface, inverseOnSurface = Ocean_light_inverseOnSurface,
+    inversePrimary = Ocean_light_inversePrimary,
+    surfaceContainerLowest = Ocean_light_surfaceContainerLowest,
+    surfaceContainerLow = Ocean_light_surfaceContainerLow, surfaceContainer = Ocean_light_surfaceContainer,
+    surfaceContainerHigh = Ocean_light_surfaceContainerHigh, surfaceContainerHighest = Ocean_light_surfaceContainerHighest,
+)
+
+private fun oceanDark() = darkColorScheme(
+    primary = Ocean_dark_primary, onPrimary = Ocean_dark_onPrimary,
+    primaryContainer = Ocean_dark_primaryContainer, onPrimaryContainer = Ocean_dark_onPrimaryContainer,
+    secondary = Ocean_dark_secondary, onSecondary = Ocean_dark_onSecondary,
+    secondaryContainer = Ocean_dark_secondaryContainer, onSecondaryContainer = Ocean_dark_onSecondaryContainer,
+    tertiary = Ocean_dark_tertiary, onTertiary = Ocean_dark_onTertiary,
+    tertiaryContainer = Ocean_dark_tertiaryContainer, onTertiaryContainer = Ocean_dark_onTertiaryContainer,
+    background = Ocean_dark_background, onBackground = Ocean_dark_onBackground,
+    surface = Ocean_dark_surface, onSurface = Ocean_dark_onSurface,
+    surfaceVariant = Ocean_dark_surfaceVariant, onSurfaceVariant = Ocean_dark_onSurfaceVariant,
+    outline = Ocean_dark_outline, outlineVariant = Ocean_dark_outlineVariant,
+    inverseSurface = Ocean_dark_inverseSurface, inverseOnSurface = Ocean_dark_inverseOnSurface,
+    inversePrimary = Ocean_dark_inversePrimary,
+    surfaceContainerLowest = Ocean_dark_surfaceContainerLowest,
+    surfaceContainerLow = Ocean_dark_surfaceContainerLow, surfaceContainer = Ocean_dark_surfaceContainer,
+    surfaceContainerHigh = Ocean_dark_surfaceContainerHigh, surfaceContainerHighest = Ocean_dark_surfaceContainerHighest,
+)
+
+private fun violetLight() = lightColorScheme(
+    primary = Violet_light_primary, onPrimary = Violet_light_onPrimary,
+    primaryContainer = Violet_light_primaryContainer, onPrimaryContainer = Violet_light_onPrimaryContainer,
+    secondary = Violet_light_secondary, onSecondary = Violet_light_onSecondary,
+    secondaryContainer = Violet_light_secondaryContainer, onSecondaryContainer = Violet_light_onSecondaryContainer,
+    tertiary = Violet_light_tertiary, onTertiary = Violet_light_onTertiary,
+    tertiaryContainer = Violet_light_tertiaryContainer, onTertiaryContainer = Violet_light_onTertiaryContainer,
+    background = Violet_light_background, onBackground = Violet_light_onBackground,
+    surface = Violet_light_surface, onSurface = Violet_light_onSurface,
+    surfaceVariant = Violet_light_surfaceVariant, onSurfaceVariant = Violet_light_onSurfaceVariant,
+    outline = Violet_light_outline, outlineVariant = Violet_light_outlineVariant,
+    inverseSurface = Violet_light_inverseSurface, inverseOnSurface = Violet_light_inverseOnSurface,
+    inversePrimary = Violet_light_inversePrimary,
+    surfaceContainerLowest = Violet_light_surfaceContainerLowest,
+    surfaceContainerLow = Violet_light_surfaceContainerLow, surfaceContainer = Violet_light_surfaceContainer,
+    surfaceContainerHigh = Violet_light_surfaceContainerHigh, surfaceContainerHighest = Violet_light_surfaceContainerHighest,
+)
+
+private fun violetDark() = darkColorScheme(
+    primary = Violet_dark_primary, onPrimary = Violet_dark_onPrimary,
+    primaryContainer = Violet_dark_primaryContainer, onPrimaryContainer = Violet_dark_onPrimaryContainer,
+    secondary = Violet_dark_secondary, onSecondary = Violet_dark_onSecondary,
+    secondaryContainer = Violet_dark_secondaryContainer, onSecondaryContainer = Violet_dark_onSecondaryContainer,
+    tertiary = Violet_dark_tertiary, onTertiary = Violet_dark_onTertiary,
+    tertiaryContainer = Violet_dark_tertiaryContainer, onTertiaryContainer = Violet_dark_onTertiaryContainer,
+    background = Violet_dark_background, onBackground = Violet_dark_onBackground,
+    surface = Violet_dark_surface, onSurface = Violet_dark_onSurface,
+    surfaceVariant = Violet_dark_surfaceVariant, onSurfaceVariant = Violet_dark_onSurfaceVariant,
+    outline = Violet_dark_outline, outlineVariant = Violet_dark_outlineVariant,
+    inverseSurface = Violet_dark_inverseSurface, inverseOnSurface = Violet_dark_inverseOnSurface,
+    inversePrimary = Violet_dark_inversePrimary,
+    surfaceContainerLowest = Violet_dark_surfaceContainerLowest,
+    surfaceContainerLow = Violet_dark_surfaceContainerLow, surfaceContainer = Violet_dark_surfaceContainer,
+    surfaceContainerHigh = Violet_dark_surfaceContainerHigh, surfaceContainerHighest = Violet_dark_surfaceContainerHighest,
+)
+
+private fun rustLight() = lightColorScheme(
+    primary = Rust_light_primary, onPrimary = Rust_light_onPrimary,
+    primaryContainer = Rust_light_primaryContainer, onPrimaryContainer = Rust_light_onPrimaryContainer,
+    secondary = Rust_light_secondary, onSecondary = Rust_light_onSecondary,
+    secondaryContainer = Rust_light_secondaryContainer, onSecondaryContainer = Rust_light_onSecondaryContainer,
+    tertiary = Rust_light_tertiary, onTertiary = Rust_light_onTertiary,
+    tertiaryContainer = Rust_light_tertiaryContainer, onTertiaryContainer = Rust_light_onTertiaryContainer,
+    background = Rust_light_background, onBackground = Rust_light_onBackground,
+    surface = Rust_light_surface, onSurface = Rust_light_onSurface,
+    surfaceVariant = Rust_light_surfaceVariant, onSurfaceVariant = Rust_light_onSurfaceVariant,
+    outline = Rust_light_outline, outlineVariant = Rust_light_outlineVariant,
+    inverseSurface = Rust_light_inverseSurface, inverseOnSurface = Rust_light_inverseOnSurface,
+    inversePrimary = Rust_light_inversePrimary,
+    surfaceContainerLowest = Rust_light_surfaceContainerLowest,
+    surfaceContainerLow = Rust_light_surfaceContainerLow, surfaceContainer = Rust_light_surfaceContainer,
+    surfaceContainerHigh = Rust_light_surfaceContainerHigh, surfaceContainerHighest = Rust_light_surfaceContainerHighest,
+)
+
+private fun rustDark() = darkColorScheme(
+    primary = Rust_dark_primary, onPrimary = Rust_dark_onPrimary,
+    primaryContainer = Rust_dark_primaryContainer, onPrimaryContainer = Rust_dark_onPrimaryContainer,
+    secondary = Rust_dark_secondary, onSecondary = Rust_dark_onSecondary,
+    secondaryContainer = Rust_dark_secondaryContainer, onSecondaryContainer = Rust_dark_onSecondaryContainer,
+    tertiary = Rust_dark_tertiary, onTertiary = Rust_dark_onTertiary,
+    tertiaryContainer = Rust_dark_tertiaryContainer, onTertiaryContainer = Rust_dark_onTertiaryContainer,
+    background = Rust_dark_background, onBackground = Rust_dark_onBackground,
+    surface = Rust_dark_surface, onSurface = Rust_dark_onSurface,
+    surfaceVariant = Rust_dark_surfaceVariant, onSurfaceVariant = Rust_dark_onSurfaceVariant,
+    outline = Rust_dark_outline, outlineVariant = Rust_dark_outlineVariant,
+    inverseSurface = Rust_dark_inverseSurface, inverseOnSurface = Rust_dark_inverseOnSurface,
+    inversePrimary = Rust_dark_inversePrimary,
+    surfaceContainerLowest = Rust_dark_surfaceContainerLowest,
+    surfaceContainerLow = Rust_dark_surfaceContainerLow, surfaceContainer = Rust_dark_surfaceContainer,
+    surfaceContainerHigh = Rust_dark_surfaceContainerHigh, surfaceContainerHighest = Rust_dark_surfaceContainerHighest,
+)
+
 private fun colorSchemeFor(theme: AppTheme, dark: Boolean): ColorScheme = when (theme) {
     AppTheme.INDIGO  -> if (dark) indigoDark()   else indigoLight()
     AppTheme.SAGE    -> if (dark) sageDark()     else sageLight()
     AppTheme.AMBER   -> if (dark) amberDark()    else amberLight()
     AppTheme.CRIMSON -> if (dark) crimsonDark()  else crimsonLight()
     AppTheme.SLATE   -> if (dark) slateDark()    else slateLight()
+    AppTheme.OCEAN   -> if (dark) oceanDark()    else oceanLight()
+    AppTheme.VIOLET  -> if (dark) violetDark()   else violetLight()
+    AppTheme.RUST    -> if (dark) rustDark()     else rustLight()
 }
 
 // ── Typography ────────────────────────────────────────────────────────────────
@@ -276,14 +387,11 @@ fun PolyPhonemeTheme(
     }
 
     val ipaFont = rememberIpaFontFamily()
-    val bodyFont = when (readerFont) {
-        ReaderFont.DEFAULT -> ipaFont
-        ReaderFont.SERIF   -> FontFamily.Serif
-    }
+    val bodyFont = rememberReaderFontFamily(readerFont)
 
     val readerStyle = when (readerBackground) {
         ReaderBackground.DEFAULT -> ReaderStyle(null, null, null, bodyFont)
-        ReaderBackground.SEPIA   -> ReaderStyle(ReaderSepiaBg, ReaderSepiaText, ReaderSepiaIpa, FontFamily.Serif)
+        ReaderBackground.SEPIA   -> ReaderStyle(ReaderSepiaBg, ReaderSepiaText, ReaderSepiaIpa, bodyFont)
         ReaderBackground.DARK    -> ReaderStyle(ReaderDarkBg, ReaderDarkText, ReaderDarkIpa, bodyFont)
         ReaderBackground.AMOLED  -> ReaderStyle(ReaderAmoledBg, ReaderAmoledText, ReaderAmoledIpa, bodyFont)
     }

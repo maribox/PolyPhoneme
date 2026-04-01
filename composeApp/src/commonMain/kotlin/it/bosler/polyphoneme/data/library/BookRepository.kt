@@ -10,9 +10,13 @@ interface BookRepository {
     suspend fun getLibrary(): List<BookMeta>
     suspend fun getBookMeta(bookId: String): BookMeta?
     suspend fun deleteBook(id: String)
-    suspend fun loadChapter(bookId: String, chapterIndex: Int): Chapter
+    suspend fun loadChapter(bookId: String, chapterIndex: Int, nativeLanguage: String = "en"): Chapter
+    /** Fast: parse EPUB chapter text only, no IPA or translation. */
+    suspend fun loadChapterRaw(bookId: String, chapterIndex: Int): Chapter
     suspend fun getChapterCount(bookId: String): Int
     suspend fun updateLastRead(bookId: String, chapterIndex: Int)
     suspend fun updateBookLanguage(bookId: String, language: String)
-    suspend fun getTableOfContents(bookId: String): List<TocEntry>
+    suspend fun updateBookTranslationFrequency(bookId: String, frequency: Float?)
+    /** Returns all TOC entries and the index of the first content chapter. */
+    suspend fun getTableOfContents(bookId: String): Pair<List<TocEntry>, Int>
 }

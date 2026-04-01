@@ -90,39 +90,59 @@ object EpubParser {
         val scores = mapOf(
             "de" to (hits("der", "die", "das", "ein", "eine", "nicht", "ist", "und", "auch", "aber", "werden", "haben")
                     + sample.count { it in "äöüß" } * 3),
-            "fr" to (hits("le", "la", "les", "des", "une", "est", "que", "dans", "cette", "mais", "leur", "aussi", "même")
-                    + sample.count { it in "éèêëàâùûôœç" } * 2),
-            "es" to (hits("los", "las", "una", "que", "con", "por", "para", "pero", "como", "son", "está", "hay")
+            "fr" to (hits("les", "des", "une", "dans", "cette", "leur", "aussi", "même", "être", "ont", "comme", "nous")
+                    + sample.count { it in "éèêëàâùûôœç" } * 3),
+            "es" to (hits("los", "las", "una", "con", "por", "para", "pero", "como", "son", "hay", "del", "sus")
                     + sample.count { it in "ñáéíóúü" } * 4),
-            "it" to (hits("gli", "una", "che", "con", "per", "sono", "questo", "della", "anche", "come", "però", "quando")
+            "it" to (hits("gli", "che", "per", "sono", "questo", "della", "anche", "come", "però", "quando", "lui", "loro")
                     + sample.count { it in "àèéìòù" } * 2),
-            "pt" to (hits("uma", "que", "com", "por", "para", "mas", "não", "são", "isso", "este", "ela", "pelo")
+            "pt" to (hits("uma", "com", "por", "para", "mas", "não", "são", "isso", "este", "ela", "pelo", "foi")
                     + sample.count { it in "ãõâêôáéíóú" } * 3),
-            "nl" to (hits("het", "van", "een", "maar", "zijn", "deze", "ook", "werd", "door", "naar", "over", "worden")
-                    + sample.count { it in "ij" } * 2),
+            "nl" to hits("het", "van", "zijn", "worden", "heeft", "kunnen", "naar", "door", "deze", "werd", "wordt", "over"),
             "en" to hits("the", "and", "that", "this", "with", "was", "have", "from", "they", "would", "been", "were"),
         )
         return scores.maxByOrNull { it.value }?.takeIf { it.value > 0 }?.key
     }
 
-    fun extractTableOfContents(book: Book): List<TocEntry> {
+    /** Returns all TOC entries (every spine item) plus the index of the first content chapter. */
+    fun extractTableOfContents(book: Book): Pair<List<TocEntry>, Int> {
+        val spineRefs = book.spine.spineReferences
+        fun normalize(href: String?) = href?.substringAfterLast('/')?.substringBefore('#')?.lowercase() ?: ""
+
+        // Build NCX title map
+        val ncxTitles = mutableMapOf<Int, String>()
         val toc = book.tableOfContents
-        if (toc != null && toc.tocReferences.isNotEmpty()) {
-            val spineRefs = book.spine.spineReferences
-            return toc.tocReferences.mapNotNull { ref ->
-                val spineIndex = spineRefs.indexOfFirst { it.resource.href == ref.resource?.href }
-                if (spineIndex >= 0) {
-                    TocEntry(index = spineIndex, title = ref.title ?: "Chapter ${spineIndex + 1}")
-                } else null
+        if (toc != null) {
+            fun collectRefs(refs: List<io.documentnode.epub4j.domain.TOCReference>) {
+                for (ref in refs) {
+                    val refHref = normalize(ref.resource?.href ?: ref.completeHref)
+                    val spineIndex = spineRefs.indexOfFirst { normalize(it.resource.href) == refHref }
+                    if (spineIndex >= 0 && !ncxTitles.containsKey(spineIndex)) {
+                        ncxTitles[spineIndex] = ref.title ?: "Chapter ${spineIndex + 1}"
+                    }
+                    if (ref.children.isNotEmpty()) collectRefs(ref.children)
+                }
             }
+            collectRefs(toc.tocReferences)
         }
-        // Fallback: generate TOC from spine
-        return book.spine.spineReferences.mapIndexed { index, ref ->
-            val html = try { String(ref.resource.data) } catch (_: Exception) { "" }
-            val title = if (html.isNotEmpty()) {
-                Jsoup.parse(html).selectFirst("h1, h2, h3, title")?.text()
-            } else null
-            TocEntry(index = index, title = title ?: "Chapter ${index + 1}")
+
+        // All spine items — use NCX title if available, else first heading, else fallback
+        var firstContentIndex = 0
+        val entries = spineRefs.mapIndexed { index, ref ->
+            val html = try { String(ref.resource.data) } catch (_: Exception) { null }
+            val doc = html?.let { Jsoup.parse(it) }
+            val title = ncxTitles[index]
+                ?: doc?.selectFirst("h1, h2, h3")?.text()?.takeIf { it.isNotBlank() }
+                ?: "Chapter ${index + 1}"
+            // Detect first content chapter: >= 300 meaningful words
+            if (firstContentIndex == 0 && index > 0) {
+                doc?.select("style, script")?.remove()
+                val wordCount = doc?.body()?.text()?.split(Regex("\\s+"))?.count { it.length > 2 } ?: 0
+                if (wordCount >= 300) firstContentIndex = index
+            }
+            TocEntry(index = index, title = title)
         }
+
+        return entries to firstContentIndex
     }
 }

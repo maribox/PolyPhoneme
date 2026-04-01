@@ -19,6 +19,19 @@ import java.text.Normalizer
 class DictionaryIpaService(private val context: Context) : IpaService {
 
     private val dictionaries = mutableMapOf<String, Map<String, String>>()
+
+    companion object {
+        private val DIACRITIC_RE = Regex("[\\p{InCombiningDiacriticalMarks}]")
+
+        // French elision prefixes: the clitic before the apostrophe and its IPA
+        private val FR_ELISION_IPA = mapOf(
+            "qu" to "k", "l"  to "l", "d" to "d",
+            "j"  to "ʒ", "s"  to "s", "n" to "n",
+            "m"  to "m", "t"  to "t", "c" to "s",
+            "lorsqu" to "lɔʁsk", "jusqu" to "ʒysk", "puisqu" to "pɥisk",
+            "quoiqu" to "kwask", "bien qu" to "bjɛ̃k",
+        )
+    }
     private val accentNormalizedDicts = mutableMapOf<String, Map<String, String>>()
     private val classifiers = mutableMapOf<String, HomographClassifier>()
     private val mutex = Mutex()
@@ -60,7 +73,7 @@ class DictionaryIpaService(private val context: Context) : IpaService {
 
     private fun stripDiacritics(s: String): String {
         val normalized = Normalizer.normalize(s, Normalizer.Form.NFD)
-        return normalized.replace(Regex("[\\p{InCombiningDiacriticalMarks}]"), "")
+        return normalized.replace(DIACRITIC_RE, "")
     }
 
     private fun applyRegion(ipa: String, lang: String): String {
@@ -102,11 +115,15 @@ class DictionaryIpaService(private val context: Context) : IpaService {
         val classifier = loadClassifier(lang)
         val suffixes = suffixesFor(lang)
 
+        // Cache fallback lookups per chapter to avoid redundant expensive searches
+        val fallbackCache = HashMap<String, String?>(256)
+
         return paragraphs.map { paragraph ->
             val tokens = paragraph.tokens
             paragraph.copy(
                 tokens = tokens.mapIndexed { index, token ->
                     val key = token.word.lowercase()
+                        .replace('\u2019', '\'').replace('\u2018', '\'')
                     val rawIpa = dict[key]
                         ?: normalizedDict?.get(stripDiacritics(key))
 
@@ -126,8 +143,10 @@ class DictionaryIpaService(private val context: Context) : IpaService {
                     } else if (rawIpa != null) {
                         token.copy(ipa = applyRegion(extractFirst(rawIpa), lang))
                     } else {
-                        // Try fallback lookups
-                        val fallback = lookupWithFallback(dict, normalizedDict, key, lang, suffixes)
+                        // Try fallback lookups (cached per chapter)
+                        val fallback = fallbackCache.getOrPut(key) {
+                            lookupWithFallback(dict, normalizedDict, key, lang, suffixes)
+                        }
                         if (fallback != null) token.copy(ipa = applyRegion(fallback, lang)) else token
                     }
                 }
@@ -142,41 +161,125 @@ class DictionaryIpaService(private val context: Context) : IpaService {
         lang: String,
         suffixes: List<String>,
     ): String? {
+        // Normalize smart apostrophes to straight
+        val w = word.replace('\u2019', '\'').replace('\u2018', '\'')
+
         // Direct lookup
-        dict[word]?.let { raw ->
+        dict[w]?.let { raw ->
             return extractFirst(raw)
         }
 
         // Accent-normalized fallback (e.g., "electronica" → "electrónica")
-        normalizedDict?.get(stripDiacritics(word))?.let { raw ->
+        normalizedDict?.get(stripDiacritics(w))?.let { raw ->
             return extractFirst(raw)
+        }
+
+        // English contractions: split "don't" → "do" + "n't", "it's" → "it" + "s"
+        if (lang == "en" && w.contains('\'')) {
+            val apoIdx = w.indexOf('\'')
+            if (apoIdx > 0 && apoIdx < w.length - 1) {
+                val before = w.substring(0, apoIdx)
+                val after = w.substring(apoIdx + 1)
+                val beforeIpa = dict[before]?.let { extractFirst(it) }
+                if (beforeIpa != null) {
+                    // Common English contraction suffixes
+                    val suffixIpa = when (after) {
+                        "t" -> "t"        // don't, won't, can't
+                        "s" -> "z"        // it's, he's, that's
+                        "ll" -> "l"       // I'll, we'll, they'll
+                        "re" -> "ɹ"       // they're, we're, you're
+                        "ve" -> "v"       // I've, they've, we've
+                        "d" -> "d"        // I'd, we'd, they'd
+                        "m" -> "m"        // I'm
+                        else -> dict[after]?.let { extractFirst(it) }
+                    }
+                    if (suffixIpa != null) return beforeIpa + suffixIpa
+                }
+            }
+        }
+
+        // French elision: split "qu'il" → prefix IPA "k" + lookup("il")
+        if (lang == "fr") {
+            val apoIdx = w.indexOf('\'')
+            if (apoIdx > 0 && apoIdx < w.length - 1) {
+                val prefix = w.substring(0, apoIdx)
+                val suffix = w.substring(apoIdx + 1)
+                val prefixIpa = FR_ELISION_IPA[prefix]
+                if (prefixIpa != null) {
+                    val suffixIpa = dict[suffix]
+                        ?: normalizedDict?.get(stripDiacritics(suffix))
+                    if (suffixIpa != null) return prefixIpa + extractFirst(suffixIpa)
+                    // suffix not in dict — try its own fallbacks (suffix stripping)
+                    val suffixFallback = lookupWithFallback(dict, normalizedDict, suffix, lang, suffixes)
+                    if (suffixFallback != null) return prefixIpa + suffixFallback
+                }
+            }
+        }
+
+        // French: irregular verb alternation t→x (vaut→vaux /vo/, etc.)
+        if (lang == "fr" && w.endsWith("t") && w.length > 2) {
+            val withX = w.dropLast(1) + "x"
+            dict[withX]?.let { return extractFirst(it) }
         }
 
         // Try stripping suffixes (longest first)
         for (suffix in suffixes) {
-            if (word.endsWith(suffix) && word.length > suffix.length + 1) {
-                val stem = word.dropLast(suffix.length)
+            if (w.endsWith(suffix) && w.length > suffix.length + 1) {
+                val stem = w.dropLast(suffix.length)
                 dict[stem]?.let { return extractFirst(it) }
                 normalizedDict?.get(stripDiacritics(stem))?.let { return extractFirst(it) }
             }
         }
 
         // Try removing trailing 'e' for German-style words (e.g., "grosse" → "gross")
-        if (word.length > 3 && word.last() == 'e') {
-            val withoutE = word.dropLast(1)
+        if (w.length > 3 && w.last() == 'e') {
+            val withoutE = w.dropLast(1)
             dict[withoutE]?.let { return extractFirst(it) }
         }
 
         // Try poetic elision: "vorgeschriebne" → "vorgeschriebene"
-        tryUnelide(dict, word)?.let { return it }
+        tryUnelide(dict, w)?.let { return it }
+
+        // Hyphenated word splitting (all languages)
+        if (w.contains('-') && w.length > 3) {
+            val parts = w.split('-')
+            val ipaParts = parts.map { part ->
+                dict[part]?.let { extractFirst(it) }
+                    ?: normalizedDict?.get(stripDiacritics(part))?.let { extractFirst(it) }
+            }
+            if (ipaParts.all { it != null }) {
+                return ipaParts.joinToString("")
+            }
+        }
+
+        // Common prefix stripping (all languages)
+        val prefixes = when (lang) {
+            "en" -> listOf("un", "re", "pre", "dis", "mis", "over", "out", "non")
+            "de" -> listOf("un", "vor", "ver", "zer", "ent", "emp", "er", "ge", "be", "miss", "aus", "ab", "an", "auf", "ein", "mit", "nach", "zu")
+            "fr" -> listOf("re", "dé", "in", "im", "pré", "sur", "sous")
+            "es" -> listOf("des", "in", "re", "pre", "sobre", "anti")
+            "it" -> listOf("ri", "dis", "in", "im", "pre", "sopra", "anti", "s")
+            "pt" -> listOf("des", "in", "re", "pre", "sobre", "anti")
+            else -> emptyList()
+        }
+        for (prefix in prefixes) {
+            if (w.startsWith(prefix) && w.length > prefix.length + 2) {
+                val stem = w.substring(prefix.length)
+                val stemIpa = dict[stem]?.let { extractFirst(it) }
+                val prefixIpa = dict[prefix]?.let { extractFirst(it) }
+                if (stemIpa != null && prefixIpa != null) {
+                    return prefixIpa + stemIpa
+                }
+            }
+        }
 
         // Try compound word splitting (mainly useful for German)
-        if (lang == "de" && word.length >= 6) {
-            trySplitCompound(dict, word)?.let { return it }
+        if (lang == "de" && w.length >= 6) {
+            trySplitCompound(dict, w)?.let { return it }
         }
 
         // Fallback: built-in common words
-        builtinIpa[lang]?.get(word)?.let { return it }
+        builtinIpa[lang]?.get(w)?.let { return it }
 
         return null
     }
@@ -255,7 +358,9 @@ class DictionaryIpaService(private val context: Context) : IpaService {
                     for (line in lines) {
                         val tab = line.indexOf('\t')
                         if (tab > 0 && tab < line.length - 1) {
+                            // Normalize smart/curly apostrophes to straight apostrophe
                             val word = line.substring(0, tab).lowercase()
+                                .replace('\u2019', '\'').replace('\u2018', '\'')
                             val ipa = line.substring(tab + 1).trim()
                             map[word] = ipa
                             // Build accent-normalized lookup (only if different from original)
@@ -327,7 +432,7 @@ class DictionaryIpaService(private val context: Context) : IpaService {
             "aine", "enne", "elle", "euse", "eux",
             "ent", "ant", "ais", "ait", "aux",
             "es", "er", "ez", "ée",
-            "e", "s",
+            "e", "s", "x",
         )
         "es" -> listOf(
             "mente", "ación", "iones", "ando", "endo", "idos", "adas",

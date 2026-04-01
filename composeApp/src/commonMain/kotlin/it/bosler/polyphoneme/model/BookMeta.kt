@@ -13,4 +13,5 @@ data class BookMeta(
     val chapterCount: Int,
     val lastReadChapter: Int = 0,
     val importedAt: Long,
+    val translationFrequency: Float? = null,
 )

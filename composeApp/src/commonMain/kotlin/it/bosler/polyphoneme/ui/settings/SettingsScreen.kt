@@ -62,14 +62,18 @@ import it.bosler.polyphoneme.ui.theme.Indigo_light_primary
 import it.bosler.polyphoneme.ui.theme.ReaderAmoledBg
 import it.bosler.polyphoneme.ui.theme.ReaderDarkBg
 import it.bosler.polyphoneme.ui.theme.ReaderSepiaBg
+import it.bosler.polyphoneme.ui.theme.Ocean_light_primary
+import it.bosler.polyphoneme.ui.theme.Rust_light_primary
 import it.bosler.polyphoneme.ui.theme.Sage_light_primary
 import it.bosler.polyphoneme.ui.theme.Slate_light_primary
+import it.bosler.polyphoneme.ui.theme.Violet_light_primary
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.bosler.polyphoneme.model.AppTheme
+import it.bosler.polyphoneme.model.DarkModePreference
 import it.bosler.polyphoneme.model.IpaPosition
 import it.bosler.polyphoneme.model.LanguageRegions
 import it.bosler.polyphoneme.model.ReaderBackground
@@ -236,8 +240,8 @@ fun SettingsScreen(
                 icon = Icons.Default.FormatLineSpacing,
                 title = "Line spacing",
                 value = settings.lineSpacing,
-                valueRange = 1.0f..3.0f,
-                steps = 19,
+                valueRange = 0.8f..3.0f,
+                steps = 21,
                 valueLabel = "%.1f".format(settings.lineSpacing),
                 onValueChange = { viewModel.updateLineSpacing(it) },
             )
@@ -246,6 +250,11 @@ fun SettingsScreen(
 
             // Appearance Section
             SectionHeader("Appearance")
+
+            DarkModePicker(
+                selected = settings.darkModePreference,
+                onSelect = { viewModel.updateDarkModePreference(it) },
+            )
 
             AppThemePicker(
                 selected = settings.appTheme,
@@ -270,6 +279,11 @@ fun SettingsScreen(
             IpaPositionPicker(
                 selected = settings.ipaPosition,
                 onSelect = { viewModel.updateIpaPosition(it) },
+            )
+
+            // IPA Vowel Reference Chart
+            IpaVowelChart(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             )
 
             HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -558,12 +572,65 @@ private fun SectionHeader(title: String) {
 
 // ── Appearance Pickers ───────────────────────────────────────────────────────
 
+@Composable
+private fun DarkModePicker(selected: DarkModePreference, onSelect: (DarkModePreference) -> Unit) {
+    val options = listOf(
+        DarkModePreference.SYSTEM to "System",
+        DarkModePreference.LIGHT  to "Light",
+        DarkModePreference.DARK   to "Dark",
+    )
+    ListItem(
+        headlineContent = { Text("Appearance") },
+        supportingContent = {
+            Column {
+                Text(
+                    text = "System follows your device dark/light setting.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    options.forEach { (pref, label) ->
+                        val isSel = selected == pref
+                        Surface(
+                            onClick = { onSelect(pref) },
+                            shape = RoundedCornerShape(20.dp),
+                            color = if (isSel) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                                    else MaterialTheme.colorScheme.surfaceContainerLow,
+                            border = BorderStroke(
+                                if (isSel) 2.dp else 1.dp,
+                                if (isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant,
+                            ),
+                        ) {
+                            Text(
+                                text = label,
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = if (isSel) FontWeight.Bold else FontWeight.Normal,
+                                color = if (isSel) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                            )
+                        }
+                    }
+                }
+            }
+        },
+        leadingContent = {
+            Icon(Icons.Default.Info, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        },
+    )
+}
+
 private val APP_THEME_OPTIONS = listOf(
     AppTheme.INDIGO  to ("Indigo"  to Indigo_light_primary),
     AppTheme.SAGE    to ("Sage"    to Sage_light_primary),
     AppTheme.AMBER   to ("Amber"   to Amber_light_primary),
     AppTheme.CRIMSON to ("Crimson" to Crimson_light_primary),
     AppTheme.SLATE   to ("Slate"   to Slate_light_primary),
+    AppTheme.OCEAN   to ("Ocean"   to Ocean_light_primary),
+    AppTheme.VIOLET  to ("Violet"  to Violet_light_primary),
+    AppTheme.RUST    to ("Rust"    to Rust_light_primary),
 )
 
 private val READER_BG_OPTIONS = listOf(
@@ -576,6 +643,8 @@ private val READER_BG_OPTIONS = listOf(
 private val READER_FONT_OPTIONS = listOf(
     ReaderFont.DEFAULT to "Sans",
     ReaderFont.SERIF   to "Serif",
+    ReaderFont.MONO    to "Mono",
+    ReaderFont.CURSIVE to "Cursive",
 )
 
 @OptIn(ExperimentalLayoutApi::class)

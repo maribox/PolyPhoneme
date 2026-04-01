@@ -131,6 +131,20 @@ object PhonemeDatabase {
         put("ɐ", PhonemeInfo("ɐ", "near-open central vowel", mapOf("de" to "besser")))
         put("ɤ", PhonemeInfo("ɤ", "close-mid back unrounded vowel", mapOf()))
 
+        // --- Additional monophthong vowels ---
+        put("ɨ", PhonemeInfo("ɨ", "close central unrounded vowel", mapOf("ru" to "ты", "ro" to "îmi")))
+        put("ʉ", PhonemeInfo("ʉ", "close central rounded vowel", mapOf("sv" to "hus")))
+        put("ɯ", PhonemeInfo("ɯ", "close back unrounded vowel", mapOf("tr" to "kız", "ja" to "寿司")))
+        put("ɘ", PhonemeInfo("ɘ", "close-mid central unrounded vowel", mapOf()))
+        put("ɵ", PhonemeInfo("ɵ", "close-mid central rounded vowel", mapOf()))
+        put("e̞", PhonemeInfo("e̞", "mid front unrounded vowel", mapOf("es" to "tres", "ja" to "手")))
+        put("ø̞", PhonemeInfo("ø̞", "mid front rounded vowel", mapOf("da" to "løbe")))
+        put("ɤ̞", PhonemeInfo("ɤ̞", "mid back unrounded vowel", mapOf()))
+        put("o̞", PhonemeInfo("o̞", "mid back rounded vowel", mapOf("es" to "todo", "ja" to "桜")))
+        put("ɞ", PhonemeInfo("ɞ", "open-mid central rounded vowel", mapOf()))
+        put("ɶ", PhonemeInfo("ɶ", "open front rounded vowel", mapOf("de" to "Götter")))
+        put("ä", PhonemeInfo("ä", "open central unrounded vowel", mapOf()))
+
         // --- Front rounded vowels (French/German) ---
         put("y", PhonemeInfo("y", "close front rounded vowel", mapOf("de" to "über", "fr" to "tu")))
         put("ʏ", PhonemeInfo("ʏ", "near-close near-front rounded vowel", mapOf("de" to "hübsch")))
