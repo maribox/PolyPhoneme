@@ -13,6 +13,19 @@ interface IpaService {
     fun setRegionOverrides(regions: Map<String, String>) {}
 
     /**
+     * Check what fraction of [words] exist in each supported language dictionary.
+     * Returns map of languageCode to hit rate (0.0-1.0), sorted descending.
+     * Uses bloom filters for instant checks without loading full dictionaries.
+     */
+    suspend fun detectLanguageHitRates(words: List<String>): Map<String, Float> = emptyMap()
+
+    /** Pre-load a language dictionary in the background so later transcribe() calls are instant. */
+    suspend fun preloadLanguage(language: String) {}
+
+    /** For each word, return which languages contain it (bloom filter check). */
+    suspend fun detectPerWordLanguages(words: List<String>): Map<String, List<String>> = emptyMap()
+
+    /**
      * Transcribe tokens in context, enabling homograph disambiguation.
      * Returns paragraphs with IPA and disambiguation flags applied.
      */

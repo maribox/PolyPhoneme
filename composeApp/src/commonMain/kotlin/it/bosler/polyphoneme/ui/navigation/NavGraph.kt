@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import it.bosler.polyphoneme.ui.about.AboutScreen
 import it.bosler.polyphoneme.ui.about.BuildInfo
+import it.bosler.polyphoneme.ui.ipa.LiveIpaScreen
 import it.bosler.polyphoneme.ui.library.LibraryScreen
 import it.bosler.polyphoneme.ui.reader.ReaderScreen
 import it.bosler.polyphoneme.ui.settings.SettingsScreen
@@ -28,6 +29,9 @@ fun PolyPhonemeNavHost(
                 },
                 onSettingsClick = {
                     navController.navigate(SettingsRoute)
+                },
+                onLiveIpaClick = {
+                    navController.navigate(LiveIpaRoute)
                 },
                 filePicker = filePicker,
                 pendingUri = pendingEpubUri,
@@ -50,6 +54,11 @@ fun PolyPhonemeNavHost(
         composable<AboutRoute> {
             AboutScreen(
                 buildInfo = buildInfo,
+                onBack = { navController.popBackStack() },
+            )
+        }
+        composable<LiveIpaRoute> {
+            LiveIpaScreen(
                 onBack = { navController.popBackStack() },
             )
         }

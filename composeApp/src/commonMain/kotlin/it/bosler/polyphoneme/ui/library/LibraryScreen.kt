@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AutoStories
+import androidx.compose.material.icons.filled.Translate
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
@@ -48,6 +49,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 fun LibraryScreen(
     onBookClick: (bookId: String, chapterIndex: Int) -> Unit,
     onSettingsClick: () -> Unit,
+    onLiveIpaClick: () -> Unit = {},
     viewModel: LibraryViewModel = viewModel(),
     filePicker: @Composable ((String) -> Unit) -> (() -> Unit) = { { } },
     pendingUri: MutableStateFlow<String?>? = null,
@@ -94,6 +96,9 @@ fun LibraryScreen(
                     Text("PolyPhoneme")
                 },
                 actions = {
+                    IconButton(onClick = onLiveIpaClick) {
+                        Icon(Icons.Default.Translate, contentDescription = "Live IPA")
+                    }
                     IconButton(onClick = onSettingsClick) {
                         Icon(Icons.Default.Settings, contentDescription = "Settings")
                     }

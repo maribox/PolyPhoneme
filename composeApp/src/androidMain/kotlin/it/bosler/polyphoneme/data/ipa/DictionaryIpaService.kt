@@ -5,6 +5,7 @@ import android.util.Log
 import it.bosler.polyphoneme.model.Paragraph
 import it.bosler.polyphoneme.model.Token
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
@@ -22,6 +23,12 @@ class DictionaryIpaService(private val context: Context) : IpaService {
 
     companion object {
         private val DIACRITIC_RE = Regex("[\\p{InCombiningDiacriticalMarks}]")
+        private val DICT_SIZES = mapOf(
+            "de" to 790_000, "en" to 125_000, "es" to 600_000,
+            "fr" to 250_000, "it" to 85_000, "ja" to 225_000,
+            "nl" to 125_000, "pt" to 100_000, "ru" to 425_000,
+            "zh" to 150_000,
+        )
 
         // French elision prefixes: the clitic before the apostrophe and its IPA
         private val FR_ELISION_IPA = mapOf(
@@ -34,7 +41,12 @@ class DictionaryIpaService(private val context: Context) : IpaService {
     }
     private val accentNormalizedDicts = mutableMapOf<String, Map<String, String>>()
     private val classifiers = mutableMapOf<String, HomographClassifier>()
+    private val bloomFilters = mutableMapOf<String, BloomFilter>()
     private val mutex = Mutex()
+    private val langMutexes = mutableMapOf<String, Mutex>()
+    private fun mutexFor(lang: String): Mutex = synchronized(langMutexes) {
+        langMutexes.getOrPut(lang) { Mutex() }
+    }
     private var regionOverrides: Map<String, String> = emptyMap()
 
     private val languageFiles = mapOf(
@@ -344,44 +356,63 @@ class DictionaryIpaService(private val context: Context) : IpaService {
     }
 
     private suspend fun loadDictionary(lang: String): Map<String, String>? {
-        mutex.withLock {
-            dictionaries[lang]?.let { return it }
-        }
+        // Fast path: already loaded
+        synchronized(dictionaries) { dictionaries[lang] }?.let { return it }
 
-        val fileName = languageFiles[lang] ?: return null
+        // Per-language mutex so multiple languages load in parallel
+        val langMutex = mutexFor(lang)
+        langMutex.withLock {
+            synchronized(dictionaries) { dictionaries[lang] }?.let { return it }
 
-        val result = withContext(Dispatchers.IO) {
-            try {
-                val map = HashMap<String, String>(130_000)
-                val normalizedMap = HashMap<String, String>(130_000)
-                context.assets.open(fileName).bufferedReader().useLines { lines ->
-                    for (line in lines) {
-                        val tab = line.indexOf('\t')
-                        if (tab > 0 && tab < line.length - 1) {
-                            // Normalize smart/curly apostrophes to straight apostrophe
-                            val word = line.substring(0, tab).lowercase()
+            val fileName = languageFiles[lang] ?: return null
+
+            val result = withContext(Dispatchers.IO) {
+                try {
+                    val expectedSize = DICT_SIZES[lang] ?: 200_000
+                    val map = HashMap<String, String>((expectedSize * 1.4).toInt())
+                    // Bulk-read the entire file (single IO op, much faster than line-by-line)
+                    val bytes = context.assets.open(fileName).use { it.readBytes() }
+                    val content = String(bytes, Charsets.UTF_8)
+                    var pos = 0
+                    while (pos < content.length) {
+                        val nl = content.indexOf('\n', pos).let { if (it < 0) content.length else it }
+                        val tab = content.indexOf('\t', pos)
+                        if (tab in (pos + 1) until nl) {
+                            val word = content.substring(pos, tab).lowercase()
                                 .replace('\u2019', '\'').replace('\u2018', '\'')
-                            val ipa = line.substring(tab + 1).trim()
+                            val ipa = content.substring(tab + 1, nl).trim()
                             map[word] = ipa
-                            // Build accent-normalized lookup (only if different from original)
-                            val stripped = stripDiacritics(word)
-                            if (stripped != word && stripped !in normalizedMap) {
-                                normalizedMap[stripped] = ipa
-                            }
                         }
+                        pos = nl + 1
                     }
+                    map as Map<String, String>
+                } catch (_: Exception) {
+                    null
                 }
-                Pair(map as Map<String, String>, normalizedMap as Map<String, String>)
-            } catch (_: Exception) {
-                null
-            }
-        } ?: return null
+            } ?: return null
 
-        mutex.withLock {
-            dictionaries[lang] = result.first
-            accentNormalizedDicts[lang] = result.second
+            synchronized(dictionaries) {
+                dictionaries[lang] = result
+            }
+            // Build accent-normalized dict lazily in background
+            buildAccentMapAsync(lang, result)
+            return result
         }
-        return result.first
+    }
+
+    private fun buildAccentMapAsync(lang: String, dict: Map<String, String>) {
+        kotlinx.coroutines.CoroutineScope(Dispatchers.Default).launch {
+            val normalizedMap = HashMap<String, String>((dict.size * 0.15).toInt())
+            for ((word, ipa) in dict) {
+                val stripped = stripDiacritics(word)
+                if (stripped != word && stripped !in normalizedMap) {
+                    normalizedMap[stripped] = ipa
+                }
+            }
+            mutex.withLock {
+                accentNormalizedDicts[lang] = normalizedMap
+            }
+        }
     }
 
     private suspend fun loadClassifier(lang: String): HomographClassifier? {
@@ -406,6 +437,57 @@ class DictionaryIpaService(private val context: Context) : IpaService {
             classifiers[lang] = classifier
         }
         return classifier
+    }
+
+    override suspend fun preloadLanguage(language: String) {
+        val lang = normalizeLanguage(language)
+        loadDictionary(lang)
+    }
+
+    override suspend fun detectPerWordLanguages(words: List<String>): Map<String, List<String>> {
+        if (words.isEmpty()) return emptyMap()
+        val lowered = words.map { it.lowercase() }.distinct()
+        val result = mutableMapOf<String, MutableList<String>>()
+        for (lang in languageFiles.keys) {
+            val bloom = loadBloomFilter(lang) ?: continue
+            for (word in lowered) {
+                if (bloom.mightContain(word)) {
+                    result.getOrPut(word) { mutableListOf() }.add(lang)
+                }
+            }
+        }
+        return result
+    }
+
+    override suspend fun detectLanguageHitRates(words: List<String>): Map<String, Float> {
+        if (words.isEmpty()) return emptyMap()
+        val lowered = words.map { it.lowercase() }.distinct()
+        val rates = mutableMapOf<String, Float>()
+        for (lang in languageFiles.keys) {
+            val bloom = loadBloomFilter(lang) ?: continue
+            val hits = lowered.count { bloom.mightContain(it) }
+            rates[lang] = hits.toFloat() / lowered.size
+        }
+        return rates.entries
+            .sortedByDescending { it.value }
+            .associate { it.key to it.value }
+    }
+
+    private suspend fun loadBloomFilter(lang: String): BloomFilter? {
+        mutex.withLock {
+            bloomFilters[lang]?.let { return it }
+        }
+        val filter = withContext(Dispatchers.IO) {
+            try {
+                BloomFilter.load(context, "bloom-$lang.bin")
+            } catch (_: Exception) {
+                null
+            }
+        } ?: return null
+        mutex.withLock {
+            bloomFilters[lang] = filter
+        }
+        return filter
     }
 
     private fun normalizeLanguage(language: String): String {
